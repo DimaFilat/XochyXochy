@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import Type from 'prop-types';
-import elbrusImg from './elbrus.png';
+import React, { Component } from "react";
+import Type from "prop-types";
+import Menu from "../headerMenu/Menu";
+import { Container, Row, Col } from "reactstrap";
+import { Switch, Route, Link } from "react-router-dom";
+import { Login, Reg } from "../loginReg";
+import Info from "./Info";
 
 export default class App extends Component {
   static propTypes = {
@@ -8,12 +12,12 @@ export default class App extends Component {
   };
 
   static defaultProps = {
-    appName: 'Default App Name'
+    appName: "Default App Name"
   };
 
   componentDidMount() {
     const fetchFunc = async () => {
-      const res = await fetch('/test');
+      const res = await fetch("/test");
       console.log(res);
       return res;
     };
@@ -23,15 +27,42 @@ export default class App extends Component {
   render() {
     const { appName } = this.props;
     return (
-      <div className='some class'>
-        <h1>{ appName }</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <img src={ elbrusImg } width='300px' className='other-img' />
+      <div>
+        <Container>
+          <Row>
+            <Col xs="1">1</Col>
+            <Col>
+              <div>
+                <Menu />
+              </div>
+              
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={() => {
+                    return <Info />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/login"
+                  render={() => {
+                    return <Login />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/reg"
+                  render={() => {
+                    return <Reg />;
+                  }}
+                />
+              </Switch>
+            </Col>
+            <Col xs="1">3</Col>
+          </Row>
+        </Container>
       </div>
     );
   }

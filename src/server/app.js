@@ -5,10 +5,6 @@ import proxy from 'http-proxy-middleware';
 import handlebars from 'handlebars';
 import config from './config/default';
 
-
-
-
-
 //import routes
 import router from './router';
 
