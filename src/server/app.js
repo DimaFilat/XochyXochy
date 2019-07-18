@@ -13,7 +13,7 @@ const client = redis.createClient();
 
 //import routes
 
-import router from './router';
+// import router from './router';
 
 import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";

@@ -7,7 +7,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import YaSoberu from './components/yaSoberu/YaSoberu'
+import YaSoberu from "./components/yaSoberu/YaSoberu";
 
 const composeEnhancer = composeWithDevTools({});
 // add to store rootReducer
@@ -18,7 +18,7 @@ const Index = () => (
   <Provider store={store}>
     <BrowserRouter>
       <App />
-  <YaSoberu />
+      {/* <YaSoberu /> */}
     </BrowserRouter>
   </Provider>
 );
