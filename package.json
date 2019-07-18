@@ -18,12 +18,14 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "bcryptjs": "^2.4.3",
     "connect-redis": "^3.4.1",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "express-session": "^1.16.2",
     "handlebars": "^4.0.12",
     "http-proxy-middleware": "^0.19.0",
+    "logger": "0.0.1",
     "mongoose": "^5.6.5",
     "morgan": "^1.9.1",
     "prop-types": "^15.6.2",
@@ -51,16 +53,34 @@
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
-    "eslint": "^5.9.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
     "file-loader": "^2.0.0",
     "nodemon": "^1.18.6",
+    "prettier": "^1.18.2",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
-  }
+  },
+  "description": "Как вы обычно выбираете ресторан или кафе? В Америке существует [Yelp](https://www.yelp.com/search?cflt=restaurants&find_loc=San+Francisco%2C+CA) - полезный сервис, где вы можете посмотреть рестораны, отфильтровать и отсортировать их как вам удобно, зарезервировать столик и тд. Помимо поиска по ресторанам Yelp предоставляет и другие функции, но мы пока их затрагивать не будем. Знаете ли вы какие-нибудь аналоги на российском рынке? Они есть, однако они не так популярны. А значит вы можете написать свой Yelp, и возможно он станет супер-популярным :)",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimaFilat/XochyXochy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DimaFilat/XochyXochy/issues"
+  },
+  "homepage": "https://github.com/DimaFilat/XochyXochy#readme"
 }
