@@ -6,6 +6,7 @@ import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import YaSoberu from './components/yaSoberu/YaSoberu'
 
 const composeEnhancer = composeWithDevTools({});
 // const store = createStore(rootReducer, composeEnhancer());
@@ -13,6 +14,7 @@ const composeEnhancer = composeWithDevTools({});
 const Index = () => (
 <div>
   <App appName='React Router Challenge: Yelp Restaurants Clone'/>
+  <YaSoberu />
   </div>
 );
 
