@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import WishListItem from '../wishListItem/WishListItem';
 
 export default function Info(props) {
   return (
@@ -12,6 +13,7 @@ export default function Info(props) {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
+      <WishListItem />
     </div>
   );
 }
