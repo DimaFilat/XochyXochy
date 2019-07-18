@@ -12,6 +12,9 @@ import connectRedis from "connect-redis";
 const client = redis.createClient();
 
 //import routes
+
+import router from './router';
+
 import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 import giftsRouter from "./routes/gifts";
@@ -51,6 +54,7 @@ app.use(cookiesCleaner);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/gifts", giftsRouter);
+
 
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/XochyXochy", {

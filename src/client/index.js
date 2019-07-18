@@ -1,21 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from './components/app/app';
+import App from "./components/app/app";
 import { createStore } from "redux";
 // import rootReducer from "./redux/reducer/combinedReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import YaSoberu from './components/yaSoberu/YaSoberu'
 
 const composeEnhancer = composeWithDevTools({});
-// const store = createStore(rootReducer, composeEnhancer());
+// add to store rootReducer
+
+const store = createStore(composeEnhancer());
 
 const Index = () => (
-<div>
-  <App appName='React Router Challenge: Yelp Restaurants Clone'/>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
   <YaSoberu />
-  </div>
+    </BrowserRouter>
+  </Provider>
 );
 
-ReactDOM.render(<Index />, document.getElementById('react-app'));
+ReactDOM.render(<Index />, document.getElementById("react-app"));
