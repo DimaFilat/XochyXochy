@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Collapse,
   Navbar,
@@ -16,8 +16,8 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input
-} from "reactstrap";
-import { Switch, Route, Link } from "react-router-dom";
+} from 'reactstrap';
+import { Switch, Route, Link } from 'react-router-dom';
 
 export default class Menu extends Component {
   state = {
@@ -34,18 +34,26 @@ export default class Menu extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">
+            Home
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/login">Login</NavLink>
+                <NavLink tag={Link} to="/login">
+                  Login
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/reg">Register</NavLink>
+                <NavLink tag={Link} to="/reg">
+                  Register
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/">Logout</NavLink>
+                <NavLink tag={Link} to="/">
+                  Logout
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/ArtiomOganesyan/XochyXochy">
