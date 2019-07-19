@@ -25,7 +25,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { appName } = this.props;
+    
     return (
       <div>
         <Container>
