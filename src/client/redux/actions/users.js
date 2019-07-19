@@ -19,37 +19,25 @@ export const regInAC = () => ({
   type: USERS_AC.REG_IN
 });
 
-export const fetchSent = () => {
-  return { type: USERS_AC.SENT_FETCH };
+export const fetchSent = () => ({
+  type: USERS_AC.SENT_FETCH
+});
+export const fetchRcvd = data => {
+  return { type: USERS_AC.RCWD_FETCH, user: data };
 };
-export const fetchRcvd = () => {
-  return { type: USERS_AC.RCWD_FETCH };
-};
-export const fetchThunk = data => {
+export const fetchThunk = (user, path) => {
   return async dispatch => {
     dispatch(fetchSent());
-    const response = await fetch('/users/signup', {
+    const response = await fetch(`${path}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ data })
+      body: JSON.stringify({ user })
     });
-    const user = await response.json();
-    dispatch(fetchRcvd(user));
+    const userData = await response.json();
+    // console.warn(userData);
+    dispatch(fetchRcvd(userData));
+    // };
   };
 };
-// export const fetchThunkReg = data => {
-//   return async dispatch => {
-//     dispatch(fetchSent());
-//     const response = await fetch('/users/signup', {
-//       method: 'POST',
-//       headers: {
-//         'Content-type': 'application/json'
-//       },
-//       body: JSON.stringify({ data })
-//     });
-//     const user = await response.json();
-//     dispatch(fetchRcvd(user));
-//   };
-// };

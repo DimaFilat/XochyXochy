@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { fetchThunk } from '../../redux/actions/users';
+
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import { loginAC } from '../../Actions/action';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {};
 
   render() {
+    const { pathname } = this.props.location;
+
     const { redirect, email, password } = this.state;
     if (redirect) {
       return <Redirect to="/todo" />;
@@ -48,11 +52,11 @@ export default class Login extends Component {
               color="primary"
               onClick={e => {
                 e.preventDefault();
-                this.fetchUserData(this.state);
+                this.props.fetchAuth(this.state, pathname);
               }}
             >
               Sign In
-            </Button>{' '}
+            </Button>
           </Form>
           <p className="lead mt-4">
             No Account?
@@ -63,3 +67,17 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAuth: (data, path) => dispatch(fetchThunk(data, path))
+  };
+};
+const mapStateToProps = state => {
+  return { state };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

@@ -18,7 +18,7 @@ router.get('/sessioncheck', async (req, res) => {
   }
 });
 //  Register Handle
-router.route('/signup').post(async (req, res) => {
+router.route('/reg').post(async (req, res) => {
   console.log(req.body);
 
   const { name, email, password } = req.body.user;
@@ -35,14 +35,14 @@ router.route('/signup').post(async (req, res) => {
     });
 
     //  Hash Password
-    bcrypt.genSalt(10, (err, salt) =>
+    bcrypt.genSalt(10, (error, salt) =>
       bcrypt.hash(newUser.password, salt, async (err, hash) => {
         if (err) throw err;
         //  Set password to hashed
         newUser.password = hash;
         //  Save user
         const user = await newUser.save();
-
+        // console.log(user);
         res.json({ user, auth: true });
       })
     );

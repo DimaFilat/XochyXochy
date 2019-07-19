@@ -9,7 +9,6 @@ import { Login, Reg } from '../loginReg';
 import Info from './Info';
 
 export default class App extends Component {
-
   static propTypes = {
     appName: Type.string
   };
@@ -47,23 +46,22 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path="/login"
-                render={() => {
-                  return <Login />;
+                path="/users/login"
+                render={props => {
+                  return <Login {...props} />;
                 }}
               />
               <Route
                 exact
-                path="/reg"
-                render={() => {
-                  return <Reg />;
+                path="/users/reg"
+                render={props => {
+                  return <Reg {...props} />;
                 }}
               />
             </Switch>
           </Col>
           <Col xs="1"></Col>
         </Row>
-
       </div>
     );
   }

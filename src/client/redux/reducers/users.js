@@ -4,10 +4,12 @@ const appReducerInitState = { loading: false };
 
 export default (state = appReducerInitState, action) => {
   switch (action.type) {
-    case USERS_AC.FETCH_SEND:
+    case USERS_AC.SENT_FETCH: {
       return { loading: true };
-    case USERS_AC.FETCH_RCWD:
-      return { ...state, loading: false, ...action };
+    }
+    case USERS_AC.RCWD_FETCH: {
+      return { ...state, loading: false, ...action.user };
+    }
     default:
       return state;
   }
