@@ -1,6 +1,6 @@
 import React from "react";
 import User from "../user/User";
-import WishListItem from '../wishListItem/WishListItem';
+import WishListItem from '../user/wishListItem';
 
 export default function Info(props) {
   return (
@@ -16,7 +16,7 @@ export default function Info(props) {
       </p>
       <User />
       <br/>
-      <WishListItem />
+      {/* <WishListItem /> */}
     </div>
   );
 }
