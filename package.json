@@ -42,10 +42,8 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-
     "semantic-ui-react": "^0.87.3",
     "thunk": "0.0.1",
-
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -47,21 +47,17 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path="/login"
-                render={() => {
-                  return (
-                    <div>
-                      <Login />
-                      <FacebookAuth />
-                    </div>
-                  );
+                path="/users/login"
+                render={props => {
+                  return <Login {...props} />;
+
                 }}
               />
               <Route
                 exact
-                path="/reg"
-                render={() => {
-                  return <Reg />;
+                path="/users/reg"
+                render={props => {
+                  return <Reg {...props} />;
                 }}
               />
             </Switch>

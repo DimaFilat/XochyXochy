@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
@@ -10,8 +12,10 @@ import { fetchThunk } from '../../redux/actions/users';
 
 class Reg extends Component {
   state = {
+    name: '',
     email: '',
     password: '',
+    password2: '',
     redirect: false,
     errors: []
   };
@@ -24,6 +28,7 @@ class Reg extends Component {
   };
 
   render() {
+    const { pathname } = this.props.location;
     const { redirect, email, password, name, password2 } = this.state;
     if (redirect) {
       return <Redirect to="/users/profile" />;
@@ -31,7 +36,7 @@ class Reg extends Component {
     return (
       <div>
         <Col sm={{ size: 3, offset: 4 }}>
-          <Form onSubmit={this.fetchThunkReg} className="form-login mt-5">
+          <Form className="form-login mt-5">
             <h1 text="center mb-3 mt-10">Register</h1>
             <FormGroup>
               <Label for="name">Name</Label>
@@ -46,7 +51,7 @@ class Reg extends Component {
               <Label for="exampleEmail">Email</Label>
               <Input
                 className="input"
-                type="email"
+                type="text"
                 name="email"
                 placeholder="Enter Email"
                 value={email}
@@ -79,11 +84,11 @@ class Reg extends Component {
               color="primary"
               onClick={e => {
                 e.preventDefault();
-                this.fetchUserData(this.state);
+                this.props.fetchAuth(this.state, pathname);
               }}
             >
               Sign In
-            </Button>{' '}
+            </Button>
           </Form>
           <p className="lead mt-4">
             Have An Account?
@@ -96,7 +101,7 @@ class Reg extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    fetchReg: () => dispatch(fetchThunk())
+    fetchAuth: (data, path) => dispatch(fetchThunk(data, path))
   };
 };
 const mapStateToProps = state => {
