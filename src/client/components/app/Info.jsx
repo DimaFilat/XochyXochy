@@ -1,5 +1,6 @@
 import React from "react";
 import User from "../user/User";
+import WishListItem from '../wishListItem/WishListItem';
 
 export default function Info(props) {
   return (
@@ -14,6 +15,8 @@ export default function Info(props) {
         mollit anim id est laborum.
       </p>
       <User />
+      <br/>
+      <WishListItem />
     </div>
   );
 }
