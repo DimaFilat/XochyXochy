@@ -4,12 +4,12 @@ import Type from 'prop-types';
 import Menu from '../headerMenu/Menu';
 import { Container, Row, Col } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
+import FacebookAuth from '../facebookAuth/FacebookAuth';
 
 import { Login, Reg } from '../loginReg';
 import Info from './Info';
 
 export default class App extends Component {
-
   static propTypes = {
     appName: Type.string
   };
@@ -49,7 +49,12 @@ export default class App extends Component {
                 exact
                 path="/login"
                 render={() => {
-                  return <Login />;
+                  return (
+                    <div>
+                      <Login />
+                      <FacebookAuth />
+                    </div>
+                  );
                 }}
               />
               <Route
@@ -63,7 +68,6 @@ export default class App extends Component {
           </Col>
           <Col xs="1"></Col>
         </Row>
-
       </div>
     );
   }
