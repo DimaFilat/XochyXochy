@@ -6,6 +6,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
+
   NavLink,
   UncontrolledDropdown,
   DropdownToggle,
@@ -19,18 +20,21 @@ import {
 } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
 
+
 export default class Menu extends Component {
   state = {
     isOpen: false
   };
 
-  toggle() {
+  toggle = () => {
+    const { isOpen } = this.state;
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !isOpen
     });
-  }
+  };
 
   render() {
+    const { isOpen } = this.state;
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -38,20 +42,26 @@ export default class Menu extends Component {
             Home
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/login">
+
+                <NavLink tag={Link} to="/users/login">
+
                   Login
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/reg">
+
+                <NavLink tag={Link} to="/users/reg">
+
                   Register
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/">
+
+                <NavLink tag={Link} to="/users/logout">
+
                   Logout
                 </NavLink>
               </NavItem>
