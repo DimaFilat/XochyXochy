@@ -1,31 +1,14 @@
-import React, { Component } from "react";
-import Type from "prop-types";
-import Menu from "../headerMenu/Menu";
-import { Container, Row, Col } from "reactstrap";
-import { Switch, Route, Link } from "react-router-dom";
-import { Login, Reg } from "../loginReg";
-import Info from "./Info";
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { Switch, Route } from 'react-router-dom';
+import Menu from '../headerMenu/Menu';
+import { Login, Reg } from '../loginReg';
+import Info from './Info';
 
 export default class App extends Component {
-  static propTypes = {
-    appName: Type.string
-  };
-
-  static defaultProps = {
-    appName: "Default App Name"
-  };
-
-  componentDidMount() {
-    const fetchFunc = async () => {
-      const res = await fetch("/test");
-      console.log(res);
-      return res;
-    };
-    fetchFunc();
-  }
+  state = {};
 
   render() {
-    const { appName } = this.props;
     return (
       <div>
         <Container>
@@ -35,7 +18,7 @@ export default class App extends Component {
               <div>
                 <Menu />
               </div>
-              
+
               <Switch>
                 <Route
                   exact
@@ -46,14 +29,14 @@ export default class App extends Component {
                 />
                 <Route
                   exact
-                  path="/login"
+                  path="/users/login"
                   render={() => {
                     return <Login />;
                   }}
                 />
                 <Route
                   exact
-                  path="/reg"
+                  path="/users/reg"
                   render={() => {
                     return <Reg />;
                   }}

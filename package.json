@@ -17,8 +17,8 @@
     "start": "node start.js"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.3.1",
     "connect-redis": "^3.4.1",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
@@ -33,12 +33,14 @@
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "reactstrap": "^8.0.1",
     "redis": "^2.8.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "thunk": "0.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

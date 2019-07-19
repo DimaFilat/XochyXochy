@@ -1,18 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/app/app";
-import { createStore } from "redux";
-// import rootReducer from "./redux/reducer/combinedReducer";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import YaSoberu from "./components/yaSoberu/YaSoberu";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import rootReducer from './redux/reducers/combineReducer';
+import App from './components/app/app';
+// import YaSoberu from './components/yaSoberu/YaSoberu';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const composeEnhancer = composeWithDevTools({});
+const composeEnhancers = composeWithDevTools({});
 // add to store rootReducer
 
-const store = createStore(composeEnhancer());
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 const Index = () => (
   <Provider store={store}>
@@ -23,4 +27,4 @@ const Index = () => (
   </Provider>
 );
 
-ReactDOM.render(<Index />, document.getElementById("react-app"));
+ReactDOM.render(<Index />, document.getElementById('react-app'));

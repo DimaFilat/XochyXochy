@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Collapse,
   Navbar,
@@ -6,46 +6,47 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Media,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input
-} from "reactstrap";
-import { Switch, Route, Link } from "react-router-dom";
+  NavLink
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class Menu extends Component {
   state = {
     isOpen: false
   };
 
-  toggle() {
+  toggle = () => {
+    const { isOpen } = this.state;
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !isOpen
     });
-  }
+  };
 
   render() {
+    const { isOpen } = this.state;
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">
+            Home
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/login">Login</NavLink>
+                <NavLink tag={Link} to="/users/login">
+                  Login
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/reg">Register</NavLink>
+                <NavLink tag={Link} to="/users/reg">
+                  Register
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/">Logout</NavLink>
+                <NavLink tag={Link} to="/users/logout">
+                  Logout
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/ArtiomOganesyan/XochyXochy">
