@@ -6,9 +6,20 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Media,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
+
 
 export default class Menu extends Component {
   state = {
@@ -34,17 +45,23 @@ export default class Menu extends Component {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
+
                 <NavLink tag={Link} to="/users/login">
+
                   Login
                 </NavLink>
               </NavItem>
               <NavItem>
+
                 <NavLink tag={Link} to="/users/reg">
+
                   Register
                 </NavLink>
               </NavItem>
               <NavItem>
+
                 <NavLink tag={Link} to="/users/logout">
+
                   Logout
                 </NavLink>
               </NavItem>
