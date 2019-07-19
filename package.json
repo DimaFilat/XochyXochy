@@ -17,8 +17,8 @@
     "start": "node start.js"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.3.1",
     "connect-redis": "^3.4.1",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
@@ -38,7 +38,8 @@
     "redis": "^2.8.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.87.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
