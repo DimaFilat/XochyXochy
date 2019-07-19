@@ -4,6 +4,7 @@ import Type from 'prop-types';
 import Menu from '../headerMenu/Menu';
 import { Container, Row, Col } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
+import FacebookAuth from '../facebookAuth/FacebookAuth';
 
 import { Login, Reg } from '../loginReg';
 import Info from './Info';
@@ -49,6 +50,7 @@ export default class App extends Component {
                 path="/users/login"
                 render={props => {
                   return <Login {...props} />;
+
                 }}
               />
               <Route
