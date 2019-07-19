@@ -1,20 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
-import { createStore } from 'redux';
 
-import rootReducer from './redux/reducers/combineReducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import rootReducer from './redux/reducers/combineReducer';
+import App from './components/app/app';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import YaSoberu from './components/yaSoberu/YaSoberu';
+
+const composeEnhancers = composeWithDevTools({});
 
 
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
-const composeEnhancer = composeWithDevTools({});
-
-const store = createStore(rootReducer, composeEnhancer());
 
 const Index = () => (
   <Provider store={store}>

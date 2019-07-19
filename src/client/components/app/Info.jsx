@@ -1,6 +1,8 @@
+
 import React from "react";
 import User from "../user/User";
 import WishListItem from '../wishListItem/WishListItem';
+
 
 export default function Info(props) {
   return (
