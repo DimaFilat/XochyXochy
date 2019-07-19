@@ -5,9 +5,7 @@ const WishItem = require('../model/wishItem');
 const faker = require('faker');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-
-
+// router.get('/', async (req, res) => {
 //Please do step by step
 
   //   //Seed Users step1
@@ -49,8 +47,7 @@ router.get('/', async (req, res) => {
   //       await users[i].save();
   //       console.log(i, users[i].wishItem, users[i].name);
   //     }
-
-  res.end();
-});
+//   res.end();
+// });
 
 export default router;
