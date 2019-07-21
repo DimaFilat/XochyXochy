@@ -5,8 +5,9 @@ export default class UploadPhoto extends Component {
     return (
       <div>
         <p>Загрузите фотографию товара</p>
-        <form action="/upload" method="POST" encType="myltipart/form-data">
+        <form action="/upload" method="POST" encType="multipart/form-data">
           <input type="file" name="file" id="file" />
+          <br/>
           <input type="submit" value="Отравить" />
         </form>
       </div>

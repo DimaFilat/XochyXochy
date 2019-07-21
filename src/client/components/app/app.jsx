@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import Type from 'prop-types';
-import Menu from '../headerMenu/Menu';
 import { Container, Row, Col } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
+import Menu from '../headerMenu/Menu';
 import FacebookAuth from '../facebookAuth/FacebookAuth';
 
 import { Login, Reg } from '../loginReg';
