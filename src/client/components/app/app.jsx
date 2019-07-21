@@ -8,6 +8,7 @@ import FacebookAuth from '../facebookAuth/FacebookAuth';
 
 import { Login, Reg } from '../loginReg';
 import Info from './Info';
+import UploadPhoto from '../uploadPhoto/UploadPhoto';
 
 export default class App extends Component {
   static propTypes = {
@@ -43,6 +44,13 @@ export default class App extends Component {
                 path="/"
                 render={() => {
                   return <Info />;
+                }}
+              />
+              <Route
+                exact
+                path="/upload"
+                render={props => {
+                  return <UploadPhoto {...props} />;
                 }}
               />
               <Route
