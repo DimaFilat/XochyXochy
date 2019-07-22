@@ -13,7 +13,6 @@ import redis from 'redis';
 import connectRedis from 'connect-redis';
 
 // imports for uploading photo(gridfs)
-import bodyParser from 'body-parser';
 import crypto from 'crypto';
 import multer from 'multer';
 import GridFsStorage from 'multer-gridfs-storage';
@@ -136,7 +135,9 @@ const upload = multer({ storage });
 // @desc  Uploads file to DB
 app.post('/upload', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
-  res.redirect('/upload');
+  // res.redirect('/upload');
+  console.log(req.body);
+  res.status(201).end();
 });
 
 // @route GET /files
@@ -205,7 +206,6 @@ app.delete('/files/:id', (req, res) => {
     res.redirect('/');
   });
 });
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
