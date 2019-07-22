@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Type from 'prop-types';
-import Menu from '../headerMenu/Menu';
 import { Container, Row, Col } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
+import Menu from '../headerMenu/Menu';
 import FacebookAuth from '../facebookAuth/FacebookAuth';
 import { Login, Reg } from '../loginReg';
 import Info from './Info';
+import UploadPhoto from '../uploadPhoto/UploadPhoto';
 import UserAccount from '../user/UserAccount';
 
 export default class App extends Component {
@@ -42,6 +43,13 @@ export default class App extends Component {
                 path="/"
                 render={() => {
                   return <Info />;
+                }}
+              />
+              <Route
+                exact
+                path="/upload"
+                render={props => {
+                  return <UploadPhoto {...props} />;
                 }}
               />
               <Route
