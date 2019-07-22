@@ -7,7 +7,6 @@ import session from 'express-session';
 import passport from 'passport';
 import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
-import bodyParser from 'body-parser';
 import handlebars from 'handlebars';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
@@ -205,7 +204,6 @@ app.delete('/files/:id', (req, res) => {
     res.redirect('/');
   });
 });
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
