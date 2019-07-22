@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { Image, List } from 'semantic-ui-react';
+import { Image, List, Button } from 'semantic-ui-react';
 
 export default function UserSmallWishList(props) {
   const { id, title, img, rating, price, description, active, reserve } = props;
@@ -22,7 +22,7 @@ export default function UserSmallWishList(props) {
                 <Row>{price}</Row>
                 <Row>{description}</Row>
               </Col>
-              <Col xs="2">Edit</Col>
+              <Col xs="2"><Button>Edit</Button></Col>
             </Row>
           </Container>
         </List.Content>
