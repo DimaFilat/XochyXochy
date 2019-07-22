@@ -17,7 +17,9 @@ router.get('/sessioncheck', async (req, res) => {
     res.json({ user: {}, auth: false });
   }
 });
+
 //  Register Handle
+
 router.route('/reg').post(async (req, res) => {
   console.log(req.body);
   const { name, email, password } = req.body.user;
@@ -30,7 +32,8 @@ router.route('/reg').post(async (req, res) => {
     const newUser = await new User({
       name,
       email,
-      password
+      password,
+      img: 'https://image.flaticon.com/icons/png/512/149/149071.png'
     });
 
     //  Hash Password
