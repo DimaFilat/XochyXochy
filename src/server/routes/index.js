@@ -53,9 +53,8 @@ const router = express.Router();
 //   res.end();
 // });
 
-
-=======
 //Please do step by step
+
 
 //   //Seed Users step1
 //     for (let index = 0; index < 20; index++) {
@@ -96,7 +95,9 @@ const router = express.Router();
 //       await users[i].save();
 //       console.log(i, users[i].wishItem, users[i].name);
 //     }
+
 //   res.end();
+
 // });
 
 export default router;

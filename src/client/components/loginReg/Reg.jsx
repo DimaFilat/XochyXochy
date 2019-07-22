@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-re
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchThunk } from '../../redux/actions/users';

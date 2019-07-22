@@ -36,7 +36,7 @@ export const fetchThunk = (user, path) => {
       body: JSON.stringify({ user })
     });
     const userData = await response.json();
-    // console.warn(userData);
+    console.warn(userData);
     dispatch(fetchRcvd(userData));
     // };
   };

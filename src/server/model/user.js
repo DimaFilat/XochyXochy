@@ -5,7 +5,13 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   img: String,
-  celebrationDate: Date,
+  celebrationDate: [
+    {
+      title: String,
+      date: Date,
+      cycle: false
+    }
+  ],
   wishItem: []
 });
 
