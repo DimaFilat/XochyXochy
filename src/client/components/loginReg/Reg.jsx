@@ -84,7 +84,6 @@ class Reg extends Component {
               onClick={e => {
                 e.preventDefault();
                 this.props.fetchAuth(this.state, pathname);
-                
               }}
             >
               Sign In

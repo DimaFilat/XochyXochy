@@ -81,12 +81,6 @@ export default class MainPageCarousel extends Component {
           key={item.src}
         >
           <CardImg top width="100%" src={item.src} alt={item.altText} />
-            {/* <img src={item.src} alt={item.altText} /> */}
-          
-          <CarouselCaption
-            captionText={item.caption}
-            captionHeader={item.caption}
-          />
         </CarouselItem>
       );
     });

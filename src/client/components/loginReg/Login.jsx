@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchThunk } from '../../redux/actions/users';
-
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+
+import { fetchThunk } from '../../redux/actions/users';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import { loginAC } from '../../Actions/action';
 
 class Login extends Component {
-  state = { email: '', password: '' };
+  state = { email: '', password: '', redirect: false };
 
   inputHandler = async e => {
     e.preventDefault();
@@ -21,10 +21,9 @@ class Login extends Component {
 
   render() {
     const { pathname } = this.props.location;
-
     const { redirect, email, password } = this.state;
     if (redirect) {
-      return <Redirect to="/todo" />;
+      return <Redirect to="/users/profile" />;
     }
     return (
       <div>
@@ -81,7 +80,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = state => {
-  return { state };
+  return { ...state };
 };
 
 export default connect(
