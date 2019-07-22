@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { logOutThunk } from '../../redux/actions/users';
+
 import {
   Collapse,
   Navbar,
@@ -19,7 +22,7 @@ import {
 } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
 
-export default class Menu extends Component {
+class Menu extends Component {
   state = {
     isOpen: false
   };
@@ -33,6 +36,47 @@ export default class Menu extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const { auth } = this.props.usersReducer;
+    const { name } = this.props.usersReducer.user;
+    const styleName = {
+      color: '#e7526c'
+    };
+    const userLinks = (
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink tag={Link} to="/users/reg">
+            Register
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/users/login">
+            Login
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
+    const questLinks = (
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink style={styleName} tag={Link} to="/users/profile/:id">
+            {name}
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            onClick={e => {
+              e.preventDefault();
+              this.props.fetchLogOut();
+              // console.log(this.props.router.pathname(''));
+            }}
+            tag={Link}
+            to="/users/logout/"
+          >
+            Logout
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -41,27 +85,8 @@ export default class Menu extends Component {
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink tag={Link} to="/users/login">
-                  Login
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/users/reg">
-                  Register
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/users/:id">
-                  Account Page
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/users/logout">
-                  Logout
-                </NavLink>
-              </NavItem>
+            {!auth ? userLinks : questLinks}
+            <Nav navbar>
               <NavItem>
                 <NavLink href="https://github.com/ArtiomOganesyan/XochyXochy">
                   Our Project
@@ -86,3 +111,15 @@ export default class Menu extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return { ...state };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchLogOut: () => dispatch(logOutThunk())
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Menu);

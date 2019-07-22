@@ -4,7 +4,6 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import passport from 'passport';
 import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
 import handlebars from 'handlebars';
@@ -199,7 +198,7 @@ app.get('/image/:filename', (req, res) => {
 app.delete('/files/:id', (req, res) => {
   gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
     if (err) {
-      return res.status(404).json({ err: err });
+      return res.status(404).json({ err });
     }
 
     res.redirect('/');

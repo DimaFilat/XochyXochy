@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import express from 'express';
 import bcrypt from 'bcryptjs';
-import { validateBody, schemas } from '../helpers/routeHelpers';
+// import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
 
 const router = express.Router();
@@ -20,7 +20,6 @@ router.get('/sessioncheck', async (req, res) => {
 //  Register Handle
 router.route('/reg').post(async (req, res) => {
   console.log(req.body);
-
   const { name, email, password } = req.body.user;
   //  Validation passed
   const user1 = await User.findOne({ email });
@@ -36,7 +35,7 @@ router.route('/reg').post(async (req, res) => {
 
     //  Hash Password
     bcrypt.genSalt(10, (error, salt) =>
-      bcrypt.hash(newUser.password, salt, async (err, hash) => {
+      bcrypt.hash(newUser.password, salt, async (errsessioncheck, hash) => {
         if (err) throw err;
         //  Set password to hashed
         newUser.password = hash;
@@ -51,45 +50,44 @@ router.route('/reg').post(async (req, res) => {
   }
 });
 //  user login
-router
-  .route('/login')
-  .post(validateBody(schemas.authSchema), async (req, res) => {
-    console.log(req.body);
+router.route('/login').post(async (req, res) => {
+  console.log(req.body);
 
-    const { email, password } = req.body.user;
+  const { email, password } = req.body.user;
 
-    //  Validation passed
-    const user = await User.findOne({ email });
-    if (!user) {
-      //  User exists
-      res.json({ auth: false, msg: 'Email or password incorrect' });
-    } else {
-      // Match password
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) throw err;
-        if (isMatch) {
-          res.json({ user, auth: true });
-        } else {
-          res.json({ msg: 'Email or password incorrect' });
-        }
-      });
-      if (req.session.user !== user) {
-        req.session.user = user;
+  //  Validation passed
+  const user = await User.findOne({ email });
+  if (!user) {
+    //  User exists
+    res.json({ auth: false, msg: 'Email or password incorrect' });
+  } else {
+    // Match password
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) throw err;
+      if (isMatch) {
+        res.json({ user, auth: true });
+        console.log('<<<<<>>>>', user);
+      } else {
+        res.json({ msg: 'Email or password incorrect' });
       }
+    });
+    if (req.session.user !== user) {
+      req.session.user = user;
     }
-  });
+  }
+});
 
 router.get('/logout', async (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
     try {
-      // res.clearCookie('user_sid');
+      res.clearCookie('user_sid');
       await req.session.destroy();
-      res.json({ msg: 'session been destroyed' });
+      res.json({ user: {}, auth: false });
     } catch (error) {
       next(error);
     }
   } else {
-    res.json('/login');
+    res.redirect('/login');
   }
 });
 

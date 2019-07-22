@@ -1,19 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 export const USERS_AC = {
-  LOG_IN: 'LOG_IN',
+  SESSION_CHECK: 'SESSION_CHECK',
   REG_IN: 'REG_IN',
   LOG_OUT: 'LOG_OUT',
   SENT_FETCH: 'SENT_FETCH',
   RCWD_FETCH: 'RCWD_FETCH'
 };
-
-export const logInAC = () => ({
-  type: USERS_AC.LOG_IN
-});
-
-export const logOutAC = () => ({
-  type: USERS_AC.LOG_OUT
-});
 
 export const regInAC = () => ({
   type: USERS_AC.REG_IN
@@ -24,6 +16,26 @@ export const fetchSent = () => ({
 });
 export const fetchRcvd = data => {
   return { type: USERS_AC.RCWD_FETCH, user: data };
+};
+export const logOutThunk = () => {
+  return async dispatch => {
+    dispatch(fetchSent());
+    const response = await fetch('/users/logout');
+    const userData = await response.json();
+    console.warn(userData);
+
+    dispatch(fetchRcvd(userData));
+  };
+};
+export const sessionCheckThunk = () => {
+  return async dispatch => {
+    dispatch(fetchSent());
+    const response = await fetch('/users/sessioncheck');
+    const userData = await response.json();
+    console.warn(userData);
+
+    dispatch(fetchRcvd(userData));
+  };
 };
 export const fetchThunk = (user, path) => {
   return async dispatch => {
@@ -38,6 +50,5 @@ export const fetchThunk = (user, path) => {
     const userData = await response.json();
     console.warn(userData);
     dispatch(fetchRcvd(userData));
-    // };
   };
 };

@@ -1,4 +1,9 @@
 const mongoose = require('mongoose');
+// Mongo URI
+const mongoURI = 'mongodb://localhost:27017/XochyXochy';
+
+// Create mongo connection
+const conn = mongoose.createConnection(mongoURI);
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -15,4 +20,4 @@ const userSchema = new mongoose.Schema({
   wishItem: []
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = conn.model('User', userSchema);
