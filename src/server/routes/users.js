@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-
 import express from 'express';
 import bcrypt from 'bcryptjs';
+import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
 
 const router = express.Router();
@@ -26,7 +26,7 @@ router.route('/reg').post(async (req, res) => {
   const user1 = await User.findOne({ email });
   if (user1) {
     //  User exists
-    res.json({ auth: false, msg: 'Email is already registred' });
+    res.json({ msg: 'Email is already in use' });
   } else {
     const newUser = await new User({
       name,
@@ -53,8 +53,9 @@ router.route('/reg').post(async (req, res) => {
 //  user login
 router
   .route('/login')
+  .post(validateBody(schemas.authSchema), async (req, res) => {
+    console.log(req.body);
 
-  .post(async (req, res) => {
     const { email, password } = req.body.user;
 
     //  Validation passed
@@ -69,7 +70,7 @@ router
         if (isMatch) {
           res.json({ user, auth: true });
         } else {
-          res.json({ auth: false, msg: 'Email or password incorrect' });
+          res.json({ msg: 'Email or password incorrect' });
         }
       });
       if (req.session.user !== user) {

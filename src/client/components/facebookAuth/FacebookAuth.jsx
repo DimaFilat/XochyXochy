@@ -29,17 +29,17 @@ export default class FacebookAuth extends Component {
 
     if (this.state.isLoggedIn) {
       <div
-          style={{
-            width: "400px",
-            margin: "auto",
-            background: "#f4f4f4",
-            padding: "20px"
-          }}
-        >
-          <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
-          Email: {this.state.email}
-        </div>
+        style={{
+          width: '400px',
+          margin: 'auto',
+          background: '#f4f4f4',
+          padding: '20px'
+        }}
+      >
+        <img src={this.state.picture} alt={this.state.name} />
+        <h2>Welcome {this.state.name}</h2>
+        Email: {this.state.email}
+      </div>;
     } else {
       fbContent = (
         <FacebookLogin
@@ -51,8 +51,14 @@ export default class FacebookAuth extends Component {
         />
       );
     }
-    return <div style={{
-        textAlign: 'center'
-      }}>{fbContent}</div>;
+    return (
+      <div
+        style={{
+          textAlign: 'center'
+        }}
+      >
+        {fbContent}
+      </div>
+    );
   }
 }

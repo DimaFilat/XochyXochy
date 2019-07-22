@@ -4,8 +4,10 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import passport from 'passport';
 import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
+import bodyParser from 'body-parser';
 import handlebars from 'handlebars';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
@@ -13,7 +15,6 @@ import { cookiesCleaner } from './middleware/auth';
 import config from './config/default';
 
 //  import routes
-
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 import giftsRouter from './routes/gifts';
@@ -22,7 +23,7 @@ const client = redis.createClient();
 const app = express();
 
 app.use(morgan('dev'));
-
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

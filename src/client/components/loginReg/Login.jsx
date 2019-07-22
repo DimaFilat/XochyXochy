@@ -10,7 +10,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import { loginAC } from '../../Actions/action';
 
 class Login extends Component {
-  state = {};
+  state = { email: '', password: '' };
+
+  inputHandler = async e => {
+    e.preventDefault();
+    await this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
   render() {
     const { pathname } = this.props.location;
