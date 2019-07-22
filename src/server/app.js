@@ -9,6 +9,7 @@ import morgan from 'morgan';
 import handlebars from 'handlebars';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
+import bodyParser from 'body-parser';
 
 // imports for uploading photo(gridfs)
 import crypto from 'crypto';
@@ -28,7 +29,7 @@ const client = redis.createClient();
 const app = express();
 
 app.use(morgan('dev'));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

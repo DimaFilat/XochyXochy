@@ -45,6 +45,16 @@ export default class AddItem extends Component {
             </Col>
           </FormGroup>
           <FormGroup row>
+            <Label sm={2}>Picture Link</Label>
+            <Col sm={10}>
+              <Input
+                type="text"
+                name="title"
+                placeholder="How does it look?"
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
             <Label sm={2}>Description</Label>
             <Col sm={10}>
               <Input
