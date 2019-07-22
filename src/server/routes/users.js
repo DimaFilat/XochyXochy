@@ -36,7 +36,7 @@ router.route('/reg').post(async (req, res) => {
     //  Hash Password
     bcrypt.genSalt(10, (error, salt) =>
       bcrypt.hash(newUser.password, salt, async (errsessioncheck, hash) => {
-        if (err) throw err;
+        if (error) throw error;
         //  Set password to hashed
         newUser.password = hash;
         //  Save user

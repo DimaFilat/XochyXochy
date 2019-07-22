@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Type from 'prop-types';
 import { connect } from 'react-redux';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import Menu from '../headerMenu/Menu';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, withRouter } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers/combineReducer';
@@ -18,10 +18,12 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
+const AppWithRouter = withRouter(App);
+
 const Index = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <AppWithRouter />
     </BrowserRouter>
   </Provider>
 );
