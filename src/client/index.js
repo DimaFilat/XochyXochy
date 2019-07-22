@@ -22,7 +22,6 @@ const Index = () => (
   <Provider store={store}>
     <BrowserRouter>
       <App />
-      {/* <YaSoberu /> */}
     </BrowserRouter>
   </Provider>
 );

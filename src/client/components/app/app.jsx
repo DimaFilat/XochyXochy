@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-
 import Type from 'prop-types';
-import Menu from '../headerMenu/Menu';
 import { Container, Row, Col } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
+import Menu from '../headerMenu/Menu';
 import FacebookAuth from '../facebookAuth/FacebookAuth';
-
 import { Login, Reg } from '../loginReg';
 import Info from './Info';
+import UploadPhoto from '../uploadPhoto/UploadPhoto';
+import UserAccount from '../user/UserAccount';
 
 export default class App extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='body'>
         <Row>
           <Col xs="1"></Col>
           <Col>
@@ -47,6 +47,13 @@ export default class App extends Component {
               />
               <Route
                 exact
+                path="/upload"
+                render={props => {
+                  return <UploadPhoto {...props} />;
+                }}
+              />
+              <Route
+                exact
                 path="/users/login"
                 render={props => {
                   return <Login {...props} />;
@@ -58,6 +65,13 @@ export default class App extends Component {
                 path="/users/reg"
                 render={props => {
                   return <Reg {...props} />;
+                }}
+              />
+              <Route
+                exact
+                path="/users/:id"
+                render={props => {
+                  return <UserAccount {...props} />;
                 }}
               />
             </Switch>

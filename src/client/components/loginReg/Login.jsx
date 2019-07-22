@@ -28,7 +28,7 @@ class Login extends Component {
     }
     return (
       <div>
-        <Col sm={{ size: 3, offset: 4 }}>
+        <Col sm={{ size: 4, offset: 4 }}>
           <Form className="form-login mt-5">
             <h1>Login</h1>
             <FormGroup>
