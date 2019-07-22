@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Container,
+  Row,
+  Col
+} from 'reactstrap';
 import {
   Image,
   Divider,
@@ -11,21 +20,23 @@ import {
   List
 } from 'semantic-ui-react';
 import UserSmallWishList from './UserSmallWishList';
+import WishListItem from './wishListItem';
+import AddItem from './AddItem';
+import UserCelebrationList from './UserCelebrationList';
 
 export default class UserAccount extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
     this.state = {
+      addNewItem: false,
+      addNewDate: false,
+      showAllDate: false,
       dropdownOpen: false,
-
-      user: [
-        { name: 'Jack', nextCelebration: 'Next Big Date' },
-        { name: 'Mike', nextCelebration: 'Next Big Date' },
-        { name: 'London', nextCelebration: 'Next Big Date' },
-        { name: 'Willium', nextCelebration: 'Next Big Date' }
-      ],
+      user: {
+        name: 'Jack',
+        img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
+        celebration: { title: 'Easter', date: 'Dynamic Date' }
+      },
       wishItem: [
         {
           title: 'Cart',
@@ -73,40 +84,135 @@ export default class UserAccount extends Component {
     };
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
-  }
+  };
+  
+  addNewDate = event => {
+    event.preventDefault();
+    if (this.state.addNewDate) {
+      this.setState({
+        addNewDate: false
+      });
+    } else {
+      this.setState({
+        addNewDate: true
+      });
+    }
+  };
+
+  addNewItem = event => {
+    event.preventDefault();
+    if (this.state.addNewItem) {
+      this.setState({
+        addNewItem: false
+      });
+    } else {
+      this.setState({
+        addNewItem: true
+      });
+    }
+  };
+
+  showAllDate = event => {
+    event.preventDefault();
+    if (this.state.showAllDate) {
+      this.setState({
+        showAllDate: false
+      });
+    } else {
+      this.setState({
+        showAllDate: true
+      });
+    }
+  };
+
   render() {
+    console.log(this.state.showAllDate);
     return (
       <div>
         <Container>
           <Row>
             <Col xs="3">
               <Container>
-                <Image
-                  src="https://image.flaticon.com/icons/png/512/149/149071.png"
-                  size="medium"
-                />
+                <Image src={this.state.user.img} size="medium" />
               </Container>
             </Col>
             <Col xs="9">
               <br />
               <Row>
                 <Col>
-                  <h4>THIS USER NAME</h4>
+                  <h3>{this.state.user.name}</h3>
                 </Col>
               </Row>
               <br></br>
               <Row>
-                <Col>THIS USER NEXT CELEB DATE</Col>
                 <Col>
-                  <Button.Group size="large">
-                    <Button>One</Button>
+                  {this.state.showAllDate ? (
+                    <div>
+                      <ul>
+                        {this.state.showAllDate ? (
+                          <UserCelebrationList />
+                        ) : (
+                          'loading'
+                        )}
+                      </ul>
+                    </div>
+                  ) : (
+                    <div>
+                      <Row>
+                        <Col>
+                          <h4>{this.state.user.celebration.title}</h4>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <h5>{this.state.user.celebration.date}</h5>
+                        </Col>
+                      </Row>
+                    </div>
+                  )}
+                </Col>
+                <Col>
+                  <Button.Group size="medium">
+                    <Button onClick={this.addNewDate}>New date</Button>
                     <Button.Or />
-                    <Button>Three</Button>
+                    <Button onClick={this.showAllDate}>Show all dates</Button>
                   </Button.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col></Col>
+                <Col>
+                  <Row>
+                    <Col>
+                      {this.state.addNewDate ? (
+                        <Form>
+                          <FormGroup>
+                            <Input
+                              type="datetime"
+                              name="datetime"
+                              id="exampleDatetime"
+                              placeholder="Your next big date"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <Input
+                              type="date"
+                              name="date"
+                              id="exampleDate"
+                              placeholder="date placeholder"
+                            />
+                          </FormGroup>
+                          <Button onClick={this.addNewDate}>Add Date</Button>
+                        </Form>
+                      ) : (
+                        ' '
+                      )}
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             </Col>
@@ -115,23 +221,38 @@ export default class UserAccount extends Component {
           <Row>
             <Col xs="1"></Col>
             <Col xs="10">
-              <ul>
-                {this.state.wishItem
-                  ? this.state.wishItem.map((element, index) => (
-                      <UserSmallWishList
-                        id={index}
-                        key={index}
-                        title={element.title}
-                        img={element.img}
-                        rating={element.rating}
-                        price={element.price}
-                        description={element.description}
-                        active={element.active}
-                        reserve={element.reserve}
-                      />
-                    ))
-                  : 'loading'}
-              </ul>
+              {!this.state.addNewItem ? (
+                <div>
+                  <Row>
+                    <Col xs="1"></Col>
+                    <Col xs="10">
+                      <Button onClick={this.addNewItem}>
+                        What would you like to add to your WishList?
+                      </Button>
+                    </Col>
+                    <Col xs="1"></Col>
+                  </Row>
+                  <ul>
+                    {this.state.wishItem
+                      ? this.state.wishItem.map((element, index) => (
+                          <UserSmallWishList
+                            id={index}
+                            key={index}
+                            title={element.title}
+                            img={element.img}
+                            rating={element.rating}
+                            price={element.price}
+                            description={element.description}
+                            active={element.active}
+                            reserve={element.reserve}
+                          />
+                        ))
+                      : 'loading'}
+                  </ul>
+                </div>
+              ) : (
+                <AddItem addNewItem={this.addNewItem} />
+              )}
             </Col>
             <Col xs="1"></Col>
           </Row>
