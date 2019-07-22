@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Media } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import UserSmallWishList from './UserSmallWishList';
 import { Image } from 'semantic-ui-react';
 import { Divider } from 'semantic-ui-react';
