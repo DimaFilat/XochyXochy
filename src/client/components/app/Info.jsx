@@ -25,6 +25,7 @@ export default function Info(props) {
           </p>
         </Col>
       </Row>
+      
     </div>
   );
 }

@@ -23,8 +23,10 @@ import UserSmallWishList from './UserSmallWishList';
 import WishListItem from './wishListItem';
 import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
+// import { connect } from 'tls';
+import { connect } from 'react-redux';
 
-export default class UserAccount extends Component {
+class UserAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,9 +35,9 @@ export default class UserAccount extends Component {
       showAllDate: false,
       dropdownOpen: false,
       user: {
-        name: 'Jack',
+        // name: 'Jack',
         img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-        celebration: { title: 'Easter', date: 'Dynamic Date' }
+        celebrationDate: { title: 'Easter', date: 'Dynamic Date' }
       },
       wishItem: [
         {
@@ -89,7 +91,7 @@ export default class UserAccount extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   };
-  
+
   addNewDate = event => {
     event.preventDefault();
     if (this.state.addNewDate) {
@@ -130,7 +132,7 @@ export default class UserAccount extends Component {
   };
 
   render() {
-    console.log(this.state.showAllDate);
+    console.log('!!!!',this.props.user);
     return (
       <div>
         <Container>
@@ -144,7 +146,7 @@ export default class UserAccount extends Component {
               <br />
               <Row>
                 <Col>
-                  <h3>{this.state.user.name}</h3>
+                  <h3>{this.props.user.name}</h3>
                 </Col>
               </Row>
               <br></br>
@@ -164,12 +166,12 @@ export default class UserAccount extends Component {
                     <div>
                       <Row>
                         <Col>
-                          <h4>{this.state.user.celebration.title}</h4>
+                          <h4>{this.state.user.celebrationDate.title}</h4>
                         </Col>
                       </Row>
                       <Row>
                         <Col>
-                          <h5>{this.state.user.celebration.date}</h5>
+                          <h5>{this.state.user.celebrationDate.date}</h5>
                         </Col>
                       </Row>
                     </div>
@@ -261,3 +263,12 @@ export default class UserAccount extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    // ...state
+    user: state.usersReducer.user // Flows in the state to props in a component
+  };
+};
+
+export default connect(mapStateToProps)(UserAccount);
