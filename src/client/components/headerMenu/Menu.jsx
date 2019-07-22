@@ -6,7 +6,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-
   NavLink,
   UncontrolledDropdown,
   DropdownToggle,
@@ -19,7 +18,6 @@ import {
   Input
 } from 'reactstrap';
 import { Switch, Route, Link } from 'react-router-dom';
-
 
 export default class Menu extends Component {
   state = {
@@ -45,23 +43,22 @@ export default class Menu extends Component {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-
                 <NavLink tag={Link} to="/users/login">
-
                   Login
                 </NavLink>
               </NavItem>
               <NavItem>
-
                 <NavLink tag={Link} to="/users/reg">
-
                   Register
                 </NavLink>
               </NavItem>
               <NavItem>
-
+                <NavLink tag={Link} to="/users/:id">
+                  Account Page
+                </NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink tag={Link} to="/users/logout">
-
                   Logout
                 </NavLink>
               </NavItem>

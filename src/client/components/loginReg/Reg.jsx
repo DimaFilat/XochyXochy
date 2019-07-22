@@ -35,7 +35,7 @@ class Reg extends Component {
     }
     return (
       <div>
-        <Col sm={{ size: 3, offset: 4 }}>
+        <Col sm={{ size: 4, offset: 4 }}>
           <Form className="form-login mt-5">
             <h1 text="center mb-3 mt-10">Register</h1>
             <FormGroup>
@@ -85,6 +85,7 @@ class Reg extends Component {
               onClick={e => {
                 e.preventDefault();
                 this.props.fetchAuth(this.state, pathname);
+                
               }}
             >
               Sign In
