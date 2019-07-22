@@ -67,7 +67,6 @@ class Menu extends Component {
             onClick={e => {
               e.preventDefault();
               this.props.fetchLogOut();
-              // console.log(this.props.router.pathname(''));
             }}
             tag={Link}
             to="/users/logout/"

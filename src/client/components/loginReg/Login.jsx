@@ -59,6 +59,7 @@ class Login extends Component {
               onClick={e => {
                 e.preventDefault();
                 this.props.fetchAuth(this.state, pathname);
+                this.props.history.push('/users/profile/:id');
               }}
             >
               Sign In
