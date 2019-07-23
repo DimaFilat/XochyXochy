@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 // import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
 import sessionChecker from '../middleware/auth';
+import scrape from '../ozonParser/ozonParser';
 
 const router = express.Router();
 
@@ -112,6 +113,13 @@ router.post('/profile/:id/newCelebration', async (req, res) => {
   const user = await User.findOne({ _id });
   req.session.user = user;
   res.json(user);
+});
+
+router.post('/ozonParser', async (req, res) => {
+  console.log(req.body);
+  const scrapeFunc = await scrape(req.body.url);
+  // console.log(scrapeFunc);
+  res.json(scrapeFunc);
 });
 
 module.exports = router;

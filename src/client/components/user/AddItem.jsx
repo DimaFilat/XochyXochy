@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import {
   Col,
@@ -19,6 +20,7 @@ export default class AddItem extends Component {
             <Col sm={10}>
               <Input
                 type="text"
+                id="wishitem"
                 name="title"
                 placeholder="What would you like for your next big date?"
               />
@@ -40,18 +42,38 @@ export default class AddItem extends Component {
               <Input
                 type="text"
                 name="title"
+                id="linkInput"
                 placeholder="Where can we find this item?"
               />
+              <button
+                type="button"
+                onClick={e => {
+                  e.preventDefault();
+                  let itemUrl = document.getElementById('linkInput').value;
+                  (async () => {
+                    let response = await fetch('/users/ozonParser', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        url: itemUrl
+                      })
+                    });
+                    let data = await response.json();
+                   
+                    
+                  })();
+                }}
+              >
+                Submit
+              </button>
             </Col>
           </FormGroup>
           <FormGroup row>
             <Label sm={2}>Picture Link</Label>
             <Col sm={10}>
-              <Input
-                type="text"
-                name="title"
-                placeholder="How does it look?"
-              />
+              <Input type="text" name="title" placeholder="How does it look?" />
             </Col>
           </FormGroup>
           <FormGroup row>

@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
-const scrape = async () => {
+const scrape = async (url) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto('https://www.ozon.ru/context/detail/id/136937722/');
+  await page.goto(`${url}`);
   await page.waitFor(100);
   // Код для скрапинга
   const result = await page.evaluate(() => {
@@ -21,6 +21,8 @@ const scrape = async () => {
   return result;
 };
 
-scrape().then(value => {
-  console.log(value);
-});
+// scrape().then(value => {
+//   console.log(value);
+// });
+
+export default scrape;
