@@ -32,6 +32,7 @@ export default class AddItem extends Component {
               <Input
                 type="text"
                 name="price"
+                id="price"
                 placeholder="Who much do you think it will cost?"
               />
             </Col>
@@ -61,8 +62,10 @@ export default class AddItem extends Component {
                       })
                     });
                     let data = await response.json();
-                   
-                    
+                    document.getElementById('wishitem').value = data.title;
+                    document.getElementById('price').value = data.price;
+                    document.getElementById('pictureUrl').value =
+                      data.pictureUrl;
                   })();
                 }}
               >
@@ -73,7 +76,12 @@ export default class AddItem extends Component {
           <FormGroup row>
             <Label sm={2}>Picture Link</Label>
             <Col sm={10}>
-              <Input type="text" name="title" placeholder="How does it look?" />
+              <Input
+                type="text"
+                name="title"
+                id="pictureUrl"
+                placeholder="How does it look?"
+              />
             </Col>
           </FormGroup>
           <FormGroup row>
