@@ -25,6 +25,7 @@ import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
 // import { connect } from 'tls';
 import { connect } from 'react-redux';
+import { fetchThunk } from '../../redux/actions/users';
 
 class UserAccount extends Component {
   constructor(props) {
@@ -33,56 +34,7 @@ class UserAccount extends Component {
       addNewItem: false,
       addNewDate: false,
       showAllDate: false,
-      dropdownOpen: false,
-      user: {
-        // name: 'Jack',
-        img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-        celebrationDate: { title: 'Easter', date: 'Dynamic Date' }
-      },
-      wishItem: [
-        {
-          title: 'Cart',
-          img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-          rating: '3',
-          price: '1500',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-          messenger: [
-            { userId: '123123', text: 'some text' },
-            { userId: '122211', text: 'some more text' }
-          ],
-          active: true,
-          reserve: false
-        },
-        {
-          title: 'Book',
-          img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-          rating: '1',
-          price: '1213',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-          messenger: [
-            { userId: '123123', text: 'some text' },
-            { userId: '122211', text: 'some more text' }
-          ],
-          active: true,
-          reserve: false
-        },
-        {
-          title: 'Whiskey',
-          img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-          rating: '5',
-          price: '22',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-          messenger: [
-            { userId: '123123', text: 'some text' },
-            { userId: '122211', text: 'some more text' }
-          ],
-          active: true,
-          reserve: false
-        }
-      ]
+      dropdownOpen: false
     };
   }
 
@@ -92,7 +44,28 @@ class UserAccount extends Component {
     });
   };
 
+  saveNewDate = async event => {
+    event.preventDefault();
+    const { _id } = this.props.user;
+    this.setState({
+      ...this.state.users, //need to check if this.state.users needs .users???
+      inputCelebrationTitle: event.target.title.value,
+      inputCelebrationDate: event.target.date.value
+    });
+    
+    if (this.state.addNewDate) {
+      this.setState({
+        addNewDate: false
+      });
+    } else {
+      this.setState({
+        addNewDate: true
+      });
+    }
+      };
+
   addNewDate = event => {
+    // console.log(event.target);
     event.preventDefault();
     if (this.state.addNewDate) {
       this.setState({
@@ -119,6 +92,7 @@ class UserAccount extends Component {
   };
 
   showAllDate = event => {
+    console.log(event.target);
     event.preventDefault();
     if (this.state.showAllDate) {
       this.setState({
@@ -132,14 +106,16 @@ class UserAccount extends Component {
   };
 
   render() {
-    console.log('!!!!',this.props.user);
+    const newDatePath = this.props.location.pathname + '/newCelebration';
+    console.log(newDatePath);
+    console.log('=========>',this.state)
     return (
       <div>
         <Container>
           <Row>
             <Col xs="3">
               <Container>
-                <Image src={this.state.user.img} size="medium" />
+                <Image src={this.props.user.img} size="medium" />
               </Container>
             </Col>
             <Col xs="9">
@@ -155,23 +131,38 @@ class UserAccount extends Component {
                   {this.state.showAllDate ? (
                     <div>
                       <ul>
-                        {this.state.showAllDate ? (
-                          <UserCelebrationList />
-                        ) : (
-                          'loading'
-                        )}
+                        {this.props.user.celebrationDate
+                          ? this.props.user.celebrationDate.map(
+                              (element, index) => (
+                                <UserCelebrationList
+                                  id={index}
+                                  key={index}
+                                  title={element.title}
+                                  date={element.date}
+                                />
+                              )
+                            )
+                          : 'loading'}
                       </ul>
                     </div>
                   ) : (
                     <div>
                       <Row>
                         <Col>
-                          <h4>{this.state.user.celebrationDate.title}</h4>
+                          <h4>
+                            {this.props.user.celebrationDate.length
+                              ? this.props.user.celebrationDate[0].title
+                              : 'You have no big dates'}
+                          </h4>
                         </Col>
                       </Row>
                       <Row>
                         <Col>
-                          <h5>{this.state.user.celebrationDate.date}</h5>
+                          <h5>
+                            {this.props.user.celebrationDate.length
+                              ? this.props.user.celebrationDate[0].date
+                              : ' '}
+                          </h5>
                         </Col>
                       </Row>
                     </div>
@@ -191,24 +182,31 @@ class UserAccount extends Component {
                   <Row>
                     <Col>
                       {this.state.addNewDate ? (
-                        <Form>
+                        <Form
+                          onSubmit={e => {
+                            e.preventDefault();
+                            this.props.fetchNewDate(this.state, newDatePath);
+                          }}
+                        >
                           <FormGroup>
                             <Input
-                              type="datetime"
-                              name="datetime"
+                              required
+                              type="text "
+                              name="title"
                               id="exampleDatetime"
                               placeholder="Your next big date"
                             />
                           </FormGroup>
                           <FormGroup>
                             <Input
+                              required
                               type="date"
                               name="date"
                               id="exampleDate"
                               placeholder="date placeholder"
                             />
                           </FormGroup>
-                          <Button onClick={this.addNewDate}>Add Date</Button>
+                          <Button type="submit">Add Date</Button>
                         </Form>
                       ) : (
                         ' '
@@ -235,8 +233,8 @@ class UserAccount extends Component {
                     <Col xs="1"></Col>
                   </Row>
                   <ul>
-                    {this.state.wishItem
-                      ? this.state.wishItem.map((element, index) => (
+                    {this.props.user.wishItem.length
+                      ? this.props.wishItem.map((element, index) => (
                           <UserSmallWishList
                             id={index}
                             key={index}
@@ -249,7 +247,7 @@ class UserAccount extends Component {
                             reserve={element.reserve}
                           />
                         ))
-                      : 'loading'}
+                      : 'ADD SOME GIF'}
                   </ul>
                 </div>
               ) : (
@@ -264,11 +262,21 @@ class UserAccount extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    // ...state
-    user: state.usersReducer.user // Flows in the state to props in a component
+    fetchNewDate: (data, newDatePath) =>
+      dispatch(fetchThunk(data, newDatePath)),
+    fetchCheckAuth: () => dispatch(sessionCheckThunk())
   };
 };
 
-export default connect(mapStateToProps)(UserAccount);
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserAccount);

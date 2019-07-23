@@ -7,8 +7,10 @@ function cookiesCleaner(req, res, next) {
 }
 
 const sessionChecker = (req, res, next) => {
+  
   if (req.session.user && req.cookies.user_sid) {
-    res.redirect('/todo');
+    const { user } = req.session;
+    res.json(user);
   } else {
     next();
   }

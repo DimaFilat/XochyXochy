@@ -4,7 +4,12 @@ export const USERS_AC = {
   REG_IN: 'REG_IN',
   LOG_OUT: 'LOG_OUT',
   SENT_FETCH: 'SENT_FETCH',
-  RCWD_FETCH: 'RCWD_FETCH'
+  RCWD_FETCH: 'RCWD_FETCH',
+  ADD_DATE: 'ADD_DATE'
+};
+
+export const addDate = () => {
+  type: USERS_AC.ADD_DATE;
 };
 
 export const regInAC = () => ({
@@ -52,3 +57,5 @@ export const fetchThunk = (user, path) => {
     dispatch(fetchRcvd(userData));
   };
 };
+
+
