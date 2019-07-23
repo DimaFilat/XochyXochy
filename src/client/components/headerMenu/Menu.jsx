@@ -37,7 +37,7 @@ class Menu extends Component {
   render() {
     const { isOpen } = this.state;
     const { auth } = this.props.usersReducer;
-    const { name } = this.props.usersReducer.user;
+    const { name, _id } = this.props.usersReducer.user;
     const styleName = {
       color: '#e7526c'
     };
@@ -58,7 +58,7 @@ class Menu extends Component {
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink style={styleName} tag={Link} to="/users/profile/:id">
+          <NavLink style={styleName} tag={Link} to={`/users/profile/${_id}`}>
             {name}
           </NavLink>
         </NavItem>

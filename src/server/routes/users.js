@@ -3,6 +3,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 // import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
+import sessionChecker from '../middleware/auth';
 
 const router = express.Router();
 
@@ -38,7 +39,7 @@ router.route('/reg').post(async (req, res) => {
 
     //  Hash Password
     bcrypt.genSalt(10, (error, salt) =>
-      bcrypt.hash(newUser.password, salt, async (errsessioncheck, hash) => {
+      bcrypt.hash(newUser.password, salt, async (error, hash) => {
         if (error) throw error;
         //  Set password to hashed
         newUser.password = hash;
@@ -48,13 +49,12 @@ router.route('/reg').post(async (req, res) => {
         res.json({ user, auth: true });
       })
     );
-
     req.session.user = newUser;
   }
 });
 //  user login
 router.route('/login').post(async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const { email, password } = req.body.user;
 
@@ -92,6 +92,26 @@ router.get('/logout', async (req, res, next) => {
   } else {
     res.redirect('/login');
   }
+});
+
+router.post('/profile/:id/newCelebration', async (req, res) => {
+  // console.log('ruchka', req.body, 'session ====>', req.session);
+  const { _id } = req.session.user;
+  const { celebrationDate, celebrationTitle } = req.body;
+  // await User.findOneAndUpdate(
+  //   { _id },
+  //   {
+  //     $push: {
+  //       celebrationDate: {
+  //         title: celebrationTitle,
+  //         date: celebrationDate
+  //       }
+  //     }
+  //   }
+  // );
+  const user = await User.findOne({ _id });
+  req.session.user = user;
+  res.json(user);
 });
 
 module.exports = router;
