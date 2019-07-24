@@ -95,7 +95,7 @@ router.get('/logout', async (req, res, next) => {
 });
 
 router.post('/profile/:id/newCelebration', async (req, res) => {
-  // console.log('ruchka', req.body, 'session ====>', req.session);
+  console.log('ruchka', req.body, 'session ====>', req.session);
   const { _id } = req.session.user;
   const { celebrationDate, celebrationTitle } = req.body;
   // await User.findOneAndUpdate(

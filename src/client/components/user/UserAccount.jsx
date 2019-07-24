@@ -25,7 +25,7 @@ import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
 // import { connect } from 'tls';
 import { connect } from 'react-redux';
-import { fetchThunk } from '../../redux/actions/users';
+import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
 class UserAccount extends Component {
   constructor(props) {
@@ -44,6 +44,10 @@ class UserAccount extends Component {
     });
   };
 
+  componentDidMount = () => {
+    this.props.fetchCheckAuth();
+  };
+
   saveNewDate = async event => {
     event.preventDefault();
     const { _id } = this.props.user;
@@ -52,7 +56,7 @@ class UserAccount extends Component {
       inputCelebrationTitle: event.target.title.value,
       inputCelebrationDate: event.target.date.value
     });
-    
+
     if (this.state.addNewDate) {
       this.setState({
         addNewDate: false
@@ -62,7 +66,7 @@ class UserAccount extends Component {
         addNewDate: true
       });
     }
-      };
+  };
 
   addNewDate = event => {
     // console.log(event.target);
@@ -107,8 +111,8 @@ class UserAccount extends Component {
 
   render() {
     const newDatePath = this.props.location.pathname + '/newCelebration';
-    console.log(newDatePath);
-    console.log('=========>',this.state)
+    // console.log(newDatePath);
+    // console.log('=========>', this.state);
     return (
       <div>
         <Container>
@@ -185,11 +189,13 @@ class UserAccount extends Component {
                         <Form
                           onSubmit={e => {
                             e.preventDefault();
+                            this.saveNewDate;
                             this.props.fetchNewDate(this.state, newDatePath);
                           }}
                         >
                           <FormGroup>
                             <Input
+                              onChange={this.saveNewDate}
                               required
                               type="text "
                               name="title"
@@ -199,6 +205,7 @@ class UserAccount extends Component {
                           </FormGroup>
                           <FormGroup>
                             <Input
+                            onChange={this.saveNewDate}
                               required
                               type="date"
                               name="date"
