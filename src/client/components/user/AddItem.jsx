@@ -12,12 +12,14 @@ import {
 
 export default class AddItem extends Component {
   state = {
-    img: ''
+    img: '',
+    wishItem: '',
+    price: '',
+    picLink: ''
   };
 
   render() {
     const productImage = this.state.img;
-    // const productImage = this.state.img;
     return (
       <div>
         <Form>
@@ -27,6 +29,10 @@ export default class AddItem extends Component {
               <Input
                 type="text"
                 id="wishitem"
+                value={this.state.wishItem}
+                onChange={e => {
+                  this.setState({ wishItem: e.target.value });
+                }}
                 name="title"
                 placeholder="What would you like for your next big date?"
               />
@@ -38,6 +44,10 @@ export default class AddItem extends Component {
               <Input
                 type="text"
                 name="price"
+                value={this.state.price}
+                onChange={e => {
+                  this.setState({ price: e.target.value });
+                }}
                 id="price"
                 placeholder="Who much do you think it will cost?"
               />
@@ -67,10 +77,12 @@ export default class AddItem extends Component {
                     })
                   });
                   const data = await response.json();
-                  document.getElementById('wishitem').value = data.title;
-                  document.getElementById('price').value = data.price;
-                  document.getElementById('pictureUrl').value = data.pictureUrl;
-                  this.setState({ ...this.state, img: 'productImage.jpg' });
+                  this.setState({
+                    img: data.picFileName,
+                    price: data.scrapeFunc.price,
+                    wishItem: data.scrapeFunc.title,
+                    picLink: data.scrapeFunc.pictureUrl
+                  });
                 }}
               >
                 Submit
@@ -92,9 +104,12 @@ export default class AddItem extends Component {
                 type="text"
                 name="title"
                 id="pictureUrl"
+                value={this.state.picLink}
+                onChange={e => {
+                  this.setState({ picLink: e.target.value });
+                }}
                 placeholder="How does it look?"
               />
-              {/* <img className="ui mini image" id="pic" src=itemUrl /> */}
             </Col>
           </FormGroup>
           <FormGroup row>

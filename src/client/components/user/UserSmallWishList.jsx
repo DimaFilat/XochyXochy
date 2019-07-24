@@ -22,7 +22,9 @@ export default function UserSmallWishList(props) {
                 <Row>{price}</Row>
                 <Row>{description}</Row>
               </Col>
-              <Col xs="2"><Button>Edit</Button></Col>
+              <Col xs="2">
+                <Button>Edit</Button>
+              </Col>
             </Row>
           </Container>
         </List.Content>
