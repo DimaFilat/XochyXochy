@@ -1,0 +1,4 @@
+   document.getElementById('wishitem').value = data.title
+
+   {title: "17.3" Игровой ноутбук Dell G3 3779 G317-7534, черный",
+    price: "60525", pictureUrl: "https://cdn1.ozone.ru/multimedia/1023986167.jpg"}

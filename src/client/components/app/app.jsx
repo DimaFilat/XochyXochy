@@ -18,6 +18,7 @@ class App extends Component {
   };
 
   render() {
+   const {user} = this.props
     return (
       <div className="body">
         <Row>
@@ -26,7 +27,6 @@ class App extends Component {
             <div>
               <Menu />
             </div>
-
             <Switch>
               <Route
                 exact
@@ -58,7 +58,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/users/profile/:id"
+                path={`/users/profile/${user._id}`}
                 render={props => {
                   return <UserAccount {...props} />;
                 }}
@@ -77,7 +77,13 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    ...state.usersReducer
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

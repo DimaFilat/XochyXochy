@@ -23,8 +23,8 @@ import UserSmallWishList from './UserSmallWishList';
 import WishListItem from './wishListItem';
 import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
-// import { connect } from 'tls';
 import { connect } from 'react-redux';
+import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
 class UserAccount extends Component {
   constructor(props) {
@@ -43,7 +43,38 @@ class UserAccount extends Component {
     });
   };
 
+  componentDidMount = () => {
+    this.props.fetchCheckAuth();
+  };
+
+  saveNewDate = async event => {
+    event.preventDefault();
+    if (event.target.name === 'title') {
+      this.setState({
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationDate: event.target.value
+      });
+    } else {
+      this.setState({
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationDate: event.target.value
+      });
+    }
+
+    const { _id } = this.props.user;
+    // if (this.state.addNewDate) {
+    //   this.setState({
+    //     addNewDate: false
+    //   });
+    // } else {
+    //   this.setState({
+    //     addNewDate: true
+    //   });
+    // }
+  };
+
   addNewDate = event => {
+    // console.log(event.target);
     event.preventDefault();
     if (this.state.addNewDate) {
       this.setState({
@@ -70,6 +101,7 @@ class UserAccount extends Component {
   };
 
   showAllDate = event => {
+    console.log(event.target);
     event.preventDefault();
     if (this.state.showAllDate) {
       this.setState({
@@ -105,11 +137,18 @@ class UserAccount extends Component {
                   {this.state.showAllDate ? (
                     <div>
                       <ul>
-                        {this.state.showAllDate ? (
-                          <UserCelebrationList />
-                        ) : (
-                          'loading'
-                        )}
+                        {this.props.user.celebrationDate
+                          ? this.props.user.celebrationDate.map(
+                              (element, index) => (
+                                <UserCelebrationList
+                                  id={index}
+                                  key={index}
+                                  title={element.title}
+                                  date={element.date}
+                                />
+                              )
+                            )
+                          : 'loading'}
                       </ul>
                     </div>
                   ) : (
@@ -141,24 +180,35 @@ class UserAccount extends Component {
                   <Row>
                     <Col>
                       {this.state.addNewDate ? (
-                        <Form>
+                        <Form
+                          onChange={this.saveNewDate}
+                          onSubmit={e => {
+                            e.preventDefault();
+                            this.saveNewDate;
+                            this.props.fetchNewDate(this.state, newDatePath);
+                          }}
+                        >
                           <FormGroup>
                             <Input
-                              type="datetime"
-                              name="datetime"
+                              // onChange={this.saveNewDate}
+                              required
+                              type="text "
+                              name="title"
                               id="exampleDatetime"
                               placeholder="Your next big date"
                             />
                           </FormGroup>
                           <FormGroup>
                             <Input
+                              // onChange={this.saveNewDate}
+                              required
                               type="date"
                               name="date"
                               id="exampleDate"
                               placeholder="date placeholder"
                             />
                           </FormGroup>
-                          <Button onClick={this.addNewDate}>Add Date</Button>
+                          <Button type="submit">Add Date</Button>
                         </Form>
                       ) : (
                         ' '
@@ -185,8 +235,8 @@ class UserAccount extends Component {
                     <Col xs="1"></Col>
                   </Row>
                   <ul>
-                    {this.state.wishItem
-                      ? this.state.wishItem.map((element, index) => (
+                    {this.props.user.wishItem.length
+                      ? this.props.wishItem.map((element, index) => (
                           <UserSmallWishList
                             id={index}
                             key={index}
@@ -199,7 +249,7 @@ class UserAccount extends Component {
                             reserve={element.reserve}
                           />
                         ))
-                      : 'loading'}
+                      : 'ADD SOME GIF'}
                   </ul>
                 </div>
               ) : (
@@ -214,11 +264,21 @@ class UserAccount extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    // ...state
-    user: state.usersReducer.user // Flows in the state to props in a component
+    fetchNewDate: (data, newDatePath) =>
+      dispatch(fetchThunk(data, newDatePath)),
+    fetchCheckAuth: () => dispatch(sessionCheckThunk())
   };
 };
 
-export default connect(mapStateToProps)(UserAccount);
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserAccount);
