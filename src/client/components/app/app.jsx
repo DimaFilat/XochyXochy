@@ -14,7 +14,7 @@ import UserAccount from '../user/UserAccount';
 
 class App extends Component {
   componentDidMount = () => {
-    this.props.fetchCheckAuth();
+    // this.props.fetchCheckAuth();
   };
 
   render() {
@@ -44,21 +44,21 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/users/login"
+                path="/users/signin"
                 render={props => {
                   return <Login {...props} />;
                 }}
               />
               <Route
                 exact
-                path="/users/reg"
+                path="/users/signup"
                 render={props => {
                   return <Reg {...props} />;
                 }}
               />
               <Route
                 exact
-                path={`/users/profile/${user._id}`}
+                // path={`/users/profile/${user._id}`}
                 render={props => {
                   return <UserAccount {...props} />;
                 }}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logOutThunk } from '../../redux/actions/users';
-
+// import {menu, textColor} from './style';
+import './style.css';
 import {
   Collapse,
   Navbar,
@@ -20,7 +21,7 @@ import {
   InputGroupText,
   Input
 } from 'reactstrap';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
 class Menu extends Component {
   state = {
@@ -36,20 +37,25 @@ class Menu extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const { fetchLogOut } = this.props;
     const { auth } = this.props.usersReducer;
-    const { name, _id } = this.props.usersReducer.user;
-    const styleName = {
-      color: '#e7526c'
+
+    // const { name } = this.props.usersReducer.user;
+
+    // const { name, _id } = this.props.usersReducer.user;
+    const menu = {
+      backgroundColor: '#75706f'
     };
+    const textColor = { color: '#8b0002' };
     const userLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink tag={Link} to="/users/reg">
+          <NavLink style={textColor} tag={Link} to="/users/signup">
             Register
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/users/login">
+          <NavLink tag={Link} to="/users/signin">
             Login
           </NavLink>
         </NavItem>
@@ -58,15 +64,15 @@ class Menu extends Component {
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink style={styleName} tag={Link} to={`/users/profile/${_id}`}>
+          {/* <NavLink tag={Link} to={`/users/profile/${_id}`}>
             {name}
-          </NavLink>
+          </NavLink> */}
         </NavItem>
         <NavItem>
           <NavLink
             onClick={e => {
               e.preventDefault();
-              this.props.fetchLogOut();
+              fetchLogOut();
             }}
             tag={Link}
             to="/users/logout/"
@@ -76,18 +82,21 @@ class Menu extends Component {
         </NavItem>
       </Nav>
     );
+
+    console.log(this.props);
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand tag={Link} to="/">
+        {!auth ? <Redirect to="/" /> : null}
+        <Navbar className="menu" light expand="md">
+          <NavbarBrand className="menuButton" tag={Link} to="/">
             Home
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             {!auth ? userLinks : questLinks}
             <Nav navbar>
-              <NavItem>
-                <NavLink href="https://github.com/ArtiomOganesyan/XochyXochy">
+              <NavItem >
+                <NavLink className="menuButton" href="https://github.com/ArtiomOganesyan/XochyXochy">
                   Our Project
                 </NavLink>
               </NavItem>
