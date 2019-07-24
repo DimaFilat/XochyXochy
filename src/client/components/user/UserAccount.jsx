@@ -23,7 +23,6 @@ import UserSmallWishList from './UserSmallWishList';
 import WishListItem from './wishListItem';
 import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
-// import { connect } from 'tls';
 import { connect } from 'react-redux';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
@@ -50,22 +49,28 @@ class UserAccount extends Component {
 
   saveNewDate = async event => {
     event.preventDefault();
-    const { _id } = this.props.user;
-    this.setState({
-      ...this.state.users, //need to check if this.state.users needs .users???
-      inputCelebrationTitle: event.target.title.value,
-      inputCelebrationDate: event.target.date.value
-    });
-
-    if (this.state.addNewDate) {
+    if (event.target.name === 'title') {
       this.setState({
-        addNewDate: false
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationDate: event.target.value
       });
     } else {
       this.setState({
-        addNewDate: true
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationDate: event.target.value
       });
     }
+
+    const { _id } = this.props.user;
+    // if (this.state.addNewDate) {
+    //   this.setState({
+    //     addNewDate: false
+    //   });
+    // } else {
+    //   this.setState({
+    //     addNewDate: true
+    //   });
+    // }
   };
 
   addNewDate = event => {
@@ -113,6 +118,7 @@ class UserAccount extends Component {
     const newDatePath = this.props.location.pathname + '/newCelebration';
     // console.log(newDatePath);
     // console.log('=========>', this.state);
+    // console.log(this.props)
     return (
       <div>
         <Container>
@@ -187,6 +193,7 @@ class UserAccount extends Component {
                     <Col>
                       {this.state.addNewDate ? (
                         <Form
+                          onChange={this.saveNewDate}
                           onSubmit={e => {
                             e.preventDefault();
                             this.saveNewDate;
@@ -195,7 +202,7 @@ class UserAccount extends Component {
                         >
                           <FormGroup>
                             <Input
-                              onChange={this.saveNewDate}
+                              // onChange={this.saveNewDate}
                               required
                               type="text "
                               name="title"
@@ -205,7 +212,7 @@ class UserAccount extends Component {
                           </FormGroup>
                           <FormGroup>
                             <Input
-                            onChange={this.saveNewDate}
+                              // onChange={this.saveNewDate}
                               required
                               type="date"
                               name="date"
