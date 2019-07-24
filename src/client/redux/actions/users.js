@@ -45,16 +45,21 @@ export const sessionCheckThunk = () => {
 export const fetchThunk = (user, path) => {
   return async dispatch => {
     dispatch(fetchSent());
-    const response = await fetch(`${path}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({ user })
-    });
-    const userData = await response.json();
-    // console.warn(userData);
-    dispatch(fetchRcvd(userData));
+
+    try {
+      const response = await fetch(`${path}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ ...user })
+      });
+      const userData = await response.json();
+
+      console.warn(userData);
+      dispatch(fetchRcvd(userData));
+    } catch (err) {}
+
   };
 };
 

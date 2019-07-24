@@ -20,7 +20,7 @@ import {
   InputGroupText,
   Input
 } from 'reactstrap';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
 class Menu extends Component {
   state = {
@@ -36,21 +36,28 @@ class Menu extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const { fetchLogOut } = this.props;
     const { auth } = this.props.usersReducer;
+
+    // const { name } = this.props.usersReducer.user;
+    const styleName = {
+      color: '#e7526c'
+
     const { name, _id } = this.props.usersReducer.user;
     const inlineStyle = {
       backgroundColor: '#75706f',
       color: '#8b0002'
+
     };
     const userLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink tag={Link} to="/users/reg">
+          <NavLink tag={Link} to="/users/signup">
             Register
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/users/login">
+          <NavLink tag={Link} to="/users/signin">
             Login
           </NavLink>
         </NavItem>
@@ -67,7 +74,7 @@ class Menu extends Component {
           <NavLink
             onClick={e => {
               e.preventDefault();
-              this.props.fetchLogOut();
+              fetchLogOut();
             }}
             tag={Link}
             to="/users/logout/"
@@ -81,7 +88,8 @@ class Menu extends Component {
     console.log(this.props)
     return (
       <div>
-        <Navbar style={inlineStyle} light expand="md">
+        {!auth ? <Redirect to="/" /> : null}
+           <Navbar style={inlineStyle} light expand="md">
           <NavbarBrand tag={Link} to="/">
             Home
           </NavbarBrand>
