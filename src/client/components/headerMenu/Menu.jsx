@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logOutThunk } from '../../redux/actions/users';
-import style from './style'
+// import {menu, textColor} from './style';
+import './style.css';
 import {
   Collapse,
   Navbar,
@@ -40,19 +41,16 @@ class Menu extends Component {
     const { auth } = this.props.usersReducer;
 
     // const { name } = this.props.usersReducer.user;
-    const styleName = {
-      color: '#e7526c'
 
-    const { name, _id } = this.props.usersReducer.user;
-    const inlineStyle = {
-      backgroundColor: '#75706f',
-      color: '#8b0002'
-
+    // const { name, _id } = this.props.usersReducer.user;
+    const menu = {
+      backgroundColor: '#75706f'
     };
+    const textColor = { color: '#8b0002' };
     const userLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink tag={Link} to="/users/signup">
+          <NavLink style={textColor} tag={Link} to="/users/signup">
             Register
           </NavLink>
         </NavItem>
@@ -66,9 +64,9 @@ class Menu extends Component {
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink tag={Link} to={`/users/profile/${_id}`}>
+          {/* <NavLink tag={Link} to={`/users/profile/${_id}`}>
             {name}
-          </NavLink>
+          </NavLink> */}
         </NavItem>
         <NavItem>
           <NavLink
@@ -85,20 +83,20 @@ class Menu extends Component {
       </Nav>
     );
 
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
         {!auth ? <Redirect to="/" /> : null}
-           <Navbar style={inlineStyle} light expand="md">
-          <NavbarBrand tag={Link} to="/">
+        <Navbar className="menu" light expand="md">
+          <NavbarBrand className="menuButton" tag={Link} to="/">
             Home
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             {!auth ? userLinks : questLinks}
             <Nav navbar>
-              <NavItem>
-                <NavLink href="https://github.com/ArtiomOganesyan/XochyXochy">
+              <NavItem >
+                <NavLink className="menuButton" href="https://github.com/ArtiomOganesyan/XochyXochy">
                   Our Project
                 </NavLink>
               </NavItem>
