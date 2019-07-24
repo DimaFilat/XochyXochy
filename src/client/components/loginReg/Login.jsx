@@ -62,7 +62,7 @@ class Login extends Component {
                 const user = { email, password };
                 this.props.fetchAuth(user, pathname);
                 !this.props.auth
-                  ? this.props.history.push('/users/profile/:id')
+                  ? this.props.history.push('/users/profile/')
                   : null;
               }}
             >
