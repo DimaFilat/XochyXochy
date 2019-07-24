@@ -4,6 +4,7 @@ import User from '../user/User';
 import WishListItem from '../user/wishListItem';
 import MainPageCarousel from './MainPageCarousel';
 import UserAccount from '../user/UserAccount';
+import Upload from '../uploadPhoto/UploadPhoto';
 
 export default function Info(props) {
   return (
@@ -23,9 +24,9 @@ export default function Info(props) {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
+          <Upload />
         </Col>
       </Row>
-      
     </div>
   );
 }

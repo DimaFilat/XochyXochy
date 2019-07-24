@@ -28,22 +28,6 @@ import UserCelebrationList from './UserCelebrationList';
 import { connect } from 'react-redux';
 
 class UserAccount extends Component {
-  state = { addNewItem: false };
-
-  addNewItem = event => {
-    const { addNewItem } = this.state;
-    event.preventDefault();
-    if (addNewItem) {
-      this.setState({
-        addNewItem: false
-      });
-    } else {
-      this.setState({
-        addNewItem: true
-      });
-    }
-  };
-
   render() {
     const { user } = this.props.user;
     console.log('!!!!', this.props.user);
@@ -52,6 +36,7 @@ class UserAccount extends Component {
         <Container>
           <NewDate {...user} />
           <AddItem addNewItem={this.addNewItem} />
+          {/* <UserSmallWishList /> */}
         </Container>
       </div>
     );

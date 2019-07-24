@@ -35,7 +35,7 @@ export const logOutThunk = () => {
 export const sessionCheckThunk = () => {
   return async dispatch => {
     dispatch(fetchSent());
-    const response = await fetch('/users/status');
+    const response = await fetch('/users/sessioncheck');
     const userData = await response.json();
     // console.warn(userData);
 
@@ -59,8 +59,5 @@ export const fetchThunk = (user, path) => {
       console.warn(userData);
       dispatch(fetchRcvd(userData));
     } catch (err) {}
-
   };
 };
-
-

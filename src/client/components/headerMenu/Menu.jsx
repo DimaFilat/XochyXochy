@@ -70,7 +70,7 @@ class Menu extends Component {
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink style={styleName} tag={Link} to="/users/profile/:id">
+          <NavLink style={styleName} tag={Link} to="/users/profile/">
             {this.props.usersReducer.user.name}
           </NavLink>
         </NavItem>
