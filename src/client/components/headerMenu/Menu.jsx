@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logOutThunk } from '../../redux/actions/users';
-
+import style from './style'
 import {
   Collapse,
   Navbar,
@@ -38,9 +38,16 @@ class Menu extends Component {
     const { isOpen } = this.state;
     const { fetchLogOut } = this.props;
     const { auth } = this.props.usersReducer;
+
     // const { name } = this.props.usersReducer.user;
     const styleName = {
       color: '#e7526c'
+
+    const { name, _id } = this.props.usersReducer.user;
+    const inlineStyle = {
+      backgroundColor: '#75706f',
+      color: '#8b0002'
+
     };
     const userLinks = (
       <Nav className="ml-auto" navbar>
@@ -59,7 +66,7 @@ class Menu extends Component {
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink style={styleName} tag={Link} to="/users/profile/:id">
+          <NavLink tag={Link} to={`/users/profile/${_id}`}>
             {name}
           </NavLink>
         </NavItem>
@@ -77,10 +84,12 @@ class Menu extends Component {
         </NavItem>
       </Nav>
     );
+
+    console.log(this.props)
     return (
       <div>
         {!auth ? <Redirect to="/" /> : null}
-        <Navbar color="light" light expand="md">
+           <Navbar style={inlineStyle} light expand="md">
           <NavbarBrand tag={Link} to="/">
             Home
           </NavbarBrand>

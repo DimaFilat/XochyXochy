@@ -52,12 +52,15 @@ export default class FacebookAuth extends Component {
       );
     }
     return (
-      <div
-        style={{
-          textAlign: 'center'
-        }}
-      >
-        {fbContent}
+      <div>
+        <div
+          style={{
+            textAlign: 'center',
+            height: 10
+          }}
+        >
+          {fbContent}
+        </div>
       </div>
     );
   }

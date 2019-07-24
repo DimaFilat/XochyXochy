@@ -4,7 +4,12 @@ export const USERS_AC = {
   REG_IN: 'REG_IN',
   LOG_OUT: 'LOG_OUT',
   SENT_FETCH: 'SENT_FETCH',
-  RCWD_FETCH: 'RCWD_FETCH'
+  RCWD_FETCH: 'RCWD_FETCH',
+  ADD_DATE: 'ADD_DATE'
+};
+
+export const addDate = () => {
+  type: USERS_AC.ADD_DATE;
 };
 
 export const regInAC = () => ({
@@ -32,7 +37,7 @@ export const sessionCheckThunk = () => {
     dispatch(fetchSent());
     const response = await fetch('/users/sessioncheck');
     const userData = await response.json();
-    console.warn(userData);
+    // console.warn(userData);
 
     dispatch(fetchRcvd(userData));
   };
@@ -40,6 +45,7 @@ export const sessionCheckThunk = () => {
 export const fetchThunk = (user, path) => {
   return async dispatch => {
     dispatch(fetchSent());
+
     try {
       const response = await fetch(`${path}`, {
         method: 'POST',
@@ -53,5 +59,8 @@ export const fetchThunk = (user, path) => {
       console.warn(userData);
       dispatch(fetchRcvd(userData));
     } catch (err) {}
+
   };
 };
+
+

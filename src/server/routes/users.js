@@ -1,6 +1,14 @@
-const express = require('express');
+
 const passport = require('passport');
 const router = require('express-promise-router')();
+
+/* eslint-disable no-console */
+import express from 'express';
+import bcrypt from 'bcryptjs';
+// import { validateBody, schemas } from '../helpers/routeHelpers';
+import User from '../model/user';
+import scrape from '../ozonParser/ozonParser';
+
 
 const { validateBody, schemas } = require('../helpers/routeHelpers');
 const UsersController = require('../controllers/users');
@@ -26,6 +34,7 @@ router
 // LogOut Router
 router.route('/signout').get(passportJWT, UsersController.signOut);
 
+
 router
   .route('/oauth/google')
   .post(
@@ -39,6 +48,7 @@ router
     passport.authenticate('facebookToken', { session: false }),
     UsersController.facebookOAuth
   );
+
 
 router
   .route('/oauth/link/google')
@@ -69,5 +79,32 @@ router.route('/dashboard').get(passportJWT, UsersController.dashboard);
 router.route('/status').get(passportJWT, UsersController.checkAuth);
 
 module.exports = router;
+
+router.post('/profile/:id/newCelebration', async (req, res) => {
+  console.log('ruchka', req.body, 'session ====>', req.session);
+  const { _id } = req.session.user;
+  const { celebrationDate, celebrationTitle } = req.body;
+  // await User.findOneAndUpdate(
+  //   { _id },
+  //   {
+  //     $push: {
+  //       celebrationDate: {
+  //         title: celebrationTitle,
+  //         date: celebrationDate
+  //       }
+  //     }
+  //   }
+  // );
+  const user = await User.findOne({ _id });
+  req.session.user = user;
+  res.json(user);
+});
+
+router.post('/ozonParser', async (req, res) => {
+  console.log(req.body);
+  const scrapeFunc = await scrape(req.body.url);
+  // console.log(scrapeFunc);
+  res.json(scrapeFunc);
+});
 
 module.exports = router;
