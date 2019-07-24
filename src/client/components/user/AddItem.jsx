@@ -11,7 +11,13 @@ import {
 } from 'reactstrap';
 
 export default class AddItem extends Component {
+  state = {
+    img: ''
+  };
+
   render() {
+    const productImage = this.state.img;
+    // const productImage = this.state.img;
     return (
       <div>
         <Form>
@@ -48,29 +54,35 @@ export default class AddItem extends Component {
               />
               <button
                 type="button"
-                onClick={e => {
+                onClick={async e => {
                   e.preventDefault();
-                  let itemUrl = document.getElementById('linkInput').value;
-                  (async () => {
-                    let response = await fetch('/users/ozonParser', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        url: itemUrl
-                      })
-                    });
-                    let data = await response.json();
-                    document.getElementById('wishitem').value = data.title;
-                    document.getElementById('price').value = data.price;
-                    document.getElementById('pictureUrl').value =
-                      data.pictureUrl;
-                  })();
+                  const itemUrl = document.getElementById('linkInput').value;
+                  const response = await fetch('/users/ozonParser', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      url: itemUrl
+                    })
+                  });
+                  const data = await response.json();
+                  document.getElementById('wishitem').value = data.title;
+                  document.getElementById('price').value = data.price;
+                  document.getElementById('pictureUrl').value = data.pictureUrl;
+                  this.setState({ ...this.state, img: 'productImage.jpg' });
                 }}
               >
                 Submit
               </button>
+              <div id="pic-place">
+                {productImage && (
+                  <img
+                    alt=""
+                    src={`http://localhost:9090/src/server/public/${productImage}`}
+                  />
+                )}
+              </div>
             </Col>
           </FormGroup>
           <FormGroup row>
@@ -82,6 +94,7 @@ export default class AddItem extends Component {
                 id="pictureUrl"
                 placeholder="How does it look?"
               />
+              {/* <img className="ui mini image" id="pic" src=itemUrl /> */}
             </Col>
           </FormGroup>
           <FormGroup row>
