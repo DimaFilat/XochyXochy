@@ -20,7 +20,6 @@ export default class AddItem extends Component {
 
   render() {
     const productImage = this.state.img;
-    // const productImage = this.state.img;
     return (
       <div>
         <Form>
@@ -78,20 +77,11 @@ export default class AddItem extends Component {
                     })
                   });
                   const data = await response.json();
-                  {
-                    /* document.getElementById('wishitem').value = data.title; */
-                  }
-
-                  /* document.getElementById('price').value = data.price; */
-
-                  {
-                    /* document.getElementById('pictureUrl').value = data.pictureUrl; */
-                  }
                   this.setState({
-                    img: 'productImage.jpg',
-                    price: data.price,
-                    wishItem: data.title,
-                    picLink: data.pictureUrl
+                    img: data.picFileName,
+                    price: data.scrapeFunc.price,
+                    wishItem: data.scrapeFunc.title,
+                    picLink: data.scrapeFunc.pictureUrl
                   });
                 }}
               >
@@ -120,7 +110,6 @@ export default class AddItem extends Component {
                 }}
                 placeholder="How does it look?"
               />
-              {/* <img className="ui mini image" id="pic" src=itemUrl /> */}
             </Col>
           </FormGroup>
           <FormGroup row>
