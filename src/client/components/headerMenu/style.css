@@ -1,0 +1,11 @@
+.menu {
+  background-color: #75706f;
+  /* border: 1px solid white; */
+  border-radius: 0% 0% 15px 15px
+}
+.menuButton {
+  border-radius: 10px 10px 10px 10px
+}
+a:hover {
+  background-color: yellow;
+}

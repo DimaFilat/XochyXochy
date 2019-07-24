@@ -10,6 +10,7 @@ import handlebars from 'handlebars';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 // imports for uploading photo(gridfs)
 import crypto from 'crypto';
@@ -28,8 +29,14 @@ import giftsRouter from './routes/gifts';
 const client = redis.createClient();
 const app = express();
 
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  })
+);
 app.use(morgan('dev'));
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -67,15 +74,13 @@ app.use('/gifts', giftsRouter);
 
 const mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://localhost:27017/XochyXochy', {
-//   useNewUrlParser: true
-// });
+mongoose.Promise = global.Promise;
 
 // Mongo URI
 const mongoURI = 'mongodb://localhost:27017/XochyXochy';
 
 // Create mongo connection
-const conn = mongoose.createConnection(mongoURI);
+const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true });
 
 // Init gfs
 let gfs;
@@ -106,29 +111,6 @@ const storage = new GridFsStorage({
   }
 });
 const upload = multer({ storage });
-
-// @route GET /upload
-// @desc Loads form
-// app.get('/upload', (req, res) => {
-//   gfs.files.find().toArray((err, files) => {
-//     // Check if files
-//     if (!files || files.length === 0) {
-//       res.render('/upload', { files: false });
-//     } else {
-//       files.map(file => {
-//         if (
-//           file.contentType === 'image/jpeg' ||
-//           file.contentType === 'image/png'
-//         ) {
-//           file.isImage = true;
-//         } else {
-//           file.isImage = false;
-//         }
-//       });
-//       res.render('index', { files: files });
-//     }
-//   });
-// });
 
 // @route POST /upload
 // @desc  Uploads file to DB

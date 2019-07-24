@@ -44,6 +44,12 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
+
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
+
+
 var _crypto = require('crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
@@ -85,13 +91,15 @@ var _gifts2 = _interopRequireDefault(_gifts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // imports for uploading photo(gridfs)
+
+/* eslint-disable no-console */
 const client = _redis2.default.createClient();
 
 //  import routes
-/* eslint-disable no-console */
 
 const app = (0, _express2.default)();
 
+app.use((0, _cors2.default)());
 app.use((0, _morgan2.default)('dev'));
 // app.use(bodyParser.json());
 app.use(_express2.default.json());
@@ -129,15 +137,15 @@ app.use('/gifts', _gifts2.default);
 
 const mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://localhost:27017/XochyXochy', {
-//   useNewUrlParser: true
-// });
+
+mongoose.Promise = global.Promise;
 
 // Mongo URI
 const mongoURI = 'mongodb://localhost:27017/XochyXochy';
 
 // Create mongo connection
-const conn = mongoose.createConnection(mongoURI);
+
+const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true });
 
 // Init gfs
 let gfs;
@@ -169,28 +177,7 @@ const storage = new _multerGridfsStorage2.default({
 });
 const upload = (0, _multer2.default)({ storage });
 
-// @route GET /upload
-// @desc Loads form
-// app.get('/upload', (req, res) => {
-//   gfs.files.find().toArray((err, files) => {
-//     // Check if files
-//     if (!files || files.length === 0) {
-//       res.render('/upload', { files: false });
-//     } else {
-//       files.map(file => {
-//         if (
-//           file.contentType === 'image/jpeg' ||
-//           file.contentType === 'image/png'
-//         ) {
-//           file.isImage = true;
-//         } else {
-//           file.isImage = false;
-//         }
-//       });
-//       res.render('index', { files: files });
-//     }
-//   });
-// });
+
 
 // @route POST /upload
 // @desc  Uploads file to DB

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
-import FacebookAuth from '../facebookAuth/FacebookAuth'
+import FacebookAuth from '../facebookAuth/FacebookAuth';
 import { fetchThunk } from '../../redux/actions/users';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -58,8 +59,11 @@ class Login extends Component {
               color="primary"
               onClick={e => {
                 e.preventDefault();
-                this.props.fetchAuth(this.state, pathname);
-                this.props.history.push('/users/profile/:id');
+                const user = { email, password };
+                this.props.fetchAuth(user, pathname);
+                !this.props.auth
+                  ? this.props.history.push('/users/profile/:id')
+                  : null;
               }}
             >
               Sign In
@@ -68,7 +72,7 @@ class Login extends Component {
           {/* <FacebookAuth /> */}
           <p className="lead mt-4">
             No Account?
-            <Link to="/register">Register</Link>
+            <Link to="/users/signup">Register</Link>
           </p>
         </Col>
       </div>

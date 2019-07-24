@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchThunk } from '../../redux/actions/users';
 
@@ -14,9 +14,7 @@ class Reg extends Component {
     name: '',
     email: '',
     password: '',
-    password2: '',
-    redirect: false,
-    errors: []
+    redirect: false
   };
 
   inputHandler = async e => {
@@ -67,31 +65,33 @@ class Reg extends Component {
                 onChange={this.inputHandler}
               />
             </FormGroup>
-            <FormGroup>
-              <Label for="examplePassword">Confirm Password</Label>
-              <Input
-                type="password"
-                name="password2"
-                placeholder="Confirm Password"
-                value={password2}
-                onChange={this.inputHandler}
-              />
-            </FormGroup>
             <Button
               className="mt-5"
               block
               color="primary"
               onClick={e => {
                 e.preventDefault();
-                this.props.fetchAuth(this.state, pathname);
+                const user = {
+                  name: this.state.name,
+                  email: this.state.email,
+                  password: this.state.password
+                };
+
+                this.props.fetchAuth(user, pathname);
+                !this.props.auth
+                  ? this.props.history.push('/users/profile/:id')
+                  : null;
               }}
             >
               Sign In
             </Button>
+
+            <Button>facebook</Button>
+            <Button>google</Button>
           </Form>
           <p className="lead mt-4">
             Have An Account?
-            <Link to="/users/login">Login</Link>
+            <Link to="/users/signin">Login</Link>
           </p>
         </Col>
       </div>
@@ -104,7 +104,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = state => {
-  return { state };
+  return { ...state.userReducer };
 };
 
 export default connect(

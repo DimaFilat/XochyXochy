@@ -1,6 +1,12 @@
 import { USERS_AC } from '../actions/users';
 
-const appReducerInitState = { loading: false, auth: false, user: {} };
+const appReducerInitState = {
+  loading: false,
+  auth: false,
+  token: '',
+  errors: '',
+  user: { name: '' }
+};
 
 export default (state = appReducerInitState, action) => {
   switch (action.type) {
