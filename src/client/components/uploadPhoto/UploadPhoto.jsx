@@ -39,7 +39,13 @@ export default class UploadPhoto extends Component {
     const { imageLoaded, imagePreviewUrl } = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = <img src={imagePreviewUrl} alt="" />;
+      $imagePreview = (
+        <img
+          src={imagePreviewUrl}
+          alt=""
+          style={{ maxWidth: '100px', maxHeight: '100px' }}
+        />
+      );
     } else {
       $imagePreview = (
         <div className="previewText" style={{ color: 'grey' }}>
