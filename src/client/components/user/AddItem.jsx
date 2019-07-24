@@ -9,6 +9,7 @@ import {
   Input,
   FormText
 } from 'reactstrap';
+import Upload from '../uploadPhoto/UploadPhoto';
 
 export default class AddItem extends Component {
   state = {
@@ -127,10 +128,11 @@ export default class AddItem extends Component {
               Pic
             </Label>
             <Col sm={10}>
-              <Input type="file" name="file" id="exampleFile" />
-              <FormText color="muted">
+              <Upload />
+              {/* <Input type="file" name="file" id="exampleFile" /> */}
+              {/* <FormText color="muted">
                 Make sure not to send us a picture that is too large.
-              </FormText>
+              </FormText> */}
             </Col>
           </FormGroup>
           <FormGroup check row>

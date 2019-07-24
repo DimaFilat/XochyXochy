@@ -42,7 +42,9 @@ export default class UploadPhoto extends Component {
       $imagePreview = <img src={imagePreviewUrl} alt="" />;
     } else {
       $imagePreview = (
-        <div className="previewText">Please select an Image for Preview</div>
+        <div className="previewText" style={{ color: 'grey' }}>
+          Please select an Image for Preview
+        </div>
       );
     }
     let page;
