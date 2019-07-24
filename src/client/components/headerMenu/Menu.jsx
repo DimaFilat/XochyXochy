@@ -56,6 +56,7 @@ class Menu extends Component {
         </NavItem>
       </Nav>
     );
+
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
