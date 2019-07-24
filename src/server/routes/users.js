@@ -24,7 +24,7 @@ router
   );
 
 // LogOut Router
-router.route('/signout').get(passportJWT, UsersController.signOut);
+router.route('/signout').get(UsersController.signOut);
 
 router
   .route('/oauth/google')

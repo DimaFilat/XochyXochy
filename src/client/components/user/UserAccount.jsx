@@ -33,56 +33,7 @@ class UserAccount extends Component {
       addNewItem: false,
       addNewDate: false,
       showAllDate: false,
-      dropdownOpen: false,
-      user: {
-        // name: 'Jack',
-        img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-        celebrationDate: { title: 'Easter', date: 'Dynamic Date' }
-      },
-      wishItem: [
-        {
-          title: 'Cart',
-          img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-          rating: '3',
-          price: '1500',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-          messenger: [
-            { userId: '123123', text: 'some text' },
-            { userId: '122211', text: 'some more text' }
-          ],
-          active: true,
-          reserve: false
-        },
-        {
-          title: 'Book',
-          img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-          rating: '1',
-          price: '1213',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-          messenger: [
-            { userId: '123123', text: 'some text' },
-            { userId: '122211', text: 'some more text' }
-          ],
-          active: true,
-          reserve: false
-        },
-        {
-          title: 'Whiskey',
-          img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-          rating: '5',
-          price: '22',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-          messenger: [
-            { userId: '123123', text: 'some text' },
-            { userId: '122211', text: 'some more text' }
-          ],
-          active: true,
-          reserve: false
-        }
-      ]
+      dropdownOpen: false
     };
   }
 
@@ -132,22 +83,21 @@ class UserAccount extends Component {
   };
 
   render() {
-    console.log('!!!!',this.props.user);
+    console.log('!!!!', this.props.user);
+    const { img } = this.props.user;
     return (
       <div>
         <Container>
           <Row>
             <Col xs="3">
               <Container>
-                <Image src={this.state.user.img} size="medium" />
+                <Image src={img} size="medium" />
               </Container>
             </Col>
             <Col xs="9">
               <br />
               <Row>
-                <Col>
-                  {/* <h3>{this.props.user.name}</h3> */}
-                </Col>
+                <Col>{/* <h3>{this.props.user.name}</h3> */}</Col>
               </Row>
               <br></br>
               <Row>
@@ -166,12 +116,12 @@ class UserAccount extends Component {
                     <div>
                       <Row>
                         <Col>
-                          <h4>{this.state.user.celebrationDate.title}</h4>
+                          <h4></h4>
                         </Col>
                       </Row>
                       <Row>
                         <Col>
-                          <h5>{this.state.user.celebrationDate.date}</h5>
+                          <h5></h5>
                         </Col>
                       </Row>
                     </div>

@@ -35,6 +35,8 @@ class Menu extends Component {
   };
 
   render() {
+    // console.log(this.props.usersReducer.user);
+
     const { isOpen } = this.state;
     const { fetchLogOut } = this.props;
     const { auth } = this.props.usersReducer;
@@ -61,7 +63,7 @@ class Menu extends Component {
       <Nav className="ml-auto" navbar>
         <NavItem>
           <NavLink style={styleName} tag={Link} to="/users/profile/:id">
-            {name}
+            {this.props.usersReducer.user.name}
           </NavLink>
         </NavItem>
         <NavItem>
@@ -71,7 +73,7 @@ class Menu extends Component {
               fetchLogOut();
             }}
             tag={Link}
-            to="/users/logout/"
+            to="/users/signout/"
           >
             Logout
           </NavLink>
