@@ -52,7 +52,6 @@ export default class UploadPhoto extends Component {
       page = (
         <React.Fragment>
           <div className="previewComponent">
-            <p>Загрузите фотографию товара</p>
             <form
               action="/upload"
               method="POST"
