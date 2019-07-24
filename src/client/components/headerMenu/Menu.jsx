@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logOutThunk } from '../../redux/actions/users';
-import style from './style';
+// import {menu, textColor} from './style';
+import './style.css';
 import {
   Collapse,
   Navbar,
@@ -50,10 +51,11 @@ class Menu extends Component {
       backgroundColor: '#75706f',
       color: '#8b0002'
     };
+    const textColor = { color: '#8b0002' };
     const userLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink tag={Link} to="/users/signup">
+          <NavLink style={textColor} tag={Link} to="/users/signup">
             Register
           </NavLink>
         </NavItem>
@@ -91,8 +93,8 @@ class Menu extends Component {
     return (
       <div>
         {!auth ? <Redirect to="/" /> : null}
-        <Navbar style={inlineStyle} light expand="md">
-          <NavbarBrand tag={Link} to="/">
+        <Navbar className="menu" light expand="md">
+          <NavbarBrand className="menuButton" tag={Link} to="/">
             Home
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -100,7 +102,10 @@ class Menu extends Component {
             {!auth ? userLinks : questLinks}
             <Nav navbar>
               <NavItem>
-                <NavLink href="https://github.com/ArtiomOganesyan/XochyXochy">
+                <NavLink
+                  className="menuButton"
+                  href="https://github.com/ArtiomOganesyan/XochyXochy"
+                >
                   Our Project
                 </NavLink>
               </NavItem>

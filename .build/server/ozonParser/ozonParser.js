@@ -1,3 +1,8 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 const puppeteer = require('puppeteer');
 
 const scrape = async url => {
@@ -25,4 +30,4 @@ const scrape = async url => {
 //   console.log(value);
 // });
 
-export default scrape;
+exports.default = scrape;

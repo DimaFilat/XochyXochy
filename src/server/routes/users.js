@@ -7,6 +7,8 @@ import bcrypt from 'bcryptjs';
 // import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
 import scrape from '../ozonParser/ozonParser';
+import imageParser from '../ozonParser/ozonPictureDownloader';
+
 
 const { validateBody, schemas } = require('../helpers/routeHelpers');
 const UsersController = require('../controllers/users');
@@ -99,6 +101,7 @@ router.post('/profile/:id/newCelebration', async (req, res) => {
 router.post('/ozonParser', async (req, res) => {
   console.log(req.body);
   const scrapeFunc = await scrape(req.body.url);
+  await imageParser(req.body.url);
   // console.log(scrapeFunc);
   res.json(scrapeFunc);
 });

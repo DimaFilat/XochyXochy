@@ -58,7 +58,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path={`/users/profile/${user._id}`}
+                // path={`/users/profile/${user._id}`}
                 render={props => {
                   return <UserAccount {...props} />;
                 }}
