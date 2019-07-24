@@ -146,7 +146,7 @@ class UserAccount extends Component {
               <br />
               <Row>
                 <Col>
-                  <h3>{this.props.user.name}</h3>
+                  {/* <h3>{this.props.user.name}</h3> */}
                 </Col>
               </Row>
               <br></br>

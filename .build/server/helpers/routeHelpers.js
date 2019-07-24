@@ -1,3 +1,5 @@
+'use strict';
+
 const Joi = require('joi');
 
 module.exports = {
@@ -18,21 +20,8 @@ module.exports = {
 
   schemas: {
     authSchema: Joi.object().keys({
-      email: Joi.string()
-        .email()
-        .required(),
-      password: Joi.string()
-        .required()
-        .min(3)
-    }),
-    signSchema: Joi.object().keys({
-      name: Joi.string().required(),
-      email: Joi.string()
-        .email()
-        .required(),
-      password: Joi.string()
-        .required()
-        .min(3)
+      email: Joi.string().email().required(),
+      password: Joi.string().required().min(3)
     })
   }
 };
