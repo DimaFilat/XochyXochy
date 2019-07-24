@@ -14,7 +14,7 @@ import UserAccount from '../user/UserAccount';
 
 class App extends Component {
   componentDidMount = () => {
-    // this.props.fetchCheckAuth();
+    this.props.fetchCheckAuth();
   };
 
   render() {

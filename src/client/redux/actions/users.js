@@ -25,7 +25,7 @@ export const fetchRcvd = data => {
 export const logOutThunk = () => {
   return async dispatch => {
     dispatch(fetchSent());
-    const response = await fetch('/users/logout');
+    const response = await fetch('/users/signout');
     const userData = await response.json();
     console.warn(userData);
 
@@ -35,7 +35,7 @@ export const logOutThunk = () => {
 export const sessionCheckThunk = () => {
   return async dispatch => {
     dispatch(fetchSent());
-    const response = await fetch('/users/sessioncheck');
+    const response = await fetch('/users/status');
     const userData = await response.json();
     // console.warn(userData);
 

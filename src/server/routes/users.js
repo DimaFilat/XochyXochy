@@ -1,4 +1,3 @@
-
 const passport = require('passport');
 const router = require('express-promise-router')();
 
@@ -9,7 +8,6 @@ import bcrypt from 'bcryptjs';
 import User from '../model/user';
 import scrape from '../ozonParser/ozonParser';
 import imageParser from '../ozonParser/ozonPictureDownloader';
-
 
 
 const { validateBody, schemas } = require('../helpers/routeHelpers');
@@ -34,8 +32,7 @@ router
   );
 
 // LogOut Router
-router.route('/signout').get(passportJWT, UsersController.signOut);
-
+router.route('/signout').get(UsersController.signOut);
 
 router
   .route('/oauth/google')
@@ -50,7 +47,6 @@ router
     passport.authenticate('facebookToken', { session: false }),
     UsersController.facebookOAuth
   );
-
 
 router
   .route('/oauth/link/google')

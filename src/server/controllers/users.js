@@ -64,7 +64,7 @@ module.exports = {
     // }
 
     // Create a new user
-    const newUser = new User({
+    const user = new User({
       methods: ['local'],
       local: {
         email,
@@ -73,21 +73,21 @@ module.exports = {
       name
     });
 
-    await newUser.save();
+    await user.save();
 
     // Generate the token
-    const token = signToken(newUser);
+    const token = signToken(user);
     // Send a cookie containing JWT
     res.cookie('access_token', token, {
       httpOnly: true
     });
-    res.status(200).json({ newUser, auth: true });
+    res.status(200).json({ user, auth: true });
   },
 
   signIn: async (req, res, next) => {
-    const user = req.user;
+    const { user } = req;
     // Generate token
-    const token = signToken(req.user);
+    const token = signToken(user);
     res.cookie('access_token', token, {
       httpOnly: true
     });

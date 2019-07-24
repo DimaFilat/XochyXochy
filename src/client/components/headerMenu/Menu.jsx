@@ -36,15 +36,20 @@ class Menu extends Component {
   };
 
   render() {
+    // console.log(this.props.usersReducer.user);
+
     const { isOpen } = this.state;
     const { fetchLogOut } = this.props;
     const { auth } = this.props.usersReducer;
 
     // const { name } = this.props.usersReducer.user;
-
-    // const { name, _id } = this.props.usersReducer.user;
-    const menu = {
-      backgroundColor: '#75706f'
+    const styleName = {
+      color: '#e7526c'
+    };
+    const { name, _id } = this.props.usersReducer.user;
+    const inlineStyle = {
+      backgroundColor: '#75706f',
+      color: '#8b0002'
     };
     const textColor = { color: '#8b0002' };
     const userLinks = (
@@ -61,12 +66,13 @@ class Menu extends Component {
         </NavItem>
       </Nav>
     );
+
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          {/* <NavLink tag={Link} to={`/users/profile/${_id}`}>
-            {name}
-          </NavLink> */}
+          <NavLink style={styleName} tag={Link} to="/users/profile/:id">
+            {this.props.usersReducer.user.name}
+          </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
@@ -75,7 +81,7 @@ class Menu extends Component {
               fetchLogOut();
             }}
             tag={Link}
-            to="/users/logout/"
+            to="/users/signout/"
           >
             Logout
           </NavLink>
@@ -95,8 +101,11 @@ class Menu extends Component {
           <Collapse isOpen={isOpen} navbar>
             {!auth ? userLinks : questLinks}
             <Nav navbar>
-              <NavItem >
-                <NavLink className="menuButton" href="https://github.com/ArtiomOganesyan/XochyXochy">
+              <NavItem>
+                <NavLink
+                  className="menuButton"
+                  href="https://github.com/ArtiomOganesyan/XochyXochy"
+                >
                   Our Project
                 </NavLink>
               </NavItem>

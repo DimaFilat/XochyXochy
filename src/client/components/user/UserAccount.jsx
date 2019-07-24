@@ -115,25 +115,21 @@ class UserAccount extends Component {
   };
 
   render() {
-    const newDatePath = this.props.location.pathname + '/newCelebration';
-    // console.log(newDatePath);
-    // console.log('=========>', this.state);
-    // console.log(this.props)
+    console.log('!!!!', this.props.user);
+    const { img } = this.props.user;
     return (
       <div>
         <Container>
           <Row>
             <Col xs="3">
               <Container>
-                <Image src={this.props.user.img} size="medium" />
+                <Image src={img} size="medium" />
               </Container>
             </Col>
             <Col xs="9">
               <br />
               <Row>
-                <Col>
-                  {/* <h3>{this.props.user.name}</h3> */}
-                </Col>
+                <Col>{/* <h3>{this.props.user.name}</h3> */}</Col>
               </Row>
               <br></br>
               <Row>
@@ -159,20 +155,12 @@ class UserAccount extends Component {
                     <div>
                       <Row>
                         <Col>
-                          <h4>
-                            {this.props.user.celebrationDate.length
-                              ? this.props.user.celebrationDate[0].title
-                              : 'You have no big dates'}
-                          </h4>
+                          <h4></h4>
                         </Col>
                       </Row>
                       <Row>
                         <Col>
-                          <h5>
-                            {this.props.user.celebrationDate.length
-                              ? this.props.user.celebrationDate[0].date
-                              : ' '}
-                          </h5>
+                          <h5></h5>
                         </Col>
                       </Row>
                     </div>

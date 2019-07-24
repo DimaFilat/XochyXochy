@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
-import FacebookAuth from '../facebookAuth/FacebookAuth'
+import FacebookAuth from '../facebookAuth/FacebookAuth';
 import { fetchThunk } from '../../redux/actions/users';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -86,7 +86,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = state => {
-  return { ...state.userReducer };
+  return { ...state };
 };
 
 export default connect(
