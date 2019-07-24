@@ -1,5 +1,6 @@
 'use strict';
 
+
 const express = require('express');
 const passport = require('passport');
 const router = require('express-promise-router')();
@@ -37,6 +38,34 @@ router.get('/logout', async (req, res, next) => {
   } else {
     res.redirect('/login');
   }
+});
+
+router.post('/profile/:id/newCelebration', async (req, res) => {
+  // console.log('ruchka', req.body, 'session ====>', req.session);
+  const { _id } = req.session.user;
+  const { celebrationDate, celebrationTitle } = req.body;
+  // await User.findOneAndUpdate(
+  //   { _id },
+  //   {
+  //     $push: {
+  //       celebrationDate: {
+  //         title: celebrationTitle,
+  //         date: celebrationDate
+  //       }
+  //     }
+  //   }
+  // );
+  const user = await _user2.default.findOne({ _id });
+  req.session.user = user;
+  res.json(user);
+});
+
+router.post('/ozonParser', async (req, res) => {
+  console.log(req.body);
+  const scrapeFunc = await (0, _ozonParser2.default)(req.body.url);
+  await (0, _ozonPictureDownloader2.default)(req.body.url);
+  // console.log(scrapeFunc);
+  res.json(scrapeFunc);
 });
 
 module.exports = router;

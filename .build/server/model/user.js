@@ -1,5 +1,6 @@
 'use strict';
 
+
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
@@ -10,6 +11,7 @@ const mongoURI = 'mongodb://localhost:27017/XochyXochy';
 const conn = mongoose.createConnection(mongoURI);
 
 const userSchema = new mongoose.Schema({
+
   method: {
     type: String,
     enum: ['local', 'google', 'facebook']
@@ -45,6 +47,7 @@ const userSchema = new mongoose.Schema({
   }],
   wishItem: []
 });
+
 
 userSchema.pre('save', async function (next) {
   try {

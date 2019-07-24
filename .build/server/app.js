@@ -44,9 +44,11 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
+
 var _cors = require('cors');
 
 var _cors2 = _interopRequireDefault(_cors);
+
 
 var _crypto = require('crypto');
 
@@ -89,6 +91,7 @@ var _gifts2 = _interopRequireDefault(_gifts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // imports for uploading photo(gridfs)
+
 /* eslint-disable no-console */
 const client = _redis2.default.createClient();
 
@@ -134,12 +137,14 @@ app.use('/gifts', _gifts2.default);
 
 const mongoose = require('mongoose');
 
+
 mongoose.Promise = global.Promise;
 
 // Mongo URI
 const mongoURI = 'mongodb://localhost:27017/XochyXochy';
 
 // Create mongo connection
+
 const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true });
 
 // Init gfs
@@ -171,6 +176,8 @@ const storage = new _multerGridfsStorage2.default({
   }
 });
 const upload = (0, _multer2.default)({ storage });
+
+
 
 // @route POST /upload
 // @desc  Uploads file to DB
