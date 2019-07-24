@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import User from '../user/User';
 import WishListItem from '../user/wishListItem';
 import MainPageCarousel from './MainPageCarousel';
 import UserAccount from '../user/UserAccount';
 
-export default function Info(props) {
+export default function Info() {
   return (
     <div>
       <Row>
@@ -25,7 +25,6 @@ export default function Info(props) {
           </p>
         </Col>
       </Row>
-      
     </div>
   );
 }
