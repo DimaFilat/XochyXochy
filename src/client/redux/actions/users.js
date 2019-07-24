@@ -37,7 +37,7 @@ export const sessionCheckThunk = () => {
     dispatch(fetchSent());
     const response = await fetch('/users/sessioncheck');
     const userData = await response.json();
-    console.warn(userData);
+    // console.warn(userData);
 
     dispatch(fetchRcvd(userData));
   };
@@ -53,7 +53,7 @@ export const fetchThunk = (user, path) => {
       body: JSON.stringify({ user })
     });
     const userData = await response.json();
-    console.warn(userData);
+    // console.warn(userData);
     dispatch(fetchRcvd(userData));
   };
 };
