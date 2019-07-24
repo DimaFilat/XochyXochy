@@ -234,8 +234,9 @@ class UserAccount extends Component {
                     </Col>
                     <Col xs="1"></Col>
                   </Row>
-                  <ul>
-                    {this.props.user.wishItem
+
+                  {/* <ul>
+                    {this.props.user.wishItem.length
                       ? this.props.wishItem.map((element, index) => (
                           <UserSmallWishList
                             id={index}
@@ -250,7 +251,7 @@ class UserAccount extends Component {
                           />
                         ))
                       : 'ADD SOME GIF'}
-                  </ul>
+                  </ul> */}
                 </div>
               ) : (
                 <AddItem addNewItem={this.addNewItem} />

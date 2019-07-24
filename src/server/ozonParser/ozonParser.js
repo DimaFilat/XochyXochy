@@ -4,8 +4,7 @@ const scrape = async url => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`${url}`);
-  await page.waitFor(20);
-  // Код для скрапинга
+  await page.waitFor(100);
   const result = await page.evaluate(() => {
     const title = document.querySelector('h1').innerText;
     const price = document.querySelector("meta[itemprop='price']").content;
@@ -20,9 +19,5 @@ const scrape = async url => {
   browser.close();
   return result;
 };
-
-// scrape().then(value => {
-//   console.log(value);
-// });
 
 export default scrape;
