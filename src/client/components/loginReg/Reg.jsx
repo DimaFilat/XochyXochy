@@ -33,7 +33,7 @@ class Reg extends Component {
     return (
       <div>
         <Col sm={{ size: 4, offset: 4 }}>
-          <Form className="form-login mt-5">
+          <Form className=" form-login mt-5">
             <h1 text="center mb-3 mt-10">Register</h1>
             <FormGroup>
               <Label for="name">Name</Label>
@@ -41,7 +41,7 @@ class Reg extends Component {
                 name="name"
                 value={name}
                 onChange={this.inputHandler}
-                placeholder="Enter Name"
+                placeholder="How should we call you?"
               />
             </FormGroup>
             <FormGroup>
@@ -50,7 +50,7 @@ class Reg extends Component {
                 className="input"
                 type="text"
                 name="email"
-                placeholder="Enter Email"
+                placeholder="Where can we write you?"
                 value={email}
                 onChange={this.inputHandler}
               />
@@ -60,13 +60,14 @@ class Reg extends Component {
               <Input
                 type="password"
                 name="password"
-                placeholder="Enter Password"
+                placeholder="Make sure it is secure"
                 value={password}
                 onChange={this.inputHandler}
               />
             </FormGroup>
             <Button
-              className="mt-5"
+              color='danger'
+              className="mt-5 regLoginForm"
               block
               color="primary"
               onClick={e => {
@@ -86,8 +87,8 @@ class Reg extends Component {
               Sign In
             </Button>
 
-            <Button>facebook</Button>
-            <Button>google</Button>
+            {/* <Button>facebook</Button>
+            <Button>google</Button> */}
           </Form>
           <p className="lead mt-4">
             Have An Account?

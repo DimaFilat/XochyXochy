@@ -1,0 +1,25 @@
+.background {
+  background-color: rgb(247, 231, 216);
+}
+.noPadding {
+  padding: 0px;
+}
+.body {
+  background-color: rgb(255, 237, 237);
+  background-image: url(../../public/image/backbody.jpg)
+}
+.fontTitle {
+  font-family: 'Fascinate', cursive;
+}
+.fontText {
+  /* font-family: 'Nunito', sans-serif; */
+  /* font-family: 'Butterfly Kids', cursive; */
+  /* font-family: 'Cabin', sans-serif; */
+  /* font-family: 'Indie Flower', cursive; */
+  font-family: 'Lobster', cursive;
+  /* font-family: 'Pacifico', cursive; */
+  /* font-family: 'Dancing Script', cursive; */
+}
+.roundEdge {
+    border-radius: 30px
+}

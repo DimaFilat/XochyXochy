@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import User from '../user/User';
-import WishListItem from '../user/wishListItem';
 import MainPageCarousel from './MainPageCarousel';
-import UserAccount from '../user/UserAccount';
+import './style.css';
 
 export default function Info(props) {
   return (
     <div>
+      <br />
       <Row>
-        <Col xs="7">
+        <Col className='roundEdge' xs="7">
           <MainPageCarousel />
         </Col>
         <Col xs="5">
-          <h3>Xochy Xochy это ...</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+          <h1 className="fontTitle">Xochy Xochy это ...</h1>
+          <p className="fontText">
+            Повседневная
+            практика показывает, что укрепление и развитие структуры требуют от
+            нас анализа направлений прогрессивного развития. Значимость этих
+            проблем настолько очевидна, что постоянный количественный рост и
+            сфера нашей активности обеспечивает широкому кругу (специалистов)
+            участие в формировании дальнейших направлений развития.
+            Разнообразный и богатый опыт укрепление и развитие структуры
+            способствует подготовки и реализации позиций, занимаемых участниками
+            в отношении поставленных задач. Не следует, однако забывать, что
+            постоянное информационно-пропагандистское обеспечение нашей
+            деятельности обеспечивает широкому кругу (специалистов) участие в
+            формировании соответствующий условий активизации. Товарищи!
+            реализация намеченных плановых заданий способствует подготовки и
+            реализации систем массового участия.
           </p>
         </Col>
       </Row>
-      
     </div>
   );
 }

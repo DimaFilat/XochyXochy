@@ -235,7 +235,7 @@ class UserAccount extends Component {
                     <Col xs="1"></Col>
                   </Row>
                   <ul>
-                    {this.props.user.wishItem.length
+                    {this.props.user.wishItem
                       ? this.props.wishItem.map((element, index) => (
                           <UserSmallWishList
                             id={index}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import Menu from '../headerMenu/Menu';
-
+import './style.css';
 import { sessionCheckThunk } from '../../redux/actions/users';
 // import FacebookAuth from '../facebookAuth/FacebookAuth';
 import { Login, Reg } from '../loginReg';
@@ -21,9 +21,9 @@ class App extends Component {
    const {user} = this.props
     return (
       <div className="body">
-        <Row>
+        <Row >
           <Col xs="1"></Col>
-          <Col>
+          <Col >
             <div>
               <Menu />
             </div>
@@ -58,7 +58,7 @@ class App extends Component {
               />
               <Route
                 exact
-                // path={`/users/profile/${user._id}`}
+                path={`/users/profile/`}
                 render={props => {
                   return <UserAccount {...props} />;
                 }}
