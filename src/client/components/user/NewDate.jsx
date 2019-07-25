@@ -124,9 +124,9 @@ class NewDate extends Component {
               </Col>
               <Col>
                 <Button.Group size="medium">
-                  <Button onClick={this.addNewDate}>New date</Button>
+                  <Button onClick={this.addNewDate}>Новый праздник</Button>
                   <Button.Or />
-                  <Button onClick={this.showAllDate}>Show all dates</Button>
+                  <Button onClick={this.showAllDate}>Все праздники</Button>
                 </Button.Group>
               </Col>
             </Row>
