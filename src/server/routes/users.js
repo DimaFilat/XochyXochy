@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import User from '../model/user';
 import scrape from '../ozonParser/ozonParser';
 import imageParser from '../ozonParser/ozonPictureDownloader';
+import scrapeAndParser from '../ozonParser/scrapeAndParser';
 
 const router = express.Router();
 
@@ -186,10 +187,9 @@ router.post('/profile/newCelebration', async (req, res) => {
 
 router.post('/ozonParser', async (req, res) => {
   console.log(req.body);
-  const scrapeFunc = await scrape(req.body.url);
-  const picFileName = await imageParser(req.body.url);
-  // console.log(scrapeFunc);
-  res.json({ scrapeFunc, picFileName });
+  const scrapeFunc = await scrapeAndParser(req.body.url);
+  // const picFileName = await imageParser(req.body.url);
+  res.json(scrapeFunc);
 });
 
 module.exports = router;

@@ -75,7 +75,7 @@ export default class UploadPhoto extends Component {
                 className="submitButton"
                 type="submit"
                 onClick={e => this.handleSubmit(e)}
-                value="Отравить"
+                value="Отправить"
               />
             </form>
             <div className="imgPreview">{$imagePreview}</div>
