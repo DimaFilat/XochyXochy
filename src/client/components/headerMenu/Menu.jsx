@@ -47,20 +47,20 @@ class Menu extends Component {
       color: '#e7526c'
     };
     const { name, _id } = this.props.usersReducer.user;
-    const inlineStyle = {
-      backgroundColor: '#75706f',
-      color: '#8b0002'
-    };
-    const textColor = { color: '#8b0002' };
+    // const inlineStyle = {
+    //   backgroundColor: '#75706f',
+    //   color: '#8b0002'
+    // };
+    // const textColor = { color: '#8b0002' };
     const userLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink style={textColor} tag={Link} to="/users/signup">
+          <NavLink  className="menuButton" tag={Link} to="/users/signup">
             Register
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/users/signin">
+          <NavLink className="menuButton" tag={Link} to="/users/signin">
             Login
           </NavLink>
         </NavItem>
@@ -70,12 +70,22 @@ class Menu extends Component {
     const questLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
+<<<<<<< HEAD
           <NavLink style={styleName} tag={Link} to="/users/profile/">
+=======
+          <NavLink
+            className="menuButton"
+            style={styleName}
+            tag={Link}
+            to="/users/profile/:id"
+          >
+>>>>>>> 697f3365a142d3477cd97ce38afd8a19cd93fe3a
             {this.props.usersReducer.user.name}
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
+            className="menuButton"
             onClick={e => {
               e.preventDefault();
               fetchLogOut();
@@ -91,7 +101,7 @@ class Menu extends Component {
 
     console.log(this.props);
     return (
-      <div>
+      <div className='noPadding'>
         {!auth ? <Redirect to="/" /> : null}
         <Navbar className="menu" light expand="md">
           <NavbarBrand className="menuButton" tag={Link} to="/">

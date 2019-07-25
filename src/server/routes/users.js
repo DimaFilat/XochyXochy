@@ -187,9 +187,9 @@ router.post('/profile/:id/newCelebration', async (req, res) => {
 router.post('/ozonParser', async (req, res) => {
   console.log(req.body);
   const scrapeFunc = await scrape(req.body.url);
-  await imageParser(req.body.url);
+  const picFileName = await imageParser(req.body.url);
   // console.log(scrapeFunc);
-  res.json(scrapeFunc);
+  res.json({ scrapeFunc, picFileName });
 });
 
 module.exports = router;

@@ -10,27 +10,18 @@ import {
   Input,
   FormText
 } from 'reactstrap';
+import Upload from '../uploadPhoto/UploadPhoto';
 
 export default class AddItem extends Component {
-  state = { addNewItem: false, img: '' };
-
-  addNewItem = event => {
-    const { addNewItem } = this.state;
-    event.preventDefault();
-    if (addNewItem) {
-      this.setState({
-        addNewItem: false
-      });
-    } else {
-      this.setState({
-        addNewItem: true
-      });
-    }
+  state = {
+    img: '',
+    wishItem: '',
+    price: '',
+    picLink: ''
   };
 
   render() {
     const productImage = this.state.img;
-    // const productImage = this.state.img;
     return (
       <div>
         <Row>
@@ -58,6 +49,10 @@ export default class AddItem extends Component {
               <Input
                 type="text"
                 id="wishitem"
+                value={this.state.wishItem}
+                onChange={e => {
+                  this.setState({ wishItem: e.target.value });
+                }}
                 name="title"
                 placeholder="What would you like for your next big date?"
               />
@@ -69,6 +64,10 @@ export default class AddItem extends Component {
               <Input
                 type="text"
                 name="price"
+                value={this.state.price}
+                onChange={e => {
+                  this.setState({ price: e.target.value });
+                }}
                 id="price"
                 placeholder="Who much do you think it will cost?"
               />
@@ -98,10 +97,12 @@ export default class AddItem extends Component {
                     })
                   });
                   const data = await response.json();
-                  document.getElementById('wishitem').value = data.title;
-                  document.getElementById('price').value = data.price;
-                  document.getElementById('pictureUrl').value = data.pictureUrl;
-                  this.setState({ ...this.state, img: 'productImage.jpg' });
+                  this.setState({
+                    img: data.picFileName,
+                    price: data.scrapeFunc.price,
+                    wishItem: data.scrapeFunc.title,
+                    picLink: data.scrapeFunc.pictureUrl
+                  });
                 }}
               >
                 Submit
@@ -123,9 +124,12 @@ export default class AddItem extends Component {
                 type="text"
                 name="title"
                 id="pictureUrl"
+                value={this.state.picLink}
+                onChange={e => {
+                  this.setState({ picLink: e.target.value });
+                }}
                 placeholder="How does it look?"
               />
-              {/* <img className="ui mini image" id="pic" src=itemUrl /> */}
             </Col>
           </FormGroup>
           <FormGroup row>
@@ -143,10 +147,11 @@ export default class AddItem extends Component {
               Pic
             </Label>
             <Col sm={10}>
-              <Input type="file" name="file" id="exampleFile" />
-              <FormText color="muted">
+              <Upload />
+              {/* <Input type="file" name="file" id="exampleFile" /> */}
+              {/* <FormText color="muted">
                 Make sure not to send us a picture that is too large.
-              </FormText>
+              </FormText> */}
             </Col>
           </FormGroup>
           <FormGroup check row>
