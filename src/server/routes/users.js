@@ -1,101 +1,223 @@
-const passport = require('passport');
-const router = require('express-promise-router')();
-
 /* eslint-disable no-console */
 import express from 'express';
 import bcrypt from 'bcryptjs';
 // import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
+import WishItem from '../model/wishItem';
 import scrape from '../ozonParser/ozonParser';
 import imageParser from '../ozonParser/ozonPictureDownloader';
 
+const router = express.Router();
 
-const { validateBody, schemas } = require('../helpers/routeHelpers');
-const UsersController = require('../controllers/users');
-const passportConf = require('../passport');
+router.get('/sessioncheck', async (req, res) => {
+  console.log(req.session);
+  if (req.session.user) {
+    const { user } = req.session;
+    res.json({ user, auth: true });
+  } else {
+    res.json({ user: {}, auth: false });
+  }
+});
+//  Register Handle
+router.route('/signup').post(async (req, res) => {
+  console.log(req.body);
 
-const passportSignIn = passport.authenticate('local', { session: false });
-const passportJWT = passport.authenticate('jwt', { session: false });
+  const { name, email, password } = req.body;
+  //  Validation passed
+  const user1 = await User.findOne({ email });
+  if (user1) {
+    //  User exists
+    res.json({ auth: false, msg: 'Email is already registred' });
+  } else {
+    const newUser = await new User({
+      name,
+      email,
+      password
+    });
 
-//  SignUP Router
-router
-  .route('/signup')
-  .post(validateBody(schemas.signSchema), UsersController.signUp);
+    //  Hash Password
+    bcrypt.genSalt(10, (err, salt) =>
+      bcrypt.hash(newUser.password, salt, async (err, hash) => {
+        if (err) throw err;
+        //  Set password to hashed
+        newUser.password = hash;
+        //  Save user
+        const user = await newUser.save();
 
-//  Login Router
+        res.json({ user, auth: true });
+      })
+    );
+
+    req.session.user = newUser;
+  }
+});
+//  user login
 router
   .route('/signin')
-  .post(
-    validateBody(schemas.authSchema),
-    passportSignIn,
-    UsersController.signIn
-  );
 
-// LogOut Router
-router.route('/signout').get(UsersController.signOut);
+  .post(async (req, res) => {
+    console.log(req.body);
 
-router
-  .route('/oauth/google')
-  .post(
-    passport.authenticate('googleToken', { session: false }),
-    UsersController.googleOAuth
-  );
+    const { email, password } = req.body;
 
-router
-  .route('/oauth/facebook')
-  .post(
-    passport.authenticate('facebookToken', { session: false }),
-    UsersController.facebookOAuth
-  );
+    //  Validation passed
+    const user = await User.findOne({ email });
+    if (!user) {
+      //  User exists
+      res.json({ auth: false, msg: 'Email or password incorrect' });
+    } else {
+      // Match password
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+        if (isMatch) {
+          res.json({ user, auth: true });
+        } else {
+          res.json({ auth: false, msg: 'Email or password incorrect' });
+        }
+      });
+      if (req.session.user !== user) {
+        req.session.user = user;
+      }
+    }
+  });
 
-router
-  .route('/oauth/link/google')
-  .post(
-    passportJWT,
-    passport.authorize('googleToken', { session: false }),
-    UsersController.linkGoogle
-  );
+router.get('/signout', async (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+    try {
+      res.clearCookie('user_sid');
+      await req.session.destroy();
+      res.json({ auth: false });
+    } catch (error) {
+      next(error);
+    }
+  }
+});
+//   add Users  auction
+// router
+//   .route('/profile/addAuction')
+//   .get((req, res) => {
+//     res.render('auction');
+//   })
 
-router
-  .route('/oauth/unlink/google')
-  .post(passportJWT, UsersController.unlinkGoogle);
+//   .post(async (req, res) => {
+//     const id = req.session.user._id;
+//     const { name, condition, start, ends, description } = req.body;
+//     const auction = await new Auctions({
+//       name,
+//       condition,
+//       start,
+//       ends,
+//       description,
+//       userID: id
+//     });
+//     const user = await User.findOne({ _id: id });
+//     user.auctions.push(auction);
+//     await user.save();
+//     res.json(user);
+//     console.log(user);
+//   });
 
-router
-  .route('/oauth/link/facebook')
-  .post(
-    passportJWT,
-    passport.authorize('facebookToken', { session: false }),
-    UsersController.linkFacebook
-  );
+// // Update Delete auctions
+// router
+//   .route('/profile/auction/:id')
+//   .get(async (req, res) => {
+//     const { id } = req.params;
+//     const userID = req.session.user._id;
+//     const user = await User.findOne({ _id: userID });
+//     user.auctions.forEach(item => {
+//       if (item._id.toString() === id) {
+//         res.json(item);
+//       }
+//     });
+//   })
+//   .put(async (req, res) => {
+//     const { _id, name, condition, start, ends, description, userID } = req.body;
+//     const auctionUpdate = await new Auctions({
+//       name,
+//       condition,
+//       start,
+//       ends,
+//       description,
+//       userID
+//     });
 
-router
-  .route('/oauth/unlink/facebook')
-  .post(passportJWT, UsersController.unlinkFacebook);
+//     const userId = req.session.user._id;
+//     const user = await User.findOne({ _id: userId });
+//     user.auctions.forEach((item, i) => {
+//       if (item._id.toString() === _id) {
+//         user.auctions.splice(i, 1);
+//         user.auctions.push(auctionUpdate);
+//         res.json(user);
+//       }
+//     });
+//     await user.save();
+//   })
+//   .delete(async (req, res) => {
+//     const { id } = req.params;
+//     const userId = req.session.user._id;
+//     const user = await User.findOne({ _id: userId });
+//     user.auctions.forEach((item, i) => {
+//       if (item._id.toString() === id) {
+//         user.auctions.splice(i, 1);
+//         res.json(user);
+//       }
+//     });
+//     await user.save();
+// });
 
-router.route('/dashboard').get(passportJWT, UsersController.dashboard);
-
-router.route('/status').get(passportJWT, UsersController.checkAuth);
-
-module.exports = router;
-
-router.post('/profile/:id/newCelebration', async (req, res) => {
-  console.log('ruchka', req.body, 'session ====>', req.session);
+//Добавление нового ПРАЗДНИКА
+router.post('/profile/newCelebration', async (req, res) => {
+  console.log('ruchka', req.body);
   const { _id } = req.session.user;
-  const { celebrationDate, celebrationTitle } = req.body;
-  // await User.findOneAndUpdate(
-  //   { _id },
-  //   {
-  //     $push: {
-  //       celebrationDate: {
-  //         title: celebrationTitle,
-  //         date: celebrationDate
-  //       }
-  //     }
-  //   }
-  // );
+  const { inputCelebrationDate, inputCelebrationTitle } = req.body;
+  await User.findOneAndUpdate(
+    { _id },
+    {
+      $push: {
+        celebrationDate: {
+          title: inputCelebrationTitle,
+          date: inputCelebrationDate
+        }
+      }
+    }
+  );
   const user = await User.findOne({ _id });
   req.session.user = user;
   res.json(user);
+});
+
+//Добавление нового ТОВАРА
+router.post('/profile/newItem', async (req, res) => {
+  console.log('ruchka', req.body);
+  const { _id } = req.session.user;
+  const { img, title, price, picLink, description } = req.body;
+  const newItem = await new WishItem({
+    title,
+    img,
+    price,
+    description,
+    picLink
+  });
+  await newItem.save();
+  const itemID = newItem._id;
+  await User.findOneAndUpdate(
+    { _id },
+    {
+      $push: {
+        wishItem: {
+          img,
+          title,
+          price,
+          picLink,
+          description,
+          _id: itemID
+        }
+      }
+    }
+  );
+  const user = await User.findOne({ _id });
+  req.session.user = user;
+  res.json(newItem);
 });
 
 router.post('/ozonParser', async (req, res) => {

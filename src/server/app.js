@@ -221,4 +221,9 @@ app.use('*', (req, res) => {
   res.send(template(context));
 });
 
+console.log(port);
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+
+console.log('test');

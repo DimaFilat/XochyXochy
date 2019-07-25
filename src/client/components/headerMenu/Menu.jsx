@@ -55,7 +55,7 @@ class Menu extends Component {
     const userLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink  className="menuButton" tag={Link} to="/users/signup">
+          <NavLink className="menuButton" tag={Link} to="/users/signup">
             Register
           </NavLink>
         </NavItem>
@@ -74,7 +74,7 @@ class Menu extends Component {
             className="menuButton"
             style={styleName}
             tag={Link}
-            to="/users/profile/:id"
+            to="/users/profile/"
           >
             {this.props.usersReducer.user.name}
           </NavLink>
@@ -95,9 +95,9 @@ class Menu extends Component {
       </Nav>
     );
 
-    // console.log(this.props);
+    
     return (
-      <div className='noPadding'>
+      <div className="noPadding">
         {!auth ? <Redirect to="/" /> : null}
         <Navbar className="menu" light expand="md">
           <NavbarBrand className="menuButton" tag={Link} to="/">

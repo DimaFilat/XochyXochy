@@ -1,22 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import MainPageCarousel from './MainPageCarousel';
+import UserAccount from '../user/UserAccount';
+import Upload from '../uploadPhoto/UploadPhoto';
 import './style.css';
 
-export default function Info(props) {
-  state = {
-    nextDate: ''
-  };
-
-  // async componentDidMount() {
-  //   let data = await fetch("https://api.chucknorris.io/jokes/random");
-  //   let result = await data.json();
-  //   console.log(result);
-  //   this.setState({ data:  result });
-  // }
-
-  
-  
+export default function Info() {
   return (
     <div>
       <br />
@@ -41,6 +30,7 @@ export default function Info(props) {
             Товарищи! реализация намеченных плановых заданий способствует
             подготовки и реализации систем массового участия.
           </p>
+          <Upload />
         </Col>
       </Row>
       <br />

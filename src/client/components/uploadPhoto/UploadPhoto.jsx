@@ -39,10 +39,18 @@ export default class UploadPhoto extends Component {
     const { imageLoaded, imagePreviewUrl } = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = <img src={imagePreviewUrl} alt="" />;
+      $imagePreview = (
+        <img
+          src={imagePreviewUrl}
+          alt=""
+          style={{ maxWidth: '100px', maxHeight: '100px' }}
+        />
+      );
     } else {
       $imagePreview = (
-        <div className="previewText">Please select an Image for Preview</div>
+        <div className="previewText" style={{ color: 'grey' }}>
+          Please select an Image for Preview
+        </div>
       );
     }
     let page;
@@ -50,7 +58,6 @@ export default class UploadPhoto extends Component {
       page = (
         <React.Fragment>
           <div className="previewComponent">
-            <p>Загрузите фотографию товара</p>
             <form
               action="/upload"
               method="POST"

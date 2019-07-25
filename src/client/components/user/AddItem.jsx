@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {
   Col,
+  Row,
   Button,
   Form,
   FormGroup,
@@ -9,16 +10,35 @@ import {
   Input,
   FormText
 } from 'reactstrap';
+import Upload from '../uploadPhoto/UploadPhoto';
+import { connect } from 'react-redux';
+import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
-export default class AddItem extends Component {
+class AddItem extends Component {
   state = {
     img: '',
-    wishItem: '',
+    title: '',
     price: '',
-    picLink: ''
+    picLink: '',
+    description: ''
+  };
+
+  componentDidMount = async () => {
+    await this.props.fetchCheckAuth();
+  };
+
+  addItemInfo = async event => {
+    event.preventDefault();
+    console.log('Submit', this.state);
+    console.log('location', this.props.location);
+    const newItemPath = this.props.location +'newItem'
+    console.log(newItemPath)
+    this.props.fetchNewItem(this.state, newItemPath)
   };
 
   render() {
+    // console.log('!!! ADD_ITEM ', this.state);
+
     const productImage = this.state.img;
     return (
       <div>
@@ -28,10 +48,10 @@ export default class AddItem extends Component {
             <Col sm={10}>
               <Input
                 type="text"
-                id="wishitem"
-                value={this.state.wishItem}
+                id="title"
+                value={this.state.title}
                 onChange={e => {
-                  this.setState({ wishItem: e.target.value });
+                  this.setState({ title: e.target.value });
                 }}
                 name="title"
                 placeholder="What would you like for your next big date?"
@@ -78,9 +98,9 @@ export default class AddItem extends Component {
                   });
                   const data = await response.json();
                   this.setState({
-                    img: data.picFileName,
-                    price: data.scrapeFunc.price,
-                    wishItem: data.scrapeFunc.title,
+                    img: 'src/server/public/' + data.picFileName,
+                    price: data.scrapeFunc.price + ' ₽',
+                    title: data.scrapeFunc.title,
                     picLink: data.scrapeFunc.pictureUrl
                   });
                 }}
@@ -89,10 +109,7 @@ export default class AddItem extends Component {
               </button>
               <div id="pic-place">
                 {productImage && (
-                  <img
-                    alt=""
-                    src={`http://localhost:9090/src/server/public/${productImage}`}
-                  />
+                  <img alt="" src={`http://localhost:9090/${productImage}`} />
                 )}
               </div>
             </Col>
@@ -119,6 +136,9 @@ export default class AddItem extends Component {
                 type="textarea"
                 name="description"
                 placeholder="Can you tell us and your friends why do you want this item?"
+                onChange={e => {
+                  this.setState({ description: e.target.value });
+                }}
               />
             </Col>
           </FormGroup>
@@ -127,17 +147,21 @@ export default class AddItem extends Component {
               Pic
             </Label>
             <Col sm={10}>
-              <Input type="file" name="file" id="exampleFile" />
-              <FormText color="muted">
-                Make sure not to send us a picture that is too large.
-              </FormText>
+              <Upload />
             </Col>
           </FormGroup>
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button onClick={this.props.addNewItem}>
-                Add a gift for you ;)
+              <Button
+                type="submit"
+                onClick={e => {
+                  this.props.addNewItem(e);
+                  this.addItemInfo(e);
+                }}
+              >
+                Add a gift for you
               </Button>
+              <Button onClick={this.props.addNewItem}>Maybe next time</Button>
             </Col>
           </FormGroup>
         </Form>
@@ -145,3 +169,22 @@ export default class AddItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchNewItem: (data, newItemPath) =>
+      dispatch(fetchThunk(data, newItemPath)),
+    fetchCheckAuth: () => dispatch(sessionCheckThunk())
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddItem);

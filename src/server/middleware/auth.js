@@ -7,7 +7,6 @@ const cookiesCleaner = (req, res, next) => {
 };
 
 const sessionChecker = (req, res, next) => {
-  
   if (req.session.user && req.cookies.user_sid) {
     const { user } = req.session;
     res.json(user);

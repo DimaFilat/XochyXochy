@@ -6,54 +6,7 @@ import { Divider } from 'semantic-ui-react';
 
 export default class User extends Component {
   state = {
-    user: [
-      { name: 'Jack', nextCelebration: 'Next Big Date' },
-      { name: 'Mike', nextCelebration: 'Next Big Date' },
-      { name: 'London', nextCelebration: 'Next Big Date' },
-      { name: 'Willium', nextCelebration: 'Next Big Date' }
-    ],
-    wishItem: [
-      {
-        title: 'Cart',
-        img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-        rating: '3',
-        price: '1500',
-        description: 'I always dreamed of this thing.',
-        messenger: [
-          { userId: '123123', text: 'some text' },
-          { userId: '122211', text: 'some more text' }
-        ],
-        active: true,
-        reserve: false
-      },
-      {
-        title: 'Book',
-        img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-        rating: '1',
-        price: '1213',
-        description: 'I always dreamed of this thing.',
-        messenger: [
-          { userId: '123123', text: 'some text' },
-          { userId: '122211', text: 'some more text' }
-        ],
-        active: true,
-        reserve: false
-      },
-      {
-        title: 'Whiskey',
-        img: 'https://image.flaticon.com/icons/png/512/149/149071.png',
-        rating: '5',
-        price: '22',
-        description: 'I always dreamed of this thing.',
-        messenger: [
-          { userId: '123123', text: 'some text' },
-          { userId: '122211', text: 'some more text' }
-        ],
-        active: true,
-        reserve: false
-      }
-    ]
-  };
+      };
 
   render() {
     return (

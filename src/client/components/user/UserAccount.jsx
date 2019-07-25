@@ -20,20 +20,76 @@ import {
   List
 } from 'semantic-ui-react';
 import UserSmallWishList from './UserSmallWishList';
-import WishListItem from './wishListItem';
+// import WishListItem from './wishListItem';
 import AddItem from './AddItem';
-import NewDate from './NewDate';
 import UserCelebrationList from './UserCelebrationList';
-// import { connect } from 'tls';
 import { connect } from 'react-redux';
+import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
 class UserAccount extends Component {
-  state = { addNewItem: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      addNewItem: false,
+      addNewDate: false,
+      showAllDate: false,
+      dropdownOpen: false
+    };
+  }
+
+  toggle = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  };
+
+  componentDidMount = async () => {
+    await this.props.fetchCheckAuth();
+  };
+
+  saveNewDate = async event => {
+    event.preventDefault();
+    if (event.target.name === 'title') {
+      this.setState({
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationTitle: event.target.value
+      });
+    } else {
+      this.setState({
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationDate: event.target.value
+      });
+    }
+
+    const { _id } = this.props.user;
+    // if (this.state.addNewDate) {
+    //   this.setState({
+    //     addNewDate: false
+    //   });
+    // } else {
+    //   this.setState({
+    //     addNewDate: true
+    //   });
+    // }
+  };
+
+  addNewDate = event => {
+    // console.log(event.target);
+    event.preventDefault();
+    if (this.state.addNewDate) {
+      this.setState({
+        addNewDate: false
+      });
+    } else {
+      this.setState({
+        addNewDate: true
+      });
+    }
+  };
 
   addNewItem = event => {
-    const { addNewItem } = this.state;
     event.preventDefault();
-    if (addNewItem) {
+    if (this.state.addNewItem) {
       this.setState({
         addNewItem: false
       });
@@ -44,9 +100,26 @@ class UserAccount extends Component {
     }
   };
 
+  showAllDate = event => {
+    console.log(event.target);
+    event.preventDefault();
+    if (this.state.showAllDate) {
+      this.setState({
+        showAllDate: false
+      });
+    } else {
+      this.setState({
+        showAllDate: true
+      });
+    }
+  };
+
   render() {
-    const { user } = this.props.user;
-    console.log('!!!!', this.props.user);
+    // console.log('!!!!', this.props.user);
+    const location = this.props.location.pathname;
+    const newDatePath = location + 'newCelebration';
+    const { img, name, celebrationDate, wishItem } = this.props.user;
+    // console.log(celebrationDate);
     return (
       <div>
         <Container>
@@ -59,7 +132,9 @@ class UserAccount extends Component {
             <Col xs="9">
               <br />
               <Row>
-                <Col>{/* <h3>{this.props.user.name}</h3> */}</Col>
+                <Col>
+                  <h3>{name}</h3>
+                </Col>
               </Row>
               <br></br>
               <Row>
@@ -67,32 +142,36 @@ class UserAccount extends Component {
                   {this.state.showAllDate ? (
                     <div>
                       <ul>
-                        {this.props.user.celebrationDate
-                          ? this.props.user.celebrationDate.map(
-                              (element, index) => (
-                                <UserCelebrationList
-                                  id={index}
-                                  key={index}
-                                  title={element.title}
-                                  date={element.date}
-                                />
-                              )
-                            )
+                        {celebrationDate.length
+                          ? celebrationDate.map((element, index) => (
+                              <UserCelebrationList
+                                id={index}
+                                key={index}
+                                title={element.title}
+                                date={element.date}
+                              />
+                            ))
                           : 'loading'}
                       </ul>
                     </div>
                   ) : (
                     <div>
-                      <Row>
-                        <Col>
-                          <h4></h4>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col>
-                          <h5></h5>
-                        </Col>
-                      </Row>
+                      {celebrationDate.length ? (
+                        <div>
+                          <Row>
+                            <Col>
+                              <h4>{celebrationDate[0].title}</h4>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <h5>{celebrationDate[0].date}</h5>
+                            </Col>
+                          </Row>
+                        </div>
+                      ) : (
+                        'You have no big dates'
+                      )}
                     </div>
                   )}
                 </Col>
@@ -164,28 +243,40 @@ class UserAccount extends Component {
                     </Col>
                     <Col xs="1"></Col>
                   </Row>
-                  {/* <ul>
-                    {this.props.user.wishItem */}
-                  {/* <ul>
-                    {this.props.user.wishItem.length
-                      ? this.props.wishItem.map((element, index) => (
-                          <UserSmallWishList
-                            id={index}
-                            key={index}
-                            title={element.title}
-                            img={element.img}
-                            rating={element.rating}
-                            price={element.price}
-                            description={element.description}
-                            active={element.active}
-                            reserve={element.reserve}
-                          />
-                        ))
-                      : 'ADD SOME GIF'}
-                  </ul> */}
+                  <ul>
+                    {wishItem.length ? (
+                      wishItem.map((element, index) => (
+                        <UserSmallWishList
+                          id={index}
+                          key={index}
+                          title={element.title}
+                          img={element.img}
+                          rating={element.rating}
+                          price={element.price}
+                          description={element.description}
+                          active={element.active}
+                          reserve={element.reserve}
+                        />
+                      ))
+                    ) : (
+                      <div>
+                        <label htmlFor="">
+                          You have no ites that you wish... add one or more
+                        </label>
+                        <br />
+                        <Container>
+                          <img
+                            src="https://i.pinimg.com/originals/49/a8/5f/49a85ff2855bbce54d4229ff75fa14a2.gif"
+                            alt="emptyItemList"
+                            style={{ maxWidth: '125px', borderRadius: '40px' }}
+                          ></img>
+                        </Container>
+                      </div>
+                    )}
+                  </ul>
                 </div>
               ) : (
-                <AddItem addNewItem={this.addNewItem} />
+                <AddItem addNewItem={this.addNewItem} location={location} />
               )}
             </Col>
             <Col xs="1"></Col>
@@ -196,11 +287,21 @@ class UserAccount extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    // ...state
-    user: state.usersReducer.user // Flows in the state to props in a component
+    fetchNewDate: (data, newDatePath) =>
+      dispatch(fetchThunk(data, newDatePath)),
+    fetchCheckAuth: () => dispatch(sessionCheckThunk())
   };
 };
 
-export default connect(mapStateToProps)(UserAccount);
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserAccount);
