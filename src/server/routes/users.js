@@ -83,7 +83,7 @@ router
 router.get('/signout', async (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
     try {
-      res.clearCookie('user_sid');
+      await res.clearCookie('user_sid');
       await req.session.destroy();
       res.json({ auth: false });
     } catch (error) {
@@ -164,21 +164,21 @@ router.get('/signout', async (req, res, next) => {
 //     await user.save();
 // });
 
-router.post('/profile/:id/newCelebration', async (req, res) => {
-  console.log('ruchka', req.body, 'session ====>', req.session);
+router.post('/profile/newCelebration', async (req, res) => {
+  console.log('ruchka', req.body);
   const { _id } = req.session.user;
-  const { celebrationDate, celebrationTitle } = req.body;
-  // await User.findOneAndUpdate(
-  //   { _id },
-  //   {
-  //     $push: {
-  //       celebrationDate: {
-  //         title: celebrationTitle,
-  //         date: celebrationDate
-  //       }
-  //     }
-  //   }
-  // );
+  const { inputCelebrationDate, inputCelebrationTitle } = req.body;
+  await User.findOneAndUpdate(
+    { _id },
+    {
+      $push: {
+        celebrationDate: {
+          title: inputCelebrationTitle,
+          date: inputCelebrationDate
+        }
+      }
+    }
+  );
   const user = await User.findOne({ _id });
   req.session.user = user;
   res.json(user);

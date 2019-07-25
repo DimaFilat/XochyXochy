@@ -13,17 +13,18 @@ import UploadPhoto from '../uploadPhoto/UploadPhoto';
 import UserAccount from '../user/UserAccount';
 
 class App extends Component {
-  componentDidMount = () => {
-    this.props.fetchCheckAuth();
-  };
+  state = {};
+
+  // componentDidMount = () => {
+  //   this.props.fetchCheckAuth();
+  // };
 
   render() {
-   const {user} = this.props
     return (
       <div className="body">
-        <Row >
+        <Row>
           <Col xs="1"></Col>
-          <Col >
+          <Col>
             <div>
               <Menu />
             </div>
@@ -58,9 +59,7 @@ class App extends Component {
               />
               <Route
                 exact
-
-                 path={`/users/profile`}
-
+                path={`/users/profile`}
                 render={props => {
                   return <UserAccount {...props} />;
                 }}
