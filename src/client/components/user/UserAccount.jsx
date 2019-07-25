@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import {
   Form,
@@ -115,18 +116,20 @@ class UserAccount extends Component {
   };
 
   render() {
-    // console.log('!!!!', this.props.user);
+
+   
     const location = this.props.location.pathname;
     const newDatePath = location + 'newCelebration';
     const { img, name, celebrationDate, wishItem } = this.props.user;
-    // console.log(celebrationDate);
+    
+
     return (
       <div>
         <Container>
           <Row>
             <Col xs="3">
               <Container>
-                <Image src={img} size="medium" />
+                <Image src={img} size="Large" />
               </Container>
             </Col>
             <Col xs="9">

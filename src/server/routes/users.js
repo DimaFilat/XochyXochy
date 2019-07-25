@@ -6,6 +6,7 @@ import User from '../model/user';
 import WishItem from '../model/wishItem';
 import scrape from '../ozonParser/ozonParser';
 import imageParser from '../ozonParser/ozonPictureDownloader';
+import scrapeAndParser from '../ozonParser/scrapeAndParser';
 
 const router = express.Router();
 
@@ -84,7 +85,7 @@ router
 router.get('/signout', async (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
     try {
-      res.clearCookie('user_sid');
+      await res.clearCookie('user_sid');
       await req.session.destroy();
       res.json({ auth: false });
     } catch (error) {
@@ -222,10 +223,9 @@ router.post('/profile/newItem', async (req, res) => {
 
 router.post('/ozonParser', async (req, res) => {
   console.log(req.body);
-  const scrapeFunc = await scrape(req.body.url);
-  const picFileName = await imageParser(req.body.url);
-  // console.log(scrapeFunc);
-  res.json({ scrapeFunc, picFileName });
+  const scrapeFunc = await scrapeAndParser(req.body.url);
+  // const picFileName = await imageParser(req.body.url);
+  res.json(scrapeFunc);
 });
 
 module.exports = router;

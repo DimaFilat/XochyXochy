@@ -8,19 +8,23 @@ import {
   FormGroup,
   Label,
   Input,
+  Spinner,
   FormText
 } from 'reactstrap';
 import Upload from '../uploadPhoto/UploadPhoto';
 import { connect } from 'react-redux';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
+
 class AddItem extends Component {
+
   state = {
     img: '',
     title: '',
     price: '',
     picLink: '',
-    description: ''
+    description: '',
+    loading: false
   };
 
   componentDidMount = async () => {
@@ -34,6 +38,9 @@ class AddItem extends Component {
     const newItemPath = this.props.location +'newItem'
     console.log(newItemPath)
     this.props.fetchNewItem(this.state, newItemPath)
+
+    
+
   };
 
   render() {
@@ -87,6 +94,9 @@ class AddItem extends Component {
                 onClick={async e => {
                   e.preventDefault();
                   const itemUrl = document.getElementById('linkInput').value;
+                  this.setState({
+                    loading: true
+                  });
                   const response = await fetch('/users/ozonParser', {
                     method: 'POST',
                     headers: {
@@ -97,11 +107,15 @@ class AddItem extends Component {
                     })
                   });
                   const data = await response.json();
+                  console.log('!!!!', data);
                   this.setState({
-                    img: 'src/server/public/' + data.picFileName,
-                    price: data.scrapeFunc.price + ' ₽',
-                    title: data.scrapeFunc.title,
-                    picLink: data.scrapeFunc.pictureUrl
+
+                    img: data.result.picFileName,
+                    price: data.result.price + ' ₽',
+                    wishItem: data.result.title,
+                    picLink: data.result.pictureUrl,
+                    loading: false
+
                   });
                 }}
               >
@@ -109,8 +123,14 @@ class AddItem extends Component {
               </button>
               <div id="pic-place">
                 {productImage && (
-                  <img alt="" src={`http://localhost:9090/${productImage}`} />
+                  <img
+                    alt=""
+                    style={{ maxWidth: '100px', maxHeight: '100px' }}
+                    src={`http://localhost:9090/src/server/public/${productImage}`}
+                  />
                 )}
+
+                {this.state.loading ? <Spinner color="secondary" /> : ''}
               </div>
             </Col>
           </FormGroup>
