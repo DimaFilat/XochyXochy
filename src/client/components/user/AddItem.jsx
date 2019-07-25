@@ -13,11 +13,20 @@ import {
 import Upload from '../uploadPhoto/UploadPhoto';
 
 export default class AddItem extends Component {
-  state = {
-    img: '',
-    wishItem: '',
-    price: '',
-    picLink: ''
+  state = { addNewItem: false, img: '' };
+
+  addNewItem = event => {
+    const { addNewItem } = this.state;
+    event.preventDefault();
+    if (addNewItem) {
+      this.setState({
+        addNewItem: false
+      });
+    } else {
+      this.setState({
+        addNewItem: true
+      });
+    }
   };
 
   render() {
