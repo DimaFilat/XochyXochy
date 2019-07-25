@@ -164,6 +164,7 @@ class UserAccount extends Component {
                     </Col>
                     <Col xs="1"></Col>
                   </Row>
+
                   {/* <ul>
                     {this.props.user.wishItem.length
                       ? this.props.wishItem.map((element, index) => (
