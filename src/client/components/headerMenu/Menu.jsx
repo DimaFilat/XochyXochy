@@ -95,7 +95,7 @@ class Menu extends Component {
       </Nav>
     );
 
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className='noPadding'>
         {!auth ? <Redirect to="/" /> : null}

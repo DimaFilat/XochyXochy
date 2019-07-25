@@ -80,7 +80,7 @@ class Reg extends Component {
 
                 this.props.fetchAuth(user, pathname);
                 !this.props.auth
-                  ? this.props.history.push('/users/profile/:id')
+                  ? this.props.history.push('/users/profile')
                   : null;
               }}
             >
