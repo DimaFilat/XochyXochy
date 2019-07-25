@@ -142,7 +142,7 @@ class NewDate extends Component {
                             type="datetime"
                             name="datetime"
                             id="exampleDatetime"
-                            placeholder="Your next big date"
+                            placeholder="Когда ваш следующий праздник?"
                           />
                         </FormGroup>
                         <FormGroup>
@@ -153,7 +153,7 @@ class NewDate extends Component {
                             placeholder="date placeholder"
                           />
                         </FormGroup>
-                        <Button onClick={this.addNewDate}>Add Date</Button>
+                        <Button onClick={this.addNewDate}>Добавить</Button>
                       </Form>
                     ) : (
                       ' '

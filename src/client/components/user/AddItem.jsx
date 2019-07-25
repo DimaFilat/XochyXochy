@@ -8,12 +8,12 @@ import {
   FormGroup,
   Label,
   Input,
-  Spinner,
   FormText
 } from 'reactstrap';
 import Upload from '../uploadPhoto/UploadPhoto';
 import { connect } from 'react-redux';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
+import Spin from '../spinner/Spinner'
 
 
 class AddItem extends Component {
@@ -129,7 +129,7 @@ class AddItem extends Component {
                   />
                 )}
 
-                {this.state.loading ? <Spinner color="secondary" /> : ''}
+                {this.state.loading ? <Spin /> : ''}
               </div>
             </Col>
           </FormGroup>
