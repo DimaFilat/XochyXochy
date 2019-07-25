@@ -43,7 +43,7 @@ export default class UploadPhoto extends Component {
         <img
           src={imagePreviewUrl}
           alt=""
-          style={{ maxWidth: '100px', maxHeight: '100px' }}
+          style={{ maxWidth: '120px', maxHeight: '120px'}}
         />
       );
     } else {
