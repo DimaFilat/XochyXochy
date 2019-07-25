@@ -22,15 +22,103 @@ import {
 import UserSmallWishList from './UserSmallWishList';
 import WishListItem from './wishListItem';
 import AddItem from './AddItem';
-import NewDate from './NewDate';
 import UserCelebrationList from './UserCelebrationList';
-// import { connect } from 'tls';
 import { connect } from 'react-redux';
+import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
 class UserAccount extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addNewItem: false,
+      addNewDate: false,
+      showAllDate: false,
+      dropdownOpen: false
+    };
+  }
+
+  toggle = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  };
+
+  componentDidMount = () => {
+    this.props.fetchCheckAuth();
+  };
+
+  saveNewDate = async event => {
+    event.preventDefault();
+    if (event.target.name === 'title') {
+      this.setState({
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationTitle: event.target.value
+      });
+    } else {
+      this.setState({
+        ...this.state.users, //need to check if this.state.users needs .users???
+        inputCelebrationDate: event.target.value
+      });
+    }
+
+    const { _id } = this.props.user;
+    // if (this.state.addNewDate) {
+    //   this.setState({
+    //     addNewDate: false
+    //   });
+    // } else {
+    //   this.setState({
+    //     addNewDate: true
+    //   });
+    // }
+  };
+
+  addNewDate = event => {
+    // console.log(event.target);
+    event.preventDefault();
+    if (this.state.addNewDate) {
+      this.setState({
+        addNewDate: false
+      });
+    } else {
+      this.setState({
+        addNewDate: true
+      });
+    }
+  };
+
+  addNewItem = event => {
+    event.preventDefault();
+    if (this.state.addNewItem) {
+      this.setState({
+        addNewItem: false
+      });
+    } else {
+      this.setState({
+        addNewItem: true
+      });
+    }
+  };
+
+  showAllDate = event => {
+    console.log(event.target);
+    event.preventDefault();
+    if (this.state.showAllDate) {
+      this.setState({
+        showAllDate: false
+      });
+    } else {
+      this.setState({
+        showAllDate: true
+      });
+    }
+  };
+
   render() {
-    const { user } = this.props.user;
-    console.log('!!!!', this.props.user);
+    // console.log('!!!!', this.props.user);
+    const newDatePath = this.props.location.pathname + 'newCelebration';
+    const { img, name, celebrationDate } = this.props.user;
+    // console.log(celebrationDate);
     return (
       <div>
         <Container>
@@ -43,7 +131,9 @@ class UserAccount extends Component {
             <Col xs="9">
               <br />
               <Row>
-                <Col>{/* <h3>{this.props.user.name}</h3> */}</Col>
+                <Col>
+                  <h3>{name}</h3>
+                </Col>
               </Row>
               <br></br>
               <Row>
@@ -51,17 +141,15 @@ class UserAccount extends Component {
                   {this.state.showAllDate ? (
                     <div>
                       <ul>
-                        {this.props.user.celebrationDate
-                          ? this.props.user.celebrationDate.map(
-                              (element, index) => (
-                                <UserCelebrationList
-                                  id={index}
-                                  key={index}
-                                  title={element.title}
-                                  date={element.date}
-                                />
-                              )
-                            )
+                        {celebrationDate.length
+                          ? celebrationDate.map((element, index) => (
+                              <UserCelebrationList
+                                id={index}
+                                key={index}
+                                title={element.title}
+                                date={element.date}
+                              />
+                            ))
                           : 'loading'}
                       </ul>
                     </div>
@@ -148,7 +236,6 @@ class UserAccount extends Component {
                     </Col>
                     <Col xs="1"></Col>
                   </Row>
-
                   {/* <ul>
                     {this.props.user.wishItem.length
                       ? this.props.wishItem.map((element, index) => (
@@ -179,11 +266,21 @@ class UserAccount extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    // ...state
-    user: state.usersReducer.user // Flows in the state to props in a component
+    fetchNewDate: (data, newDatePath) =>
+      dispatch(fetchThunk(data, newDatePath)),
+    fetchCheckAuth: () => dispatch(sessionCheckThunk())
   };
 };
 
-export default connect(mapStateToProps)(UserAccount);
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserAccount);
