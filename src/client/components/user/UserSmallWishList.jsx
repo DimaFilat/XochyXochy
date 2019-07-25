@@ -12,10 +12,7 @@ export default function UserSmallWishList(props) {
           <Container>
             <Row>
               <Col xs="4">
-                <Image
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7q5XvrW1W-6OkJdXaUUmnrX1R0QO1W6Ms2AreAFUWJt8m-Gj7"
-                  size="tiny"
-                />
+                <Image src={`http://localhost:9090/${img}`} size="tiny" />
               </Col>
               <Col>
                 <Row>{title}</Row>

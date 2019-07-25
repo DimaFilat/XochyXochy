@@ -21,7 +21,7 @@ import {
   List
 } from 'semantic-ui-react';
 import UserSmallWishList from './UserSmallWishList';
-import WishListItem from './wishListItem';
+// import WishListItem from './wishListItem';
 import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
 import { connect } from 'react-redux';
@@ -44,8 +44,8 @@ class UserAccount extends Component {
     });
   };
 
-  componentDidMount = () => {
-    this.props.fetchCheckAuth();
+  componentDidMount = async () => {
+    await this.props.fetchCheckAuth();
   };
 
   saveNewDate = async event => {
@@ -116,8 +116,12 @@ class UserAccount extends Component {
   };
 
   render() {
-    const newDatePath = this.props.location.pathname + 'newCelebration';
-    const { img, name, celebrationDate } = this.props.user;
+
+   
+    const location = this.props.location.pathname;
+    const newDatePath = location + 'newCelebration';
+    const { img, name, celebrationDate, wishItem } = this.props.user;
+    
 
     return (
       <div>
@@ -155,16 +159,22 @@ class UserAccount extends Component {
                     </div>
                   ) : (
                     <div>
-                      <Row>
-                        <Col>
-                          <h4></h4>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col>
-                          <h5></h5>
-                        </Col>
-                      </Row>
+                      {celebrationDate.length ? (
+                        <div>
+                          <Row>
+                            <Col>
+                              <h4>{celebrationDate[0].title}</h4>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <h5>{celebrationDate[0].date}</h5>
+                            </Col>
+                          </Row>
+                        </div>
+                      ) : (
+                        'You have no big dates'
+                      )}
                     </div>
                   )}
                 </Col>
@@ -236,26 +246,40 @@ class UserAccount extends Component {
                     </Col>
                     <Col xs="1"></Col>
                   </Row>
-                  {/* <ul>
-                    {this.props.user.wishItem.length
-                      ? this.props.wishItem.map((element, index) => (
-                          <UserSmallWishList
-                            id={index}
-                            key={index}
-                            title={element.title}
-                            img={element.img}
-                            rating={element.rating}
-                            price={element.price}
-                            description={element.description}
-                            active={element.active}
-                            reserve={element.reserve}
-                          />
-                        ))
-                      : 'ADD SOME GIF'}
-                  </ul> */}
+                  <ul>
+                    {wishItem.length ? (
+                      wishItem.map((element, index) => (
+                        <UserSmallWishList
+                          id={index}
+                          key={index}
+                          title={element.title}
+                          img={element.img}
+                          rating={element.rating}
+                          price={element.price}
+                          description={element.description}
+                          active={element.active}
+                          reserve={element.reserve}
+                        />
+                      ))
+                    ) : (
+                      <div>
+                        <label htmlFor="">
+                          You have no ites that you wish... add one or more
+                        </label>
+                        <br />
+                        <Container>
+                          <img
+                            src="https://i.pinimg.com/originals/49/a8/5f/49a85ff2855bbce54d4229ff75fa14a2.gif"
+                            alt="emptyItemList"
+                            style={{ maxWidth: '125px', borderRadius: '40px' }}
+                          ></img>
+                        </Container>
+                      </div>
+                    )}
+                  </ul>
                 </div>
               ) : (
-                <AddItem addNewItem={this.addNewItem} />
+                <AddItem addNewItem={this.addNewItem} location={location} />
               )}
             </Col>
             <Col xs="1"></Col>

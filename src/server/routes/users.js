@@ -3,6 +3,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 // import { validateBody, schemas } from '../helpers/routeHelpers';
 import User from '../model/user';
+import WishItem from '../model/wishItem';
 import scrape from '../ozonParser/ozonParser';
 import imageParser from '../ozonParser/ozonPictureDownloader';
 import scrapeAndParser from '../ozonParser/scrapeAndParser';
@@ -165,6 +166,7 @@ router.get('/signout', async (req, res, next) => {
 //     await user.save();
 // });
 
+//Добавление нового ПРАЗДНИКА
 router.post('/profile/newCelebration', async (req, res) => {
   console.log('ruchka', req.body);
   const { _id } = req.session.user;
@@ -183,6 +185,40 @@ router.post('/profile/newCelebration', async (req, res) => {
   const user = await User.findOne({ _id });
   req.session.user = user;
   res.json(user);
+});
+
+//Добавление нового ТОВАРА
+router.post('/profile/newItem', async (req, res) => {
+  console.log('ruchka', req.body);
+  const { _id } = req.session.user;
+  const { img, title, price, picLink, description } = req.body;
+  const newItem = await new WishItem({
+    title,
+    img,
+    price,
+    description,
+    picLink
+  });
+  await newItem.save();
+  const itemID = newItem._id;
+  await User.findOneAndUpdate(
+    { _id },
+    {
+      $push: {
+        wishItem: {
+          img,
+          title,
+          price,
+          picLink,
+          description,
+          _id: itemID
+        }
+      }
+    }
+  );
+  const user = await User.findOne({ _id });
+  req.session.user = user;
+  res.json(newItem);
 });
 
 router.post('/ozonParser', async (req, res) => {

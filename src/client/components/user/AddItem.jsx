@@ -12,49 +12,53 @@ import {
   FormText
 } from 'reactstrap';
 import Upload from '../uploadPhoto/UploadPhoto';
+import { connect } from 'react-redux';
+import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
-export default class AddItem extends Component {
+
+class AddItem extends Component {
 
   state = {
     img: '',
-    wishItem: '',
+    title: '',
     price: '',
     picLink: '',
+    description: '',
     loading: false
   };
 
+  componentDidMount = async () => {
+    await this.props.fetchCheckAuth();
+  };
+
+  addItemInfo = async event => {
+    event.preventDefault();
+    console.log('Submit', this.state);
+    console.log('location', this.props.location);
+    const newItemPath = this.props.location +'newItem'
+    console.log(newItemPath)
+    this.props.fetchNewItem(this.state, newItemPath)
+
+    
+
+  };
+
   render() {
+    // console.log('!!! ADD_ITEM ', this.state);
+
     const productImage = this.state.img;
     return (
       <div>
-        <Row>
-          <Col xs="1"></Col>
-          <Col xs="10">
-            {!this.state.addNewItem ? (
-              <div>
-                <Row>
-                  <Col xs="1"></Col>
-                  <Col xs="10">
-                    <Button onClick={this.addNewItem}>
-                      What would you like to add to your WishList?
-                    </Button>
-                  </Col>
-                  <Col xs="1"></Col>
-                </Row>
-              </div>
-            ) : null}
-          </Col>
-        </Row>
         <Form>
           <FormGroup row>
             <Label sm={2}>Wish Item</Label>
             <Col sm={10}>
               <Input
                 type="text"
-                id="wishitem"
-                value={this.state.wishItem}
+                id="title"
+                value={this.state.title}
                 onChange={e => {
-                  this.setState({ wishItem: e.target.value });
+                  this.setState({ title: e.target.value });
                 }}
                 name="title"
                 placeholder="What would you like for your next big date?"
@@ -105,11 +109,13 @@ export default class AddItem extends Component {
                   const data = await response.json();
                   console.log('!!!!', data);
                   this.setState({
+
                     img: data.result.picFileName,
-                    price: data.result.price,
+                    price: data.result.price + ' ₽',
                     wishItem: data.result.title,
                     picLink: data.result.pictureUrl,
                     loading: false
+
                   });
                 }}
               >
@@ -150,6 +156,9 @@ export default class AddItem extends Component {
                 type="textarea"
                 name="description"
                 placeholder="Can you tell us and your friends why do you want this item?"
+                onChange={e => {
+                  this.setState({ description: e.target.value });
+                }}
               />
             </Col>
           </FormGroup>
@@ -163,9 +172,16 @@ export default class AddItem extends Component {
           </FormGroup>
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button onClick={this.props.addNewItem}>
+              <Button
+                type="submit"
+                onClick={e => {
+                  this.props.addNewItem(e);
+                  this.addItemInfo(e);
+                }}
+              >
                 Add a gift for you
               </Button>
+              <Button onClick={this.props.addNewItem}>Maybe next time</Button>
             </Col>
           </FormGroup>
         </Form>
@@ -173,3 +189,22 @@ export default class AddItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchNewItem: (data, newItemPath) =>
+      dispatch(fetchThunk(data, newItemPath)),
+    fetchCheckAuth: () => dispatch(sessionCheckThunk())
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddItem);
