@@ -112,10 +112,9 @@ class AddItem extends Component {
 
                     img: data.result.picFileName,
                     price: data.result.price + ' ₽',
-                    wishItem: data.result.title,
+                    title: data.result.title,
                     picLink: data.result.pictureUrl,
                     loading: false
-
                   });
                 }}
               >
