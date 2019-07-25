@@ -8,25 +8,19 @@ import {
   FormGroup,
   Label,
   Input,
+  Spinner,
   FormText
 } from 'reactstrap';
 import Upload from '../uploadPhoto/UploadPhoto';
 
 export default class AddItem extends Component {
-  state = { addNewItem: false, img: '' };
 
-  addNewItem = event => {
-    const { addNewItem } = this.state;
-    event.preventDefault();
-    if (addNewItem) {
-      this.setState({
-        addNewItem: false
-      });
-    } else {
-      this.setState({
-        addNewItem: true
-      });
-    }
+  state = {
+    img: '',
+    wishItem: '',
+    price: '',
+    picLink: '',
+    loading: false
   };
 
   render() {
@@ -96,6 +90,9 @@ export default class AddItem extends Component {
                 onClick={async e => {
                   e.preventDefault();
                   const itemUrl = document.getElementById('linkInput').value;
+                  this.setState({
+                    loading: true
+                  });
                   const response = await fetch('/users/ozonParser', {
                     method: 'POST',
                     headers: {
@@ -106,11 +103,13 @@ export default class AddItem extends Component {
                     })
                   });
                   const data = await response.json();
+                  console.log('!!!!', data);
                   this.setState({
-                    img: data.picFileName,
-                    price: data.scrapeFunc.price,
-                    wishItem: data.scrapeFunc.title,
-                    picLink: data.scrapeFunc.pictureUrl
+                    img: data.result.picFileName,
+                    price: data.result.price,
+                    wishItem: data.result.title,
+                    picLink: data.result.pictureUrl,
+                    loading: false
                   });
                 }}
               >
@@ -120,9 +119,12 @@ export default class AddItem extends Component {
                 {productImage && (
                   <img
                     alt=""
+                    style={{ maxWidth: '100px', maxHeight: '100px' }}
                     src={`http://localhost:9090/src/server/public/${productImage}`}
                   />
                 )}
+
+                {this.state.loading ? <Spinner color="secondary" /> : ''}
               </div>
             </Col>
           </FormGroup>
@@ -157,10 +159,6 @@ export default class AddItem extends Component {
             </Label>
             <Col sm={10}>
               <Upload />
-              {/* <Input type="file" name="file" id="exampleFile" /> */}
-              {/* <FormText color="muted">
-                Make sure not to send us a picture that is too large.
-              </FormText> */}
             </Col>
           </FormGroup>
           <FormGroup check row>

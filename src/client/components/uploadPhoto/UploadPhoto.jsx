@@ -43,7 +43,7 @@ export default class UploadPhoto extends Component {
         <img
           src={imagePreviewUrl}
           alt=""
-          style={{ maxWidth: '100px', maxHeight: '100px' }}
+          style={{ maxWidth: '120px', maxHeight: '120px'}}
         />
       );
     } else {
@@ -75,7 +75,7 @@ export default class UploadPhoto extends Component {
                 className="submitButton"
                 type="submit"
                 onClick={e => this.handleSubmit(e)}
-                value="Отравить"
+                value="Отправить"
               />
             </form>
             <div className="imgPreview">{$imagePreview}</div>
