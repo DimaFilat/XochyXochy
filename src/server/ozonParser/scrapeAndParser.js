@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-// const scraperAndDownoloader = async url => {
 
 const scrapeAndParser = async url => {
   const browser = await puppeteer.launch();
@@ -10,9 +9,9 @@ const scrapeAndParser = async url => {
   const result = await page.evaluate(() => {
     const title = document.querySelector('h1').innerText;
     const price = document.querySelector("meta[itemprop='price']").content;
-    // const pictureUrl = document.querySelector("meta[itemprop='image']").content; // Large picture
+    const pictureUrl = document.querySelector("meta[itemprop='image']").content; // Large picture
     // Small pic here:
-    const pictureUrl = document.querySelector('._615bd').src;
+    // const pictureUrl = document.querySelector('._615bd').src;
     return {
       title,
       price,
