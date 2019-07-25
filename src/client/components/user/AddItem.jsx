@@ -8,6 +8,7 @@ import {
   FormGroup,
   Label,
   Input,
+  Spinner,
   FormText
 } from 'reactstrap';
 import Upload from '../uploadPhoto/UploadPhoto';
@@ -17,7 +18,8 @@ export default class AddItem extends Component {
     img: '',
     wishItem: '',
     price: '',
-    picLink: ''
+    picLink: '',
+    loading: false
   };
 
   render() {
@@ -87,6 +89,9 @@ export default class AddItem extends Component {
                 onClick={async e => {
                   e.preventDefault();
                   const itemUrl = document.getElementById('linkInput').value;
+                  this.setState({
+                    loading: true
+                  });
                   const response = await fetch('/users/ozonParser', {
                     method: 'POST',
                     headers: {
@@ -101,7 +106,8 @@ export default class AddItem extends Component {
                     img: data.picFileName,
                     price: data.scrapeFunc.price,
                     wishItem: data.scrapeFunc.title,
-                    picLink: data.scrapeFunc.pictureUrl
+                    picLink: data.scrapeFunc.pictureUrl,
+                    loading: false
                   });
                 }}
               >
@@ -114,6 +120,16 @@ export default class AddItem extends Component {
                     src={`http://localhost:9090/src/server/public/${productImage}`}
                   />
                 )}
+
+                {this.state.loading ? <Spinner color="secondary" /> : ''}
+
+                {/* {productImage ? (
+                  <img
+                    alt=""
+                    src={`http://localhost:9090/src/server/public/${productImage}`}
+                  />
+                ) : (
+                  'loading'} */}
               </div>
             </Col>
           </FormGroup>
