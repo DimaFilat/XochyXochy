@@ -6,55 +6,52 @@ const router = express.Router();
 
 // router.get('/', async (req, res) => {
 
-
-
 //Please do step by step
 
-  //   //Seed Users step1
-  //     for (let index = 0; index < 20; index++) {
-  //       let newUser = new User({
-  //         name: faker.name.findName(),
-  //         email: faker.internet.email(),
-  //         password: faker.internet.password(),
-  //         img: 'Photo',
-  //         celebrationDate: faker.date.future()
-  //       //   wishList should be added later
-  //       });
-  //       await newUser.save();
-  //       console.log(newUser);
-  //     }
+//   //Seed Users step1
+//     for (let index = 0; index < 20; index++) {
+//       let newUser = new User({
+//         name: faker.name.findName(),
+//         email: faker.internet.email(),
+//         password: faker.internet.password(),
+//         img: 'Photo',
+//         celebrationDate: faker.date.future()
+//       //   wishList should be added later
+//       });
+//       await newUser.save();
+//       console.log(newUser);
+//     }
 
-  //   //Seed wish list items step2
-  //     for (let index = 0; index < 100; index++) {
-  //       let newWishItem = new WishItem({
-  //         title: faker.commerce.product(),
-  //         img: 'Photo',
-  //         rating: Math.floor(Math.random() * 5 + 1),
-  //         price: faker.commerce.price(),
-  //         description: faker.lorem.text(),
-  //         //messenger will be added later,
-  //         active: true,
-  //         reserved: false
-  //       });
-  //       await newWishItem.save();
-  //       console.log(newWishItem);
-  //     }
+//   //Seed wish list items step2
+//     for (let index = 0; index < 100; index++) {
+//       let newWishItem = new WishItem({
+//         title: faker.commerce.product(),
+//         img: 'Photo',
+//         rating: Math.floor(Math.random() * 5 + 1),
+//         price: faker.commerce.price(),
+//         description: faker.lorem.text(),
+//         //messenger will be added later,
+//         active: true,
+//         reserved: false
+//       });
+//       await newWishItem.save();
+//       console.log(newWishItem);
+//     }
 
-  // //   Update users. Add items to there wish list step3
-  //     let users = await User.find();
-  //     let items = await WishItem.find();
-  //     for (let i = 0; i < users.length; i++) {
-  //       users[i].wishItem.push(items[i], items[items.length - i - 1]);
-  //       // users[i].wishItem.push(i);
-  //       await users[i].save();
-  //       console.log(i, users[i].wishItem, users[i].name);
-  //     }
+// //   Update users. Add items to there wish list step3
+//     let users = await User.find();
+//     let items = await WishItem.find();
+//     for (let i = 0; i < users.length; i++) {
+//       users[i].wishItem.push(items[i], items[items.length - i - 1]);
+//       // users[i].wishItem.push(i);
+//       await users[i].save();
+//       console.log(i, users[i].wishItem, users[i].name);
+//     }
 
 //   res.end();
 // });
 
 //Please do step by step
-
 
 //   //Seed Users step1
 //     for (let index = 0; index < 20; index++) {
@@ -101,3 +98,71 @@ const router = express.Router();
 // });
 
 export default router;
+
+// const { validateBody, schemas } = require('../helpers/routeHelpers');
+// const UsersController = require('../controllers/users');
+// const passportConf = require('../passport');
+
+// const passportSignIn = passport.authenticate('local', { session: false });
+// const passportJWT = passport.authenticate('jwt', { session: false });
+
+// //  SignUP Router
+// router
+//   .route('/signup')
+//   .post(validateBody(schemas.signSchema), UsersController.signUp);
+
+// //  Login Router
+// router
+//   .route('/signin')
+//   .post(
+//     validateBody(schemas.authSchema),
+//     passportSignIn,
+//     UsersController.signIn
+//   );
+
+// // LogOut Router
+// router.route('/signout').get(UsersController.signOut);
+
+// router
+//   .route('/oauth/google')
+//   .post(
+//     passport.authenticate('googleToken', { session: false }),
+//     UsersController.googleOAuth
+//   );
+
+// router
+//   .route('/oauth/facebook')
+//   .post(
+//     passport.authenticate('facebookToken', { session: false }),
+//     UsersController.facebookOAuth
+//   );
+
+// router
+//   .route('/oauth/link/google')
+//   .post(
+//     passportJWT,
+//     passport.authorize('googleToken', { session: false }),
+//     UsersController.linkGoogle
+//   );
+
+// router
+//   .route('/oauth/unlink/google')
+//   .post(passportJWT, UsersController.unlinkGoogle);
+
+// router
+//   .route('/oauth/link/facebook')
+//   .post(
+//     passportJWT,
+//     passport.authorize('facebookToken', { session: false }),
+//     UsersController.linkFacebook
+//   );
+
+// router
+//   .route('/oauth/unlink/facebook')
+//   .post(passportJWT, UsersController.unlinkFacebook);
+
+// router.route('/dashboard').get(passportJWT, UsersController.dashboard);
+
+// router.route('/status').get(passportJWT, UsersController.checkAuth);
+
+// module.exports = router;

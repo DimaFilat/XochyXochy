@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import MainPageCarousel from './MainPageCarousel';
+import UserAccount from '../user/UserAccount';
+import Upload from '../uploadPhoto/UploadPhoto';
 import './style.css';
 
 export default function Info() {
@@ -29,6 +31,7 @@ export default function Info() {
             реализация намеченных плановых заданий способствует подготовки и
             реализации систем массового участия.
           </p>
+          <Upload />
         </Col>
       </Row>
     </div>

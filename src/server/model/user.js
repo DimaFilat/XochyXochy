@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
@@ -8,34 +9,15 @@ const mongoURI = 'mongodb://localhost:27017/XochyXochy';
 const conn = mongoose.createConnection(mongoURI);
 
 const userSchema = new mongoose.Schema({
-  method: {
-    type: [String],
-    required: true
-  },
-  local: {
-    email: {
-      type: String,
-      lowercase: true
-    },
-    password: {
-      type: String
-    }
-  },
-  google: {
-    id: { type: String },
-    email: {
-      type: String,
-      lowercase: true
-    }
-  },
-  facebook: {
-    id: { type: String }
-  },
   name: {
     type: String,
     required: true
   },
-  img: String,
+  img: {
+    type: String,
+    default:
+      'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.shutterstock.com%2Fimage-vector%2Funknown-user-icon-trendy-flat-260nw-619490732.jpg&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Funknown%2Buser&docid=WacG2ZPsdhW7hM&tbnid=Oh9zimhdXiB-6M%3A&vet=10ahUKEwiD0fWW783jAhXh0qYKHR8FBIoQMwhEKAAwAA..i&w=260&h=280&bih=637&biw=1317&q=user%20unknown%20pic&ved=0ahUKEwiD0fWW783jAhXh0qYKHR8FBIoQMwhEKAAwAA&iact=mrc&uact=8'
+  },
   celebrationDate: [
     {
       title: String,
@@ -43,44 +25,15 @@ const userSchema = new mongoose.Schema({
       cycle: false
     }
   ],
+  email: {
+    type: String,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   wishItem: []
 });
-
-userSchema.pre('save', async function(next) {
-  try {
-    if (this.method !== 'local') {
-      next();
-    }
-
-    // the user schema is instantiated
-    const user = this;
-
-    // check if the user has been modified
-    // to know if the password has already been hashed
-    if (!user.isModified('local.password')) {
-      next();
-    }
-
-    //  Genrate a salt
-    const salt = await bcrypt.genSalt(10);
-
-    //  Generate a password hash (salt+hash)
-    const passwordHash = await bcrypt.hash(this.local.password, salt);
-
-    //  Re-assign hashed version over original, plain text password
-    this.local.password = passwordHash;
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
-userSchema.methods.isValidPassword = async function(newPassword) {
-  try {
-    return await bcrypt.compare(newPassword, this.local.password);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
 
 module.exports = conn.model('User', userSchema);

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {
   Col,
+  Row,
   Button,
   Form,
   FormGroup,
@@ -23,6 +24,24 @@ export default class AddItem extends Component {
     const productImage = this.state.img;
     return (
       <div>
+        <Row>
+          <Col xs="1"></Col>
+          <Col xs="10">
+            {!this.state.addNewItem ? (
+              <div>
+                <Row>
+                  <Col xs="1"></Col>
+                  <Col xs="10">
+                    <Button onClick={this.addNewItem}>
+                      What would you like to add to your WishList?
+                    </Button>
+                  </Col>
+                  <Col xs="1"></Col>
+                </Row>
+              </div>
+            ) : null}
+          </Col>
+        </Row>
         <Form>
           <FormGroup row>
             <Label sm={2}>Wish Item</Label>
@@ -138,7 +157,7 @@ export default class AddItem extends Component {
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
               <Button onClick={this.props.addNewItem}>
-                Add a gift for you ;)
+                Add a gift for you
               </Button>
             </Col>
           </FormGroup>

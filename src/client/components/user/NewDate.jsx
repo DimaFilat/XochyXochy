@@ -64,14 +64,14 @@ class NewDate extends Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { name, img } = this.props;
     return (
       <div>
         {console.log('NEWdate>>>>>>>>>', this.props)}
         <Row>
           <Col xs="3">
             <Container>
-              <Image size="medium" />
+              <Image src={img} size="medium" />
             </Container>
           </Col>
           <Col xs="9">
@@ -152,24 +152,6 @@ class NewDate extends Component {
           </Col>
         </Row>
         <Divider />
-        <Row>
-          <Col xs="1"></Col>
-          <Col xs="10">
-            {!this.state.addNewItem ? (
-              <div>
-                <Row>
-                  <Col xs="1"></Col>
-                  <Col xs="10">
-                    <Button onClick={this.addNewItem}>
-                      What would you like to add to your WishList?
-                    </Button>
-                  </Col>
-                  <Col xs="1"></Col>
-                </Row>
-              </div>
-            ) : null}
-          </Col>
-        </Row>
       </div>
     );
   }
