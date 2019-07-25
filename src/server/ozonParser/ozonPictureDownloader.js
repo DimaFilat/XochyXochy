@@ -8,6 +8,7 @@ async function imageParser(url) {
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 1200 });
   await page.goto(`${url}`);
+  await page.waitFor(20);
   // await page.waitFor(1000);
 
   const IMAGE_SELECTOR = '#gallery-image-0 > div > img';
