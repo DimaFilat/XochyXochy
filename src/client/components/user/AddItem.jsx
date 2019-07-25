@@ -102,11 +102,12 @@ export default class AddItem extends Component {
                     })
                   });
                   const data = await response.json();
+                  console.log('!!!!', data);
                   this.setState({
-                    img: data.picFileName,
-                    price: data.scrapeFunc.price,
-                    wishItem: data.scrapeFunc.title,
-                    picLink: data.scrapeFunc.pictureUrl,
+                    img: data.result.picFileName,
+                    price: data.result.price,
+                    wishItem: data.result.title,
+                    picLink: data.result.pictureUrl,
                     loading: false
                   });
                 }}
