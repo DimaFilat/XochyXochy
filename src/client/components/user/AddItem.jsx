@@ -14,6 +14,7 @@ import {
 import Upload from '../uploadPhoto/UploadPhoto';
 
 export default class AddItem extends Component {
+
   state = {
     img: '',
     wishItem: '',

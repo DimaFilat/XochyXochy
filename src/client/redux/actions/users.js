@@ -46,18 +46,16 @@ export const fetchThunk = (user, path) => {
   return async dispatch => {
     dispatch(fetchSent());
 
-    try {
-      const response = await fetch(`${path}`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify({ ...user })
-      });
-      const userData = await response.json();
+    const response = await fetch(`${path}`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ ...user })
+    });
+    const userData = await response.json();
 
-      console.warn(userData);
-      dispatch(fetchRcvd(userData));
-    } catch (err) {}
+    console.warn(userData);
+    dispatch(fetchRcvd(userData));
   };
 };

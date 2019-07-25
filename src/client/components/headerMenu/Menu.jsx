@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logOutThunk } from '../../redux/actions/users';
+import SearchBar from './Search-bar';
 // import {menu, textColor} from './style';
 import './style.css';
 import {
@@ -76,7 +77,7 @@ class Menu extends Component {
             tag={Link}
             to="/users/profile/"
           >
-            {this.props.usersReducer.user.name}
+            {name}
           </NavLink>
         </NavItem>
         <NavItem>
@@ -94,8 +95,6 @@ class Menu extends Component {
         </NavItem>
       </Nav>
     );
-
-    
     return (
       <div className="noPadding">
         {!auth ? <Redirect to="/" /> : null}
@@ -117,19 +116,20 @@ class Menu extends Component {
               </NavItem>
               {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                Options
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-
-                  <DropdownItem>Option 2</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
+                <DropdownItem>Option 1</DropdownItem>
+                
+                <DropdownItem>Option 2</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>Reset</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
         </Navbar>
+        <SearchBar />
       </div>
     );
   }
