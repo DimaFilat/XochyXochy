@@ -264,15 +264,15 @@ class UserAccount extends Component {
                     ) : (
                       <div>
                         <label htmlFor="">
-                          You have no ites that you wish... add one or more
+                          У вас пока что нет подарков в вишлисте...
                         </label>
                         <br />
                         <Container>
-                          <img
+                          {/* <img
                             src="https://i.pinimg.com/originals/49/a8/5f/49a85ff2855bbce54d4229ff75fa14a2.gif"
                             alt="emptyItemList"
                             style={{ maxWidth: '125px', borderRadius: '40px' }}
-                          ></img>
+                          ></img> */}
                         </Container>
                       </div>
                     )}

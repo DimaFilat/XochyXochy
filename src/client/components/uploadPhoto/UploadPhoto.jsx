@@ -49,7 +49,7 @@ export default class UploadPhoto extends Component {
     } else {
       $imagePreview = (
         <div className="previewText" style={{ color: 'grey' }}>
-          Please select an Image for Preview
+          Выберите файл для превью
         </div>
       );
     }
