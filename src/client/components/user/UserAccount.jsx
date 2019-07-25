@@ -173,16 +173,16 @@ class UserAccount extends Component {
                           </Row>
                         </div>
                       ) : (
-                        'You have no big dates'
+                        'Ближайший праздник еще не добавлен'
                       )}
                     </div>
                   )}
                 </Col>
                 <Col>
                   <Button.Group size="medium">
-                    <Button onClick={this.addNewDate}>New date</Button>
+                    <Button onClick={this.addNewDate}>Новый праздник</Button>
                     <Button.Or />
-                    <Button onClick={this.showAllDate}>Show all dates</Button>
+                    <Button onClick={this.showAllDate}>Все праздники</Button>
                   </Button.Group>
                 </Col>
               </Row>
@@ -241,7 +241,7 @@ class UserAccount extends Component {
                     <Col xs="1"></Col>
                     <Col xs="10">
                       <Button onClick={this.addNewItem}>
-                        What would you like to add to your WishList?
+                        Добавить подарок
                       </Button>
                     </Col>
                     <Col xs="1"></Col>

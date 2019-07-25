@@ -20,7 +20,7 @@ export default function UserSmallWishList(props) {
                 <Row>{description}</Row>
               </Col>
               <Col xs="2">
-                <Button>Edit</Button>
+                <Button>Редактировать</Button>
               </Col>
             </Row>
           </Container>
