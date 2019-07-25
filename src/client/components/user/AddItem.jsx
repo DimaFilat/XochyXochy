@@ -117,19 +117,12 @@ export default class AddItem extends Component {
                 {productImage && (
                   <img
                     alt=""
+                    style={{ maxWidth: '100px', maxHeight: '100px' }}
                     src={`http://localhost:9090/src/server/public/${productImage}`}
                   />
                 )}
 
                 {this.state.loading ? <Spinner color="secondary" /> : ''}
-
-                {/* {productImage ? (
-                  <img
-                    alt=""
-                    src={`http://localhost:9090/src/server/public/${productImage}`}
-                  />
-                ) : (
-                  'loading'} */}
               </div>
             </Col>
           </FormGroup>
@@ -164,10 +157,6 @@ export default class AddItem extends Component {
             </Label>
             <Col sm={10}>
               <Upload />
-              {/* <Input type="file" name="file" id="exampleFile" /> */}
-              {/* <FormText color="muted">
-                Make sure not to send us a picture that is too large.
-              </FormText> */}
             </Col>
           </FormGroup>
           <FormGroup check row>

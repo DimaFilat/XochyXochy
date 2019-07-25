@@ -11,7 +11,8 @@ async function imageParser(url) {
   await page.waitFor(20);
   // await page.waitFor(1000);
 
-  const IMAGE_SELECTOR = '#gallery-image-0 > div > img';
+  const IMAGE_SELECTOR =
+    '#__layout > div > div.block-vertical > div:nth-child(4) > div > div.top > div.top-image-column > div.gallery > div > div.view-component.preview-component > div > div.img._96fa6.magnifier-image.shown > img';
   const imageHref = await page.evaluate(sel => {
     return document
       .querySelector(sel)

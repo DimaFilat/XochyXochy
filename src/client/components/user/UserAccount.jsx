@@ -125,7 +125,7 @@ class UserAccount extends Component {
           <Row>
             <Col xs="3">
               <Container>
-                <Image src={img} size="medium" />
+                <Image src={img} size="Large" />
               </Container>
             </Col>
             <Col xs="9">
