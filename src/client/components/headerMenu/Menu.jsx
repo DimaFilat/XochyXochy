@@ -107,14 +107,14 @@ class Menu extends Component {
           <Collapse isOpen={isOpen} navbar>
             {!auth ? userLinks : questLinks}
             <Nav navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
                   className="menuButton"
                   href="https://my.visme.co/projects/rxy46q16-xochy"
                 >
                   Ссылка на проект
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink>
                   <SearchBar />
