@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { searchBarThunk } from '../../redux/actions/users';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   state = {
     usersEmail: [
       'o6jlako@mail.ru',
@@ -25,6 +27,10 @@ export default class SearchBar extends Component {
     }
 
     this.setState({ suggestions, text: value });
+  };
+
+  componentDidMount = async () => {
+    this.props.fetchGetEmails();
   };
 
   suggestionSelected = value => {
@@ -64,13 +70,36 @@ export default class SearchBar extends Component {
     // const { usersEmail } = this.state;
     return (
       <div>
-        <input
-          value={this.state.text}
-          onChange={this.onTextChanged}
-          type="text"
-        />
-        {this.renderSuggestions()}
+        {!this.props.usersReducer.usersEmail ? (
+          <div>Loading..</div>
+        ) : (
+          <div>
+            <input
+              value={this.state.text}
+              onChange={this.onTextChanged}
+              type="text"
+            />
+            {this.renderSuggestions()}
+          </div>
+        )}
       </div>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchGetEmails: () => dispatch(searchBarThunk())
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchBar);

@@ -9,7 +9,10 @@ import imageParser from '../ozonParser/ozonPictureDownloader';
 import scrapeAndParser from '../ozonParser/scrapeAndParser';
 
 const router = express.Router();
-
+router.get('/serchbar', async (req, res) => {
+  const usersEmail = await User.find({}, { _id: 0, email: 1 });
+  res.json({ usersEmail });
+});
 router.get('/sessioncheck', async (req, res) => {
   console.log(req.session);
   if (req.session.user) {

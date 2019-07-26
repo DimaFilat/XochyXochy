@@ -75,7 +75,7 @@ class Menu extends Component {
             className="menuButton"
             style={styleName}
             tag={Link}
-            to="/users/profile/"
+            to={`/users/profile/${_id}`}
           >
             {name}
           </NavLink>
@@ -97,7 +97,8 @@ class Menu extends Component {
     );
     return (
       <div className="noPadding">
-        {!auth ? <Redirect to="/" /> : null}
+        {console.log('pppppp', this.props.usersReducer.user)}
+        {/* {!auth ? <Redirect to="/" /> : null} */}
         <Navbar className="menu" light expand="md">
           <NavbarBrand className="menuButton" tag={Link} to="/">
             Home

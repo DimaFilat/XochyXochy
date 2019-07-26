@@ -5,7 +5,7 @@ const appReducerInitState = {
   auth: false,
   token: '',
   errors: '',
-  user: { name: '' }
+  user: ''
 };
 
 export default (state = appReducerInitState, action) => {

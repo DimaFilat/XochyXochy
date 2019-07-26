@@ -15,9 +15,7 @@ import Upload from '../uploadPhoto/UploadPhoto';
 import { connect } from 'react-redux';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 
-
 class AddItem extends Component {
-
   state = {
     img: '',
     title: '',
@@ -35,12 +33,9 @@ class AddItem extends Component {
     event.preventDefault();
     console.log('Submit', this.state);
     console.log('location', this.props.location);
-    const newItemPath = this.props.location +'newItem'
-    console.log(newItemPath)
-    this.props.fetchNewItem(this.state, newItemPath)
-
-    
-
+    const newItemPath = this.props.location + 'newItem';
+    console.log(newItemPath);
+    this.props.fetchNewItem(this.state, newItemPath);
   };
 
   render() {
@@ -109,13 +104,11 @@ class AddItem extends Component {
                   const data = await response.json();
                   console.log('!!!!', data);
                   this.setState({
-
                     img: data.result.picFileName,
                     price: data.result.price + ' ₽',
                     wishItem: data.result.title,
                     picLink: data.result.pictureUrl,
                     loading: false
-
                   });
                 }}
               >
