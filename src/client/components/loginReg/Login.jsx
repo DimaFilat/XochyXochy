@@ -47,7 +47,7 @@ class Login extends Component {
               <Label for="examplePassword">Пароль</Label>
               <Input
                 type="password"
-                name="Пароль"
+                name="password"
                 id="examplePassword"
                 placeholder="Enter Password"
                 value={password}

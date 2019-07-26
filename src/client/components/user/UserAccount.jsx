@@ -119,7 +119,7 @@ class UserAccount extends Component {
 
     return (
       <div>
-        {this.props.usersReducer.loading ? (
+        {false? (
           spinner
         ) : (
           <Container>
