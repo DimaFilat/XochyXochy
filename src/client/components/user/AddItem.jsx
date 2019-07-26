@@ -10,8 +10,8 @@ import {
   Input,
   FormText
 } from 'reactstrap';
-import Upload from '../uploadPhoto/UploadPhoto';
 import { connect } from 'react-redux';
+import Upload from '../uploadPhoto/UploadPhoto';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 import Spin from '../spinner/Spinner';
 
