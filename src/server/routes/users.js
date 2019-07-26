@@ -9,7 +9,10 @@ import imageParser from '../ozonParser/ozonPictureDownloader';
 import scrapeAndParser from '../ozonParser/scrapeAndParser';
 
 const router = express.Router();
-
+router.get('/serchbar', async (req, res) => {
+  const usersEmail = await User.find({}, { _id: 0, email: 1 });
+  res.json({ usersEmail });
+});
 router.get('/sessioncheck', async (req, res) => {
   console.log(req.session);
   if (req.session.user) {
@@ -167,10 +170,11 @@ router.get('/signout', async (req, res, next) => {
 // });
 
 //Добавление нового ПРАЗДНИКА
-router.post('/profile/newCelebration', async (req, res) => {
+router.post('/profile/:id/newCelebration', async (req, res) => {
   console.log('ruchka', req.body);
   const { _id } = req.session.user;
   const { inputCelebrationDate, inputCelebrationTitle } = req.body;
+  
   await User.findOneAndUpdate(
     { _id },
     {
@@ -184,11 +188,11 @@ router.post('/profile/newCelebration', async (req, res) => {
   );
   const user = await User.findOne({ _id });
   req.session.user = user;
-  res.json(user);
+  res.json({user});
 });
 
 //Добавление нового ТОВАРА
-router.post('/profile/newItem', async (req, res) => {
+router.post('/profile/:id/newItem', async (req, res) => {
   console.log('ruchka', req.body);
   const { _id } = req.session.user;
   const { img, title, price, picLink, description } = req.body;
@@ -218,7 +222,7 @@ router.post('/profile/newItem', async (req, res) => {
   );
   const user = await User.findOne({ _id });
   req.session.user = user;
-  res.json(newItem);
+  res.json({user});
 });
 
 router.post('/ozonParser', async (req, res) => {

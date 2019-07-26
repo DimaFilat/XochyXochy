@@ -76,7 +76,7 @@ class Menu extends Component {
             className="menuButton"
             style={styleName}
             tag={Link}
-            to="/users/profile/"
+            to={`/users/profile/${_id}`}
           >
             {name}
           </NavLink>
@@ -98,7 +98,8 @@ class Menu extends Component {
     );
     return (
       <div className="noPadding">
-        {!auth ? <Redirect to="/" /> : null}
+        {console.log('pppppp', this.props.usersReducer.user)}
+        {/* {!auth ? <Redirect to="/" /> : null} */}
         <Navbar className="menu" light expand="md">
           <NavbarBrand className="menuButton" tag={Link} to="/">
             <span className="logo">
@@ -120,6 +121,11 @@ class Menu extends Component {
                   Ссылка на проект
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink>
+                  <SearchBar />
+                </NavLink>
+              </NavItem>
               {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                 Options
@@ -135,7 +141,6 @@ class Menu extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <SearchBar />
       </div>
     );
   }

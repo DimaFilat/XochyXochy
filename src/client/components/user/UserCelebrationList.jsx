@@ -6,7 +6,8 @@ export default class UserCelebrationList extends Component {
     return (
       <div>
         {this.props.title}
-        {this.props.date}
+        <br/>
+        {this.props.date.slice(0, 10)}
         <Divider />
       </div>
     );

@@ -6,7 +6,7 @@ export default function Delete() {
   return (
     <div>
       <Col xs="2">
-        <Button>Удалить</Button>
+        <Button style={{ width: '125px' }}>Удалить</Button>
       </Col>
     </div>
   );
