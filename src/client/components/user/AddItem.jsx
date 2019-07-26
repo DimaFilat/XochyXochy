@@ -1,17 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText
-} from 'reactstrap';
-import Upload from '../uploadPhoto/UploadPhoto';
+import { Col, Row, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { connect } from 'react-redux';
+import { Button } from 'semantic-ui-react';
+import Upload from '../uploadPhoto/UploadPhoto';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
 import Spin from '../spinner/Spinner';
 
@@ -112,7 +104,7 @@ class AddItem extends Component {
                   });
                 }}
               >
-                Submit
+                Отправить
               </button>
               <div id="pic-place">
                 {productImage && (
@@ -138,7 +130,7 @@ class AddItem extends Component {
                 onChange={e => {
                   this.setState({ picLink: e.target.value });
                 }}
-                placeholder="How does it look?"
+                placeholder="Как это выглядит?"
               />
             </Col>
           </FormGroup>
@@ -166,6 +158,7 @@ class AddItem extends Component {
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
               <Button
+                style={{ backgroundColor: '#5C9EAD', width: '180px' }}
                 type="submit"
                 onClick={e => {
                   this.props.addNewItem(e);
@@ -174,10 +167,16 @@ class AddItem extends Component {
               >
                 Добавить подарок
               </Button>
-              <Button onClick={this.props.addNewItem}>В другой раз</Button>
+              <Button
+                onClick={this.props.addNewItem}
+                style={{ backgroundColor: 'lightblue', width: '180px' }}
+              >
+                В другой раз
+              </Button>
             </Col>
           </FormGroup>
         </Form>
+        
       </div>
     );
   }

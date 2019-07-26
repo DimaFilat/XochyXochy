@@ -226,7 +226,7 @@ class UserAccount extends Component {
                                 type="text "
                                 name="title"
                                 id="exampleDatetime"
-                                placeholder="Your next big date"
+                                placeholder="Ваш следующий праздник"
                               />
                             </FormGroup>
                             <FormGroup>
@@ -239,7 +239,7 @@ class UserAccount extends Component {
                                 placeholder="date placeholder"
                               />
                             </FormGroup>
-                            <Button type="submit">Add Date</Button>
+                            <Button type="submit">Добавить</Button>
                           </Form>
                         ) : (
                           ' '

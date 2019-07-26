@@ -1,6 +1,7 @@
 import { Button } from 'semantic-ui-react';
 import { Col } from 'reactstrap';
 import React from 'react';
+import YaSoberu from '../yaSoberu/YaSoberu';
 
 export default function Share() {
   return (

@@ -26,10 +26,11 @@ class Reg extends Component {
 
   render() {
     const { pathname } = this.props.location;
-    const { redirect, email, password, name, password2 } = this.state;
-    if (redirect) {
-      return <Redirect to="/users/profile" />;
-    }
+    const {  email, password, name } = this.state;
+    const { г} = this.props;
+    // if (redirect) {
+    //   return <Redirect to="/users/profile" />;
+    // }
     return (
       <div>
         <Col sm={{ size: 4, offset: 4 }}>
@@ -66,7 +67,7 @@ class Reg extends Component {
               />
             </FormGroup>
             <Button
-              color="danger"
+              
               className="mt-5 regLoginForm"
               block
               color="primary"
@@ -80,7 +81,7 @@ class Reg extends Component {
 
                 this.props.fetchAuth(user, pathname);
                 !this.props.auth
-                  ? this.props.history.push('/users/profile')
+                  ? this.props.history.push(`/users/profile/${_id}`)
                   : null;
               }}
             >
