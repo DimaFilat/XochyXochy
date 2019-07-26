@@ -16,10 +16,7 @@ export default function UserSmallWishList(props) {
           <Container>
             <Row>
               <Col xs="4">
-                <Image
-                  src={`http://localhost:9090/src/server/public/${img}`}
-                  size="tiny"
-                />
+                <Image src={img} size="tiny" />
               </Col>
               <Col>
                 <Row>{title}</Row>

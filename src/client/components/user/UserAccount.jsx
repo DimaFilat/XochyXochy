@@ -26,7 +26,6 @@ import UserSmallWishList from './UserSmallWishList';
 import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
-import Spinner from '../spinner/Spinner';
 
 class UserAccount extends Component {
   constructor(props) {
@@ -62,17 +61,6 @@ class UserAccount extends Component {
         inputCelebrationDate: event.target.value
       });
     }
-
-    const { _id } = this.props.user;
-    // if (this.state.addNewDate) {
-    //   this.setState({
-    //     addNewDate: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     addNewDate: true
-    //   });
-    // }
   };
 
   addNewDate = event => {
@@ -131,9 +119,8 @@ class UserAccount extends Component {
 
     return (
       <div>
-        <br />
-        {this.props.usersReducer.user === '' ? (
-          <Spinner />
+        {this.props.usersReducer.loading ? (
+          spinner
         ) : (
           <Container>
             <Row>
@@ -190,18 +177,9 @@ class UserAccount extends Component {
                   </Col>
                   <Col>
                     <Button.Group size="medium">
-                      <Button
-                        onClick={this.addNewDate}
-                        style={{ backgroundColor: '#5C9EAD', width: '160px' }}
-                      >
-                        Новый праздник
-                      </Button>
-                      <Button
-                        onClick={this.showAllDate}
-                        style={{ backgroundColor: 'lightblue', width: '160px' }}
-                      >
-                        Все праздники
-                      </Button>
+                      <Button onClick={this.addNewDate}>Новый праздник</Button>
+                      <Button.Or />
+                      <Button onClick={this.showAllDate}>Все праздники</Button>
                     </Button.Group>
                   </Col>
                 </Row>
@@ -259,13 +237,12 @@ class UserAccount extends Component {
                     <Row>
                       <Col xs="1"></Col>
                       <Col xs="10">
-                        <Button onClick={this.addNewItem} style={{ backgroundColor: '#8AAA79', width: '175px' }}>
+                        <Button onClick={this.addNewItem}>
                           Добавить подарок
                         </Button>
                       </Col>
                       <Col xs="1"></Col>
                     </Row>
-                    <br />
                     <ul>
                       {wishItem.length ? (
                         wishItem.map((element, index) => (

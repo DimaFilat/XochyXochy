@@ -96,6 +96,7 @@ class Menu extends Component {
         </NavItem>
       </Nav>
     );
+
     return (
       <div className="noPadding">
         {console.log('pppppp', this.props.usersReducer.user)}

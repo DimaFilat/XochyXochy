@@ -14,7 +14,6 @@ router.get('/serchbar', async (req, res) => {
   res.json({ usersEmail });
 });
 router.get('/sessioncheck', async (req, res) => {
-  console.log(req.session);
   if (req.session.user) {
     const { user } = req.session;
     res.json({ user, auth: true });
@@ -24,8 +23,6 @@ router.get('/sessioncheck', async (req, res) => {
 });
 //  Register Handle
 router.route('/signup').post(async (req, res) => {
-  console.log(req.body);
-
   const { name, email, password } = req.body;
   //  Validation passed
   const user1 = await User.findOne({ email });
@@ -60,8 +57,6 @@ router
   .route('/signin')
 
   .post(async (req, res) => {
-    console.log(req.body);
-
     const { email, password } = req.body;
 
     //  Validation passed
@@ -174,7 +169,7 @@ router.post('/profile/:id/newCelebration', async (req, res) => {
   console.log('ruchka', req.body);
   const { _id } = req.session.user;
   const { inputCelebrationDate, inputCelebrationTitle } = req.body;
-  
+
   await User.findOneAndUpdate(
     { _id },
     {
@@ -222,7 +217,7 @@ router.post('/profile/:id/newItem', async (req, res) => {
   );
   const user = await User.findOne({ _id });
   req.session.user = user;
-  res.json({user});
+  res.json({ user });
 });
 
 router.post('/ozonParser', async (req, res) => {

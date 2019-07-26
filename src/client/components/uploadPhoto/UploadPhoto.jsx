@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchRcvd } from '../../redux/actions/users';
 
-export default class UploadPhoto extends Component {
+class UploadPhoto extends Component {
   state = {
     file: '',
     imagePreviewUrl: '',
@@ -14,10 +16,12 @@ export default class UploadPhoto extends Component {
     const formData = new FormData();
     formData.append('file', file);
 
-    fetch('/upload', {
+    const res = await fetch('/upload', {
       method: 'POST',
       body: formData
     });
+    const data = await res.json();
+    this.props.fetchFilePath({ img: data.file.filename });
     this.setState({ imageLoaded: true });
   };
 
@@ -43,7 +47,7 @@ export default class UploadPhoto extends Component {
         <img
           src={imagePreviewUrl}
           alt=""
-          style={{ maxWidth: '120px', maxHeight: '120px'}}
+          style={{ maxWidth: '120px', maxHeight: '120px' }}
         />
       );
     } else {
@@ -93,3 +97,20 @@ export default class UploadPhoto extends Component {
     return page;
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchFilePath: data => dispatch(fetchRcvd(data))
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UploadPhoto);

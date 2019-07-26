@@ -34,12 +34,31 @@ class AddItem extends Component {
     console.log('Submit', this.state);
     console.log('location', this.props.location);
     const newItemPath = this.props.location + '/newItem';
+    const { title, price, picLink, description } = this.state;
     console.log(newItemPath);
-    this.props.fetchNewItem(this.state, newItemPath);
+    if (this.state.img) {
+      const obj1 = {
+        img: `http://localhost:9090/src/server/public/${this.state.img}`,
+        title,
+        price,
+        picLink,
+        description
+      };
+      this.props.fetchNewItem(obj1, newItemPath);
+    } else {
+      const obj = {
+        img: `http://localhost:3000/image/${this.props.img}`,
+        title,
+        price,
+        picLink,
+        description
+      };
+      this.props.fetchNewItem(obj, newItemPath);
+    }
   };
 
   render() {
-    // console.log('!!! ADD_ITEM ', this.state);
+    console.log('!!! ADD_ITEM ', this.props);
 
     const productImage = this.state.img;
     return (
@@ -114,6 +133,7 @@ class AddItem extends Component {
               >
                 Submit
               </button>
+              <br />
               <div id="pic-place">
                 {productImage && (
                   <img
@@ -122,6 +142,13 @@ class AddItem extends Component {
                     src={`http://localhost:9090/src/server/public/${productImage}`}
                   />
                 )}
+                {this.props.img ? (
+                  <img
+                    alt=""
+                    style={{ maxWidth: '100px', maxHeight: '100px' }}
+                    src={`http://localhost:3000/image/${this.props.img}`}
+                  />
+                ) : null}
 
                 {this.state.loading ? <Spin /> : ''}
               </div>
@@ -193,7 +220,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    user: state.usersReducer.user
+    ...state.usersReducer
   };
 };
 

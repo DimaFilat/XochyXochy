@@ -25,11 +25,13 @@ class Reg extends Component {
   };
 
   render() {
+    const { auth, user } = this.props.usersReducer;
+    {
+      console.log(this.props);
+    }
     const { pathname } = this.props.location;
     const { redirect, email, password, name, password2 } = this.state;
-    if (redirect) {
-      return <Redirect to="/users/profile" />;
-    }
+
     return (
       <div>
         <Col sm={{ size: 4, offset: 4 }}>
@@ -70,7 +72,7 @@ class Reg extends Component {
               className="mt-5 regLoginForm"
               block
               color="primary"
-              onClick={e => {
+              onClick={async e => {
                 e.preventDefault();
                 const user = {
                   name: this.state.name,
@@ -78,9 +80,9 @@ class Reg extends Component {
                   password: this.state.password
                 };
 
-                this.props.fetchAuth(user, pathname);
-                !this.props.auth
-                  ? this.props.history.push('/users/profile')
+                await this.props.fetchAuth(user, pathname);
+                !auth
+                  ? this.props.history.push(`/users/profile/${user._id}`)
                   : null;
               }}
             >
@@ -102,7 +104,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = state => {
-  return { ...state.userReducer };
+  return { ...state };
 };
 
 export default connect(

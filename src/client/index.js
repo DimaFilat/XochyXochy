@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, withRouter } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import rootReducer from './redux/reducers/combineReducer';
-import App from './components/app/app';
+import rootReducer from '../client/redux/reducers/combineReducer';
+import App from '../client/components/app/app';
 // import YaSoberu from './components/yaSoberu/YaSoberu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
