@@ -6,7 +6,7 @@ export default function Reserve() {
   return (
     <div>
       <Col xs="2">
-        <Button>Резерв</Button>
+        <Button style={{ backgroundColor: 'lightblue', width: '125px' }}>Резерв</Button>
       </Col>
     </div>
   );

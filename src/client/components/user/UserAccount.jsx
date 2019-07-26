@@ -131,7 +131,7 @@ class UserAccount extends Component {
 
     return (
       <div>
-        <br/>
+        <br />
         {this.props.usersReducer.user === '' ? (
           <Spinner />
         ) : (
@@ -190,9 +190,18 @@ class UserAccount extends Component {
                   </Col>
                   <Col>
                     <Button.Group size="medium">
-                      <Button onClick={this.addNewDate}>Новый праздник</Button>
-                      <Button.Or />
-                      <Button onClick={this.showAllDate}>Все праздники</Button>
+                      <Button
+                        onClick={this.addNewDate}
+                        style={{ backgroundColor: '#5C9EAD', width: '160px' }}
+                      >
+                        Новый праздник
+                      </Button>
+                      <Button
+                        onClick={this.showAllDate}
+                        style={{ backgroundColor: 'lightblue', width: '160px' }}
+                      >
+                        Все праздники
+                      </Button>
                     </Button.Group>
                   </Col>
                 </Row>
@@ -250,7 +259,7 @@ class UserAccount extends Component {
                     <Row>
                       <Col xs="1"></Col>
                       <Col xs="10">
-                        <Button onClick={this.addNewItem}>
+                        <Button onClick={this.addNewItem} style={{ backgroundColor: '#8AAA79', width: '175px' }}>
                           Добавить подарок
                         </Button>
                       </Col>

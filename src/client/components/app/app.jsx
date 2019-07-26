@@ -69,6 +69,7 @@ class App extends Component {
           <Col xs="1"></Col>
         </Row>
       </div>
+      
     );
   }
 }
