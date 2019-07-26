@@ -6,7 +6,9 @@ export default function Share() {
   return (
     <div>
       <Col xs="2">
-        <Button>Вскладчину</Button>
+        <Button style={{ backgroundColor: 'orange', width: '125px' }}>
+          Вскладчину
+        </Button>
       </Col>
     </div>
   );
