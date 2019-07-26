@@ -22,13 +22,12 @@ class Login extends Component {
 
   render() {
     const { pathname } = this.props.location;
-    const { auth } = this.props.usersReducer;
-    const { redirect, email, password } = this.state;
-    // if (redirect) {
-    //   return <Redirect to="/users/profile" />;
-    // }
+    const { auth, user } = this.props.usersReducer;
+    const { email, password } = this.state;
+
     return (
       <div>
+        {console.log('>>>>>>>>>>>>>>>>>>>', this.props.usersReducer.user._id)}
         {/* {console.log(this.props.usersReducer)} */}
         <Col sm={{ size: 4, offset: 4 }}>
           <Form className="form-login mt-5">
@@ -61,9 +60,11 @@ class Login extends Component {
               color="primary"
               onClick={async e => {
                 e.preventDefault();
-                const user = { email, password };
-                await this.props.fetchAuth(user, pathname);
-                !auth ? this.props.history.push('/users/profile/') : null;
+                const user1 = { email, password };
+                await this.props.fetchAuth(user1, pathname);
+                !auth
+                  ? this.props.history.push(`/users/profile/${user._id}`)
+                  : null;
               }}
             >
               Sign In
