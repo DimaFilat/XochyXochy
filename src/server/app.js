@@ -117,8 +117,11 @@ const upload = multer({ storage });
 app.post('/upload', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
   // res.redirect('/upload');
-  console.log(req.body);
-  res.status(201).end();
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', req.file);
+  // .status(201)
+  // .res.json({ file: req.file })
+  // .end();
+  res.status(201).json({ file: req.file });
 });
 
 // @route GET /files
@@ -224,6 +227,5 @@ app.use('*', (req, res) => {
 console.log(port);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
 
 console.log('test');

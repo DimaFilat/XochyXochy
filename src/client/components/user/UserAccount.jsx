@@ -61,17 +61,6 @@ class UserAccount extends Component {
         inputCelebrationDate: event.target.value
       });
     }
-
-    const { _id } = this.props.user;
-    // if (this.state.addNewDate) {
-    //   this.setState({
-    //     addNewDate: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     addNewDate: true
-    //   });
-    // }
   };
 
   addNewDate = event => {
@@ -126,11 +115,11 @@ class UserAccount extends Component {
       wishItem
     } = this.props.usersReducer.user;
 
-    console.log(wishItem)
+    console.log(wishItem);
 
     return (
       <div>
-        {this.props.usersReducer.user === '' ? (
+        {this.props.usersReducer.loading ? (
           spinner
         ) : (
           <Container>
@@ -176,7 +165,7 @@ class UserAccount extends Component {
                             </Row>
                             <Row>
                               <Col>
-                                <h5>{celebrationDate[0].date.slice(0,10)}</h5>
+                                <h5>{celebrationDate[0].date.slice(0, 10)}</h5>
                               </Col>
                             </Row>
                           </div>
