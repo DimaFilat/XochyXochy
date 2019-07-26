@@ -12,6 +12,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  CardFooter,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -100,8 +101,13 @@ class Menu extends Component {
         {!auth ? <Redirect to="/" /> : null}
         <Navbar className="menu" light expand="md">
           <NavbarBrand className="menuButton" tag={Link} to="/">
-            Хочу, Хочу!
+            <span className="logo">
+              <a href="/">
+                <img src="http://localhost:9090/src/server/public/logo/logo1.png" height="50" width="195" alt="text here" />
+              </a>
+            </span>
           </NavbarBrand>
+
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             {!auth ? userLinks : questLinks}
