@@ -110,7 +110,7 @@ class Menu extends Component {
               <NavItem>
                 <NavLink
                   className="menuButton"
-                  href="https://github.com/ArtiomOganesyan/XochyXochy"
+                  href="https://my.visme.co/projects/rxy46q16-xochy"
                 >
                   Ссылка на проект
                 </NavLink>
