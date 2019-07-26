@@ -14,7 +14,7 @@ export default function Info() {
           <MainPageCarousel />
         </Col>
         <Col xs="5">
-          <h1 className="fontTitle">Xochy Xochy - это удобный сервис для создания вишлистов<br/></h1>
+          <h1 className="fontTitle">Xochy Xochy - это удобный сервис для создания виш-листов<br/></h1>
           <br/>
           <h2 className="fontTitle">
             {' '}

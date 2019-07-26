@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Type from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
@@ -20,6 +19,7 @@ class App extends Component {
   };
 
   render() {
+    const { _id } = this.props.usersReducer.user;
     return (
       <div className="body">
         <Row>
@@ -59,7 +59,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path={`/users/profile`}
+                path={`/users/profile/${_id}`}
                 render={props => {
                   return <UserAccount {...props} />;
                 }}
@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    ...state.usersReducer
+    ...state
   };
 };
 

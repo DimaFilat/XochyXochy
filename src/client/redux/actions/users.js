@@ -37,11 +37,23 @@ export const sessionCheckThunk = () => {
     dispatch(fetchSent());
     const response = await fetch('/users/sessioncheck');
     const userData = await response.json();
-    // console.warn(userData);
+    console.warn(userData);
 
     dispatch(fetchRcvd(userData));
   };
 };
+
+export const searchBarThunk = () => {
+  return async dispatch => {
+    dispatch(fetchSent());
+    const response = await fetch('/users/serchbar');
+    const data = await response.json();
+    console.warn(data);
+
+    dispatch(fetchRcvd(data));
+  };
+};
+
 export const fetchThunk = (user, path) => {
   return async dispatch => {
     dispatch(fetchSent());
