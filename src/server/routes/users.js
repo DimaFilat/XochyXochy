@@ -188,7 +188,7 @@ router.post('/profile/:id/newCelebration', async (req, res) => {
   );
   const user = await User.findOne({ _id });
   req.session.user = user;
-  res.json(user);
+  res.json({user});
 });
 
 //Добавление нового ТОВАРА
