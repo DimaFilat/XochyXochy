@@ -170,10 +170,11 @@ router.get('/signout', async (req, res, next) => {
 // });
 
 //Добавление нового ПРАЗДНИКА
-router.post('/profile/newCelebration', async (req, res) => {
+router.post('/profile/:id/newCelebration', async (req, res) => {
   console.log('ruchka', req.body);
   const { _id } = req.session.user;
   const { inputCelebrationDate, inputCelebrationTitle } = req.body;
+  
   await User.findOneAndUpdate(
     { _id },
     {
@@ -191,7 +192,7 @@ router.post('/profile/newCelebration', async (req, res) => {
 });
 
 //Добавление нового ТОВАРА
-router.post('/profile/newItem', async (req, res) => {
+router.post('/profile/:id/newItem', async (req, res) => {
   console.log('ruchka', req.body);
   const { _id } = req.session.user;
   const { img, title, price, picLink, description } = req.body;

@@ -33,7 +33,7 @@ class AddItem extends Component {
     event.preventDefault();
     console.log('Submit', this.state);
     console.log('location', this.props.location);
-    const newItemPath = this.props.location + 'newItem';
+    const newItemPath = this.props.location + '/newItem';
     console.log(newItemPath);
     this.props.fetchNewItem(this.state, newItemPath);
   };

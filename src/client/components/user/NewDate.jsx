@@ -63,19 +63,6 @@ class NewDate extends Component {
     }
   };
 
-  showAllDate = event => {
-    event.preventDefault();
-    if (this.state.showAllDate) {
-      this.setState({
-        showAllDate: false
-      });
-    } else {
-      this.setState({
-        showAllDate: true
-      });
-    }
-  };
-
   render() {
     const { name, img } = this.props;
     return (

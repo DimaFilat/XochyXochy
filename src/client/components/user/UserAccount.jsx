@@ -118,7 +118,7 @@ class UserAccount extends Component {
   render() {
     const spinner = <div>Loading...</div>;
     const location = this.props.location.pathname;
-    const newDatePath = location + 'newCelebration';
+    const newDatePath = location + '/newCelebration';
     const {
       img,
       name,
@@ -174,7 +174,7 @@ class UserAccount extends Component {
                             </Row>
                             <Row>
                               <Col>
-                                <h5>{celebrationDate[0].date}</h5>
+                                <h5>{celebrationDate[0].date.slice(0,10)}</h5>
                               </Col>
                             </Row>
                           </div>
