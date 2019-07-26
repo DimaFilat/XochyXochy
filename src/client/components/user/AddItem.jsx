@@ -8,12 +8,12 @@ import {
   FormGroup,
   Label,
   Input,
-  Spinner,
   FormText
 } from 'reactstrap';
 import Upload from '../uploadPhoto/UploadPhoto';
 import { connect } from 'react-redux';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
+import Spin from '../spinner/Spinner'
 
 class AddItem extends Component {
   state = {
@@ -46,7 +46,7 @@ class AddItem extends Component {
       <div>
         <Form>
           <FormGroup row>
-            <Label sm={2}>Wish Item</Label>
+            <Label sm={2}>Желаемый подарок</Label>
             <Col sm={10}>
               <Input
                 type="text"
@@ -56,12 +56,12 @@ class AddItem extends Component {
                   this.setState({ title: e.target.value });
                 }}
                 name="title"
-                placeholder="What would you like for your next big date?"
+                placeholder="Какой подарок вы хотите?"
               />
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label sm={2}>Price</Label>
+            <Label sm={2}>Цена</Label>
             <Col sm={10}>
               <Input
                 type="text"
@@ -71,18 +71,18 @@ class AddItem extends Component {
                   this.setState({ price: e.target.value });
                 }}
                 id="price"
-                placeholder="Who much do you think it will cost?"
+                placeholder="Сколько это стоит?"
               />
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label sm={2}>Link</Label>
+            <Label sm={2}>Ссылка</Label>
             <Col sm={10}>
               <Input
                 type="text"
                 name="title"
                 id="linkInput"
-                placeholder="Where can we find this item?"
+                placeholder="Где это можно купить?"
               />
               <button
                 type="button"
@@ -106,7 +106,7 @@ class AddItem extends Component {
                   this.setState({
                     img: data.result.picFileName,
                     price: data.result.price + ' ₽',
-                    wishItem: data.result.title,
+                    title: data.result.title,
                     picLink: data.result.pictureUrl,
                     loading: false
                   });
@@ -123,12 +123,12 @@ class AddItem extends Component {
                   />
                 )}
 
-                {this.state.loading ? <Spinner color="secondary" /> : ''}
+                {this.state.loading ? <Spin /> : ''}
               </div>
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label sm={2}>Picture Link</Label>
+            <Label sm={2}>Ссылка на картинку</Label>
             <Col sm={10}>
               <Input
                 type="text"
@@ -143,12 +143,12 @@ class AddItem extends Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label sm={2}>Description</Label>
+            <Label sm={2}>Описание подарка</Label>
             <Col sm={10}>
               <Input
                 type="textarea"
                 name="description"
-                placeholder="Can you tell us and your friends why do you want this item?"
+                placeholder="Почему вы хотите этот товар?"
                 onChange={e => {
                   this.setState({ description: e.target.value });
                 }}
@@ -157,7 +157,7 @@ class AddItem extends Component {
           </FormGroup>
           <FormGroup row>
             <Label for="exampleFile" sm={2}>
-              Pic
+              Картинка
             </Label>
             <Col sm={10}>
               <Upload />
@@ -172,9 +172,9 @@ class AddItem extends Component {
                   this.addItemInfo(e);
                 }}
               >
-                Add a gift for you
+                Добавить подарок
               </Button>
-              <Button onClick={this.props.addNewItem}>Maybe next time</Button>
+              <Button onClick={this.props.addNewItem}>В другой раз</Button>
             </Col>
           </FormGroup>
         </Form>

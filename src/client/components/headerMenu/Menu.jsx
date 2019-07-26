@@ -57,12 +57,12 @@ class Menu extends Component {
       <Nav className="ml-auto" navbar>
         <NavItem>
           <NavLink className="menuButton" tag={Link} to="/users/signup">
-            Register
+            Регистрация
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="menuButton" tag={Link} to="/users/signin">
-            Login
+            Войти
           </NavLink>
         </NavItem>
       </Nav>
@@ -90,7 +90,7 @@ class Menu extends Component {
             tag={Link}
             to="/users/signout/"
           >
-            Logout
+            Выйти
           </NavLink>
         </NavItem>
       </Nav>
@@ -101,7 +101,7 @@ class Menu extends Component {
         {/* {!auth ? <Redirect to="/" /> : null} */}
         <Navbar className="menu" light expand="md">
           <NavbarBrand className="menuButton" tag={Link} to="/">
-            Home
+            Хочу, Хочу!
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -112,7 +112,7 @@ class Menu extends Component {
                   className="menuButton"
                   href="https://github.com/ArtiomOganesyan/XochyXochy"
                 >
-                  Our Project
+                  Ссылка на проект
                 </NavLink>
               </NavItem>
               {/* <UncontrolledDropdown nav inNavbar>
