@@ -222,7 +222,7 @@ router.post('/profile/:id/newItem', async (req, res) => {
   );
   const user = await User.findOne({ _id });
   req.session.user = user;
-  res.json(newItem);
+  res.json({user});
 });
 
 router.post('/ozonParser', async (req, res) => {

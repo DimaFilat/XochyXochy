@@ -126,6 +126,8 @@ class UserAccount extends Component {
       wishItem
     } = this.props.usersReducer.user;
 
+    console.log(wishItem)
+
     return (
       <div>
         {this.props.usersReducer.user === '' ? (
