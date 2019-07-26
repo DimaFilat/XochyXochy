@@ -34,39 +34,39 @@ class Reg extends Component {
       <div>
         <Col sm={{ size: 4, offset: 4 }}>
           <Form className=" form-login mt-5">
-            <h1 text="center mb-3 mt-10">Register</h1>
+            <h1 text="center mb-3 mt-10">Регистрация</h1>
             <FormGroup>
-              <Label for="name">Name</Label>
+              <Label for="name">Ваше имя</Label>
               <Input
                 name="name"
                 value={name}
                 onChange={this.inputHandler}
-                placeholder="How should we call you?"
+                placeholder="Ваше имя"
               />
             </FormGroup>
             <FormGroup>
-              <Label for="exampleEmail">Email</Label>
+              <Label for="exampleEmail">Электронная почта</Label>
               <Input
                 className="input"
                 type="text"
                 name="email"
-                placeholder="Where can we write you?"
+                placeholder="Электронная почта"
                 value={email}
                 onChange={this.inputHandler}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="examplePassword">Password</Label>
+              <Label for="examplePassword">Пароль</Label>
               <Input
                 type="password"
                 name="password"
-                placeholder="Make sure it is secure"
+                placeholder="Пароль"
                 value={password}
                 onChange={this.inputHandler}
               />
             </FormGroup>
             <Button
-              color='danger'
+              color="danger"
               className="mt-5 regLoginForm"
               block
               color="primary"
@@ -84,15 +84,12 @@ class Reg extends Component {
                   : null;
               }}
             >
-              Sign In
+              Зарегистрироваться
             </Button>
-
-            {/* <Button>facebook</Button>
-            <Button>google</Button> */}
           </Form>
           <p className="lead mt-4">
             Have An Account?
-            <Link to="/users/signin">Login</Link>
+            <Link to="/users/signin"> Войти</Link>
           </p>
         </Col>
       </div>

@@ -115,6 +115,11 @@ class Menu extends Component {
                   Ссылка на проект
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink>
+                  <SearchBar />
+                </NavLink>
+              </NavItem>
               {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                 Options
@@ -130,7 +135,6 @@ class Menu extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <SearchBar />
       </div>
     );
   }

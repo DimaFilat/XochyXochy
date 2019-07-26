@@ -31,23 +31,23 @@ class Login extends Component {
         {/* {console.log(this.props.usersReducer)} */}
         <Col sm={{ size: 4, offset: 4 }}>
           <Form className="form-login mt-5">
-            <h1>Login</h1>
+            <h1>Войти</h1>
             <FormGroup>
-              <Label for="exampleEmail">Email</Label>
+              <Label for="exampleEmail">Электронная почта</Label>
               <Input
                 className="input"
                 type="email"
                 name="email"
-                placeholder="Enter Email"
+                placeholder="Электронная почта"
                 value={email}
                 onChange={this.inputHandler}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="examplePassword">Password</Label>
+              <Label for="examplePassword">Пароль</Label>
               <Input
                 type="password"
-                name="password"
+                name="Пароль"
                 id="examplePassword"
                 placeholder="Enter Password"
                 value={password}
@@ -67,13 +67,13 @@ class Login extends Component {
                   : null;
               }}
             >
-              Sign In
+              Войти
             </Button>
           </Form>
           {/* <FacebookAuth /> */}
           <p className="lead mt-4">
             No Account?
-            <Link to="/users/signup">Register</Link>
+            <Link to="/users/signup"> Регистрация</Link>
           </p>
         </Col>
       </div>

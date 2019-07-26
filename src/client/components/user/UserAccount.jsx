@@ -26,6 +26,7 @@ import UserSmallWishList from './UserSmallWishList';
 import AddItem from './AddItem';
 import UserCelebrationList from './UserCelebrationList';
 import { fetchThunk, sessionCheckThunk } from '../../redux/actions/users';
+import Spinner from '../spinner/Spinner';
 
 class UserAccount extends Component {
   constructor(props) {
@@ -126,12 +127,13 @@ class UserAccount extends Component {
       wishItem
     } = this.props.usersReducer.user;
 
-    console.log(wishItem)
+    console.log(wishItem);
 
     return (
       <div>
+        <br/>
         {this.props.usersReducer.user === '' ? (
-          spinner
+          <Spinner />
         ) : (
           <Container>
             <Row>
@@ -176,7 +178,7 @@ class UserAccount extends Component {
                             </Row>
                             <Row>
                               <Col>
-                                <h5>{celebrationDate[0].date.slice(0,10)}</h5>
+                                <h5>{celebrationDate[0].date.slice(0, 10)}</h5>
                               </Col>
                             </Row>
                           </div>
@@ -254,6 +256,7 @@ class UserAccount extends Component {
                       </Col>
                       <Col xs="1"></Col>
                     </Row>
+                    <br />
                     <ul>
                       {wishItem.length ? (
                         wishItem.map((element, index) => (
