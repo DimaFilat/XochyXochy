@@ -14,7 +14,7 @@ export default (state = appReducerInitState, action) => {
       return { ...state, loading: true };
     }
     case USERS_AC.RCWD_FETCH: {
-      return { ...state, loading: false, ...action.user };
+      return { ...state, loading: false,  ...action.user };
     }
     default:
       return state;
