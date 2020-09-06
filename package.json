@@ -30,7 +30,7 @@
     "faker": "^4.1.0",
     "fs": "0.0.1-security",
     "gridfs-stream": "^1.1.1",
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.5.3",
     "history": "^4.9.0",
     "http-proxy-middleware": "^0.19.0",
     "joi": "^14.3.1",
